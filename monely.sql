@@ -185,7 +185,7 @@ CREATE TABLE `diseno_micas`(
 
 -- TABLA FICHA --
 CREATE TABLE `diseno_fichas`(
-	`id_diseno_fichas` INT,
+	`id_diseno_ficha` INT,
 	`disenos_genero` VARCHAR(45), -- mujer, hombre, niño, niña, bebe,bebo
 	`imagen_ficha_disenos` VARCHAR(45),
 
