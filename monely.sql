@@ -41,15 +41,46 @@ CREATE TABLE `ordenes_produccion`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
+-- TABLA PROVEEDORES
+
+CREATE TABLE `proveedores`(
+	`id_proveedor` INT,
+	`razon_social_proveedor` VARCHAR(45),
+	`insumo` VARCHAR(45),
+	`fecha_registro_proveedor` DATETIME,
+);
+
 -- TABLA COLOR DE TELAS
 CREATE TABLE `colores_telas`(
 	`id_colores_telas` INT,
-	`color_tela` VARCHAR(15),
-	`tipo_tela` VARCHAR(15),
-	`estado_tipo_tela` VARCHAR(15),
-	`fecha_registro_tela` DATETIME
+	`codigo_tela` VARCHAR(20),
+	`partida_tela` VARCHAR(20),
+	`color_tela_interno` VARCHAR(15),
+	`nombre_color_tela_proveedor` VARCHAR(15),
+	`porcentaje_componentes` VARCHAR(25), -- 100% algodon 
+	`tipo_rollo` VARCHAR(45), -- abierta, tubular
+	`tipo_tela` VARCHAR(15), -- jersey, gamuza, melange, 
+	`tejido_telas` VARCHAR(45), -- 30/1 - 24/1 - 20/1
+	`estado_colore_tela` VARCHAR(15),
+	`fecha_registro_tela` DATETIME,
+	fk_id_proveedor_1
 );
 
+-- TABLA COLOR DE RIP
+CREATE TABLE `colores_rip`(
+	`id_colores_rip` INT,
+	`codigo_rip` VARCHAR(20),
+	`partida_rip` VARCHAR(20),
+	`color_rip_interno` VARCHAR(15),
+	`nombre_color_rip_proveedor` VARCHAR(15),
+	`porcentaje_componentes` VARCHAR(25), -- 100% algodon 
+	`tipo_rollo` VARCHAR(45), -- abierta, tubular
+	`tipo_rip` VARCHAR(15), -- jersey, gamuza, melange, 
+	`tejido_rip` VARCHAR(45), -- 30/1 - 24/1 - 20/1
+	`estado_tipo_rip` VARCHAR(15),
+	`fecha_registro_rip` DATETIME
+	fk_id_proveedor_2
+);
 
 
 -- TABLA ESTILOS
@@ -68,21 +99,16 @@ CREATE TABLE `estilos`(
 -- TABLA GESTION TELAS --> entidad
 CREATE TABLE `gestion_telas`(
 	`id_gestion_telas` VARCHAR(8),
-	`codigo_tela` VARCHAR(20),
-	`partida_tela` VARCHAR(20),
-	`nombre_color_tela_proveedor` VARCHAR(15),
-	`rollos_requeridos` INT(8),
-	`tipo_rollo` VARCHAR(45), -- abierta, tubular
 	`consumo_prenda` INT(8),
-	`tipo_tejido` VARCHAR(15),
-	`porcentaje_componentes` VARCHAR(25),
-	`rib_requerido` INT(8),
+	`rollos_requeridos` INT(8),
 	`estado_gestion_telas` VARCHAR(15),
 	`fecha_llegada_almacen_telas` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
 	`observaciones_gestion_telas` VARCHAR(100),
 	fk_id_orden_produccion
 	fk_id_usuario_2
+	fk_colores_telas
+	fk_colores_rip
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
