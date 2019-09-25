@@ -25,30 +25,118 @@ CREATE TABLE `usuarios`(
     CONSTRAINT
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
+-- TABLA TIPO_PRENDA
+CREATE TABLE `tipo_prenda_lista`( -- 
+	`id_tipo_prenda` INT,
+	`nombre_tipo_prenda` VARCHAR(45), -- polo, body , canesu, etc.
+	`descripcion` VARCHAR(100),
+	`fecha_registro_tipo_prenda` DATETIME
+	fk_id_tecnicas_estampado -- total, parcial, pecho, espalda
+);
+
+-- TABLA ESTILOS
+CREATE TABLE `estilos`(
+	`id_estilo` INT,
+	`nombre_estilo` VARCHAR(45),
+	`descripcion` VARCHAR(100),
+	`cantidad_prendas` INT(10),
+	`tallas` VARCHAR(20), -- resolver problema con tallas
+	`curva` VARCHAR(20), -- resolver problema con curva
+	fk_tipo_prenda_1 VARCHAR(45), -- leggings, polo, falda, short, bodys ,etc
+	fk_id_tecnica_estampado -- puff - glitter - plano - dischard - suave - etc
+	fk_id_ordenes_produccion
+	fk_id_diseno_fichas -- total, parcial, pecho, espalda 
+);
 
 -- TABLA ORDEN DE PRODUCCION --> entidad
 CREATE TABLE `ordenes_produccion`(
 	`id_orden_produccion` INT(8),
-	`cliente` VARCHAR(30),
-	`estado_orden_produccion` VARCHAR(15),
-	`fecha_embarque` DATETIME,
-	`fecha_registro_orden_produccion` DATETIME,
-	`fecha_ultima_actualizacion` DATETIME,
+	fk_cliente_1
 	`observaciones_ordenes_produccion` VARCHAR(100),
-	fk_id_avios1(etiqueta_lavado)
-	fk_	estilo_1 -- etiqueta lavado
-	fk_id_diseno_fichas -- total, parcial, pecho, espalda 
+	`estado_orden_produccion` VARCHAR(15), -- despues crear tabla estado
+	`fecha_registro_orden_produccion` DATETIME,
+	`fecha_embarque` DATETIME,
+	fk_id_ordenes_guias_cortes
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA PROVEEDORES
+-- TABLA CLIENTES
+CREATE TABLE `clientes`(
+	`id_cliente` INT,
+	`razon_social_cliente` VARCHAR(45),
+	`ruc_cliente` VARCHAR(45),
+	`direccion_cliente` VARCHAR(70),
+	`fecha_registro_proveedor` DATETIME,
+);
 
+-- TABLA ETIQUETA AVIOS
+CREATE TABLE `etiqueta_lavado`(
+	`id_etiqueta_lavado` INT,
+	`imagen_etiqueta_lavado` VARCHAR(75),
+	`fecha_registro_etiqueta` DATETIME,
+	`fecha_ultima_actualizacion` DATETIME,
+	fk_id_usuario
+);
+
+
+-- TABLA INTERMIEDIA ORDEN_PRODUCCION Y ETIQUETA_LAVADO
+CREATE TABLE `ordenProduccion_etiquetaLavado`(
+	fk_id_orden_produccion
+	fk_id_etiqueta_lavado
+);
+
+
+-- TABLA AVIOS --> entidad  
+CREATE TABLE `avios`(
+	`id_avios` INT(8),
+	`nombre_avios` VARCHAR(20) --talleros, precios, hangtag,ganchos,
+	`imagen_avios` INT(8),--sensores, bolsas,broches,tuil,
+	`fecha_ultima_actualizacion` DATETIME, -- soguillas,elasticos,
+)ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
+
+
+-- TABLA HANGTAGS
+CREATE TABLE `hangtags`(
+	`id_hangtag` INT(8),
+	`nombre_hangtag` VARCHAR(20) --talleros, precios, hangtag,ganchos,
+	`imagen_hangtag` VARCHAR(8),--sensores, bolsas,broches,tuil,
+	`ancho_hangtag` INT
+	`largo_hangtag` INT
+	`fecha_registro_hangtag` DATETIME
+	`fecha_ultima_actualizacion` DATETIME, -- soguillas,elasticos,
+	fk_cliente
+	fk_id_usuario
+)ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
+
+-- TABLA PROVEEDORES
 CREATE TABLE `proveedores`(
 	`id_proveedor` INT,
 	`razon_social_proveedor` VARCHAR(45),
 	`insumo` VARCHAR(45),
 	`fecha_registro_proveedor` DATETIME,
 );
+
+
+-- TABLA INTERMEDIA HANGTAG Y PROVEEDORES
+CREATE TABLE `ordenProduccion_etiquetaLavado`(
+	fk_id_hangtag
+	fk_id_proveedor 
+);
+
+
+-- TABLA INTERMEDIA ESTILOS Y COLORES_TELAS
+CREATE TABLE `estilos_coloresTelas`(
+	fk_id_estilos
+	fk_id_colores_telas
+);
+
+
+-- TABLA INTERMEDIA ESTILOS Y COLORES_TELAS
+CREATE TABLE `estilos_coloresRip`(
+	fk_id_estilos
+	fk_id_colores_rip
+);
+
 
 -- TABLA COLOR DE TELAS
 CREATE TABLE `colores_telas`(
@@ -83,21 +171,8 @@ CREATE TABLE `colores_rip`(
 );
 
 
--- TABLA ESTILOS
-CREATE TABLE `estilos`(
-	`id_estilo` INT,
-	`nombre_estilo` VARCHAR(45),
-	`tipo_prenda` VARCHAR(45), -- leggings, polo, falda, short, bodys ,etc
-	`descripcion` VARCHAR(100),
-	`cantidad_prendas` INT(10),
-	`tallas` VARCHAR(20),
-	`curva` VARCHAR(20),
-	fk_id_tecnicas_estampado -- total, parcial, pecho, espalda 
-);
-
-
 -- TABLA GESTION TELAS --> entidad
-CREATE TABLE `gestion_telas`(
+CREATE TABLE `pedido_telas`(
 	`id_gestion_telas` VARCHAR(8),
 	`consumo_prenda` INT(8),
 	`rollos_requeridos` INT(8),
@@ -109,6 +184,7 @@ CREATE TABLE `gestion_telas`(
 	fk_id_usuario_2
 	fk_colores_telas
 	fk_colores_rip
+	fk_id_ordenes_guias_cortes
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -120,8 +196,8 @@ CREATE TABLE `ordenes_guias_cortes`(
 	`fecha_ultima_actualizacion` DATETIME,
 	`observaciones_orden_guia_corte` VARCHAR(100),
 	fk_id_usuario_3
-	fk_id_orden_produccion
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
+
 
 -- TABLA CORTE DE TELAS --> entidad
 CREATE TABLE `corte_telas`(
@@ -137,27 +213,6 @@ CREATE TABLE `corte_telas`(
 	fk_id_orden_guia_corte
 	fk_id_gestion_telas
 	fk_id_usuario_4
-)ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
-
-
--- TABLA AVIOS --> entidad  
-CREATE TABLE `avios`(
-	`id_avios` INT(8),
-	`etiquetas_talleros` INT(8),
-	`etiqueta_precios` INT(8),
-	`hangtags` INT,
-	`ganchos` INT(8),
-	`sensores` INT,
-	`bolsas` INT(8),
-	`broches` INT(8),
-	`tuils` INT(8),
-	`soguillas` INT(8),
-	`elasticos` INT(8),
-	`demasia` INT,	
-	`estado_avios` VARCHAR(15),
-	`fecha_ultima_actualizacion` DATETIME,
-	fk_id_orden_guia_corte
-	fk_id_usuario_5
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -199,11 +254,13 @@ CREATE TABLE `comentarios`(
 	`id_comentarios` INT(8),
 	`comentarios`
 	`fecha_comentarios`
-	`fk_ id_usuarios`
-	`fk_id_guia`
-	`fk_id_orden_produccion`
+	fk_ id_usuarios
+	fk_id_guia
+	fk_id_orden_produccion
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
+
+CREATE TABLE `tecnicas_estampado`
 
 CREATE TABLE `seguimientos_muestras`
 
