@@ -78,6 +78,7 @@ CREATE TABLE `clientes`(
 	fk_id_estado_actividad -- estado de cliente
 );
 
+
 -- TABLA ETIQUETA AVIOS
 CREATE TABLE `etiqueta_lavado`(
 	`id_etiqueta_lavado` INT,
@@ -183,8 +184,10 @@ CREATE TABLE `colores_telas`(  -- Registros que llenan por usuario
 	`tejido_telas` VARCHAR(45), -- 30/1 - 24/1 - 20/1
 	`fecha_registro_tela` DATETIME,
 	fk_id_proveedor_1
- 
+ 	fk_id_usuario
+ 	fk_id_estado_actividad  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
+
 
 -- TABLA COLOR DE RIP
 CREATE TABLE `colores_rip`( -- Registros que llenan por usuario
@@ -200,6 +203,8 @@ CREATE TABLE `colores_rip`( -- Registros que llenan por usuario
 	`estado_tipo_rip` VARCHAR(15),
 	`fecha_registro_rip` DATETIME
 	fk_id_proveedor_2
+	fk_id_usuario
+	fk_id_estado_actividad  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
 
@@ -208,14 +213,13 @@ CREATE TABLE `pedido_telas`( -- esto se mide a nivel de orden de produccion
 	`id_pedido_tela` VARCHAR(8),  -- Registros que llenan por usuario
 	`consumo_prenda` INT(8),
 	`pedido_rollos` INT(8),
-	`estado_pedido_tela` VARCHAR(15),
 	`fecha_llegada_almacen_telas` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
 	`observaciones_pedido_telas` VARCHAR(100),
 	fk_id_orden_produccion
 	fk_id_usuario_2
 	fk_id_ordenes_guias_cortes
-	fk_id_estado_actividad -- estado de pedido telas
+	fk_id_estado_actividad  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -226,7 +230,7 @@ CREATE TABLE `ordenes_guias_cortes`( -- Registros que llenan por usuario
 	`fecha_ultima_actualizacion` DATETIME,
 	`observaciones_orden_guia_corte` VARCHAR(100),
 	fk_id_usuario_3
-	fk_id_estado_actividad -- estado de guias corte
+	fk_id_estado_actividad  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -235,18 +239,18 @@ CREATE TABLE `corte_orden_telas`( -- Registros que llenan por usuario
 	`id_corte_orden_telas` INT(8),
 	`capas_minimas` INT(8),
 	`capas_maximas` INT(8),
-	`prendas_demasia` INT(8),
-	`prendas_falladas` INT,
+	`corte_demasia` INT(8),
+	`corte_falladas` INT,
+	`ancho_rollo` INT -- resta 2 centimetros de cada extremo 
+	`largo_rollo` INT
+	`numeral_mesa` INT -- mesa 1 / mesa 2 / mesa 3
 	`observaciones_corte_orden_telas` VARCHAR(100),
 	`fecha_ingreso_corte_orden_telas` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
 	fk_id_orden_guia_corte
 	fk_id_usuario_4
-	fk_id_estado_actividad -- estado de corte orden telas
+	fk_id_estado_actividad  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
-
-
-CREATE TABLE `corte_tendido`( -- Registros que llenan por usuario
 
 
 -- TABLA DISEÑO --
@@ -268,7 +272,8 @@ CREATE TABLE `diseno_micas`(
 	fk_id_orden_estampado_programacion
 	fk_id_diseno_ficha
 	fk_id_codigos_orden_produccion
-	fk_id_estado_actividad -- estado de diseño micas
+	fk_id_estado_actividad  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+);
 
 
 -- TABLA DISENO_MICAS
@@ -278,31 +283,7 @@ CREATE TABLE `diseno_fichas`(
 	`fecha_registro_diseno_fichas` DATETIME
 	`fecha_ultima_actualizacion` DATETIME
 	fk_id_usuario
-	fk_id_estado_actividad -- estado de diseno fichas
-
-
--- TABLA COMENTARIOS DE USUARIOS --> entidad
-CREATE TABLE `comentarios`(
-	`id_comentarios` INT(8),
-	`comentarios`
-	`fecha_comentarios`
-	fk_id_usuarios
-	fk_id_estilo
-	fk_id_ordenes_produccion
-	fk_id_gestion_tela
-	fk_id_ordenes_guias_cortes
-	fk_id_corte_orden_tela
-	fk_id_diseno_mica
-	fk_id_diseno_ficha
-)ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
-
-
--- TABLA VERIFICACION CONTROL ENTREGAS
-CREATE TABLE `verificaciones_control_entregas`(
-	`id_verificacion_control_entregas` INT
-	`nombre_verificacion_control` VARCHAR  -- verificado,no_verificado
-	`fecha_ultima_actualizacion` DATETIME
-	fk_id_usuario
+	fk_id_estado_actividad  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
 
@@ -341,7 +322,7 @@ CREATE TABLE `maquinas_estampado`(   -- maquina1, maquina2,maquina3,maquina4_eti
 	`brazos_maquina_estampado` INT
 	`fecha_registro_maquina_estampado` DATETIME
 	`fecha_ultima_actualizacion` DATETIME
-	fk_id_estado_actividad -- estado de maquinas estampado
+	fk_id_estado_actividad  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
 
@@ -355,7 +336,8 @@ CREATE TABLE `revelado_estampado`(
 	fk_id_orden_produccion
 	fk_id_etiqueta_estampada
 	fk_id_diseno_ficha 
-	fk_id_estado_actividad -- estado de revelado estampado
+	fk_id_estado_actividad  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+
 
 -- TABLA MUESTRAS ESTAMPADO
 CREATE TABLE `muestras_estampado`(
@@ -367,7 +349,7 @@ CREATE TABLE `muestras_estampado`(
 	fk_id_patronaje_moldes
 	fk_id_usuario
 	fk_id_diseno_ficha 
-	fk_id_estado_actividad -- estado de estado actividad
+	fk_id_estado_actividad  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
 
@@ -382,7 +364,9 @@ CREATE TABLE `planchado`(
 	fk_id_patronaje_moldes
 	fk_id_usuario
 	fk_id_diseno_ficha 
-	fk_id_estado_actividad -- estado de planchado
+	fk_id_estado_actividad  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+);
+
 
 -- TABLA ORDEN ESTAMPADO PROGRAMACION
 CREATE TABLE `orden_estampado_programacion`( -- ordenar por maquina x fecha x recursos
@@ -394,22 +378,22 @@ CREATE TABLE `orden_estampado_programacion`( -- ordenar por maquina x fecha x re
 	fk_id_ordenes_guias_cortes
 	fk_id_maquina_estampado
 	fk_id_usuario
-	fk_id_estado_actividad -- estado de orden estampado programacion
+	fk_id_estado_actividad  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
 
+
+
+
 -- TABLA CONTROL DE DISTRIBUCION
-CREATE TABLE `control_distribucion`(
+CREATE TABLE `control_distribucion`( -- revision de esta tabla
 	`id_control_distribucion` INT
 	`fecha_registro_control_distribucion` DATETIME
 	`fecha_ultima_actualizacion` VARCHAR
 	fk_id_usuario
 	fk_id_orden_produccion
-	fk_id_estado_actividad -- estado de control distribucion
+	fk_id_estado_actividad  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
-
-
-
 
 
 -- TABLA PATRONAJE Y MOLDES
@@ -423,11 +407,8 @@ CREATE TABLE `patronaje_moldes`(
 	fk_id_etiqueta_lavado
 	fk_id_etiqueta_estampada
 	fk_id_tipo_prenda
-	fk_id_estado_actividad -- estado de patronaje moldes
+	fk_id_estado_actividad  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
-
-
-
 
 
 -- TABLA CODIGO ORDEN DE PRODUCCION  -- revisar
@@ -449,7 +430,8 @@ CREATE TABLE `seguimiento_muestras_estampado`(
 	fk_id_usuario
 	fk_id_orden_produccion
 	fk_id_estilo
-	fk_id_estado_actividad -- estado de seguimiento muestras
+	fk_id_estado_actividad  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+);
 
 
 -- TABLA ESTADOS PROCESOS  --> para todos los estados de procesos
@@ -461,4 +443,38 @@ CREATE TABLE `estados_actividad`( -- pendiente-gris / confirmado-verde / en proc
 );
 
 
+
+-- TABLA VERIFICACION CONTROL ENTREGAS
+CREATE TABLE `verificaciones_control_entregas`(
+	`id_verificacion_control_entregas` INT
+	`nombre_verificacion_control` VARCHAR  -- verificado,no_verificado
+	`fecha_ultima_actualizacion` DATETIME
+	fk_id_usuario
+);
+
+
+
+-- TABLA COMENTARIOS DE USUARIOS --> entidad
+CREATE TABLE `comentarios`(
+	`id_comentarios` INT(8),
+	`comentarios`
+	`fecha_comentarios`
+	fk_id_usuarios
+	fk_id_estilo
+	fk_id_ordenes_produccion
+	fk_id_pedido_hangtag
+	fk_id_pedido_tela
+	fk_id_ordenes_guias_cortes
+	fk_id_corte_orden_tela
+	fk_id_diseno_mica
+	fk_id_diseno_ficha
+	fk_id_revelado_estampado
+	fk_id_planchado 
+	fk_id_orden_estampado_programacion 
+	fk_id_control_distribucion 
+	fk_id_patronaje_moldes 
+	fk_id_codigo_orden_produccion 
+	fk_id_seguimiento_muestras_estampado 
+	fk_id_verificacion_control_entregas 
+)ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
