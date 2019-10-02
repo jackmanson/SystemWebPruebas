@@ -50,23 +50,23 @@ CREATE TABLE `estilos`( -- Registros que llenan por usuario
 	`cantidad_prendas` INT(10),
 	`tallas` VARCHAR(20), -- resolver problema con tallas
 	`curva` VARCHAR(20), -- resolver problema con curva
-	fk_tipo_prenda_lista VARCHAR(45), -- leggings, polo, falda, short, bodys ,etc
+	fk_tipo_prenda_lista_1 VARCHAR(45), -- leggings, polo, falda, short, bodys ,etc
 	fk_id_tecnica_estampado -- puff - glitter - plano - dischard - suave - etc
 	fk_id_ordene_produccion
 	fk_id_diseno_ficha -- total, parcial, pecho, espalda 
 	fk_id_hangtag
-	fk_id_etiqueta_lavado
+	fk_id_etiqueta_lavado_1
 );
 
 
 -- TABLA ORDEN DE PRODUCCION --> entidad
 CREATE TABLE `ordenes_produccion`( -- Registros que llenan por usuario
 	`id_orden_produccion` INT(8) AUTO_INCREMENT,
-	fk_cliente
 	`observaciones_orden_produccion` VARCHAR(100),
 	`fecha_registro_orden_produccion` DATETIME,
 	`fecha_embarque` DATETIME,
 	fk_id_ordenes_guia_corte
+	fk_id_cliente_1
 	fk_id_estado_actividad_3 -- estado de produccion
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
@@ -97,7 +97,7 @@ CREATE TABLE `etiqueta_lavado`(
 -- TABLA INTERMIEDIA ORDEN_PRODUCCION Y ETIQUETA_LAVADO
 CREATE TABLE `ordenProduccion_etiquetaLavado`(
 	fk_id_orden_produccion
-	fk_id_etiqueta_lavado
+	fk_id_etiqueta_lavado_2
 );
 
 
@@ -121,7 +121,7 @@ CREATE TABLE `hangtags`( -- Registros que llenan por usuario
 	`cargar_archivo_hangtag` -- enlace de la ubicacion del archivo 
 	`fecha_registro_hangtag` DATETIME
 	`fecha_ultima_actualizacion` DATETIME, -- soguillas,elasticos,
-	fk_cliente
+	fk_id_cliente_2
 	fk_id_usuario_3
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
@@ -133,7 +133,7 @@ CREATE TABLE `hangtags_pedido`( -- Registros que llenan por usuario
 	`observaciones_pedido_hangtag`
 	`fecha_registro_pedido_hangtag` DATETIME
 	`fecha_ultima_actualizacion` DATETIME, -- soguillas,elasticos,
-	fk_cliente
+	fk_id_cliente_3
 	fk_id_usuario_4
 	fk_id_proveedor
 	fk_id_hangtag
@@ -164,14 +164,14 @@ CREATE TABLE `ordenProduccion_hangtags`(
 
 -- TABLA INTERMEDIA ESTILOS Y COLORES_TELAS
 CREATE TABLE `estilos_coloresTelas`(
-	fk_id_estilo
+	fk_id_estilo_1
 	fk_id_color_tela
 );
 
 
 -- TABLA INTERMEDIA ESTILOS Y COLORES_TELAS
 CREATE TABLE `estilos_coloresRip`(
-	fk_id_estilo
+	fk_id_estilo_2
 	fk_id_color_rip
 );
 
@@ -311,7 +311,7 @@ CREATE TABLE `etiquetas_estampadas`(
 	`foto_etiqueta_estampada` VARCHAR
 	`fecha_registro_etiqueta_estampada` DATETIME
 	`fecha_ultima_actualizacion` DATETIME
-	fk_id_cliente
+	fk_id_cliente_4
 	fk_id_usuario_14
 );
 
@@ -402,8 +402,8 @@ CREATE TABLE `comentarios`(
 	`comentarios`
 	`fecha_comentario`
 	fk_id_usuario_20
-	fk_id_estilo
-	fk_id_ordenes_produccion
+	fk_id_estilo_3
+	fk_id_orden_produccion_1
 	fk_id_pedido_hangtag
 	fk_id_pedido_tela
 	fk_id_orden_guia_corte
@@ -433,8 +433,8 @@ CREATE TABLE `control_distribucion`( -- revision de esta tabla
 	`fecha_registro_control_distribucion` DATETIME
 	`fecha_ultima_actualizacion` VARCHAR
 	fk_id_usuario_21
-	fk_id_orden_produccion
-	fk_codigos_orden_produccion
+	fk_id_orden_produccion_2
+	fk_id codigos_orden_produccion
 	fk_id_patronaje_molde
 	fk_id_etiqueta_estampada
 	fk_id_diseno_ficha
@@ -450,8 +450,8 @@ CREATE TABLE `patronaje_moldes`(
 	`fecha_registro_patronaje_molde` DATETIME
 	`fecha_ultima_actualizacion` DATETIME
 	fk_id_usuario_22
-	fk_id_orden_produccion
-	fk_id_etiqueta_lavado
+	fk_id_orden_produccion_3
+	fk_id_etiqueta_lavado_3
 	fk_id_etiqueta_estampada
 	fk_id_tipo_prenda
 	fk_id_estado_actividad_19  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
@@ -464,8 +464,8 @@ CREATE TABLE `seguimiento_muestras_estampado`(
 	`fecha_registro_seguimiento_muestra_estampado` DATETIME
 	`fecha_ultima_actualizacion` VARCHAR
 	fk_id_usuario_23
-	fk_id_orden_produccion
-	fk_id_estilo
+	fk_id_orden_produccion_4
+	fk_id_estilo_4
 	fk_id_estado_actividad_20  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
@@ -477,7 +477,7 @@ CREATE TABLE `codigos_orden_produccion`( -- solucionar el ingreso de datos de co
 	`fecha_registro_codigo_orden_produccion` DATETIME
 	`fecha_ultima_actualizacion` VARCHAR
 	fk_id_usuario_24
-	fk_id_orden_produccion
+	fk_id_orden_produccion_5
 );
 
 
