@@ -54,7 +54,7 @@ CREATE TABLE `estilos`( -- Registros que llenan por usuario
 	fk_id_tecnica_estampado -- puff - glitter - plano - dischard - suave - etc
 	fk_id_ordene_produccion
 	fk_id_diseno_ficha -- total, parcial, pecho, espalda 
-	fk_id_hangtag
+	fk_id_hangtag_1
 	fk_id_etiqueta_lavado_1
 );
 
@@ -68,6 +68,7 @@ CREATE TABLE `ordenes_produccion`( -- Registros que llenan por usuario
 	fk_id_ordenes_guia_corte
 	fk_id_cliente_1
 	fk_id_estado_actividad_3 -- estado de produccion
+	fk_id_hangtag_2
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -84,20 +85,29 @@ CREATE TABLE `clientes`(
 );
 
 
--- TABLA ETIQUETA AVIOS
-CREATE TABLE `etiqueta_lavado`(
+-- TABLA MARCAS
+CREATE TABLE `marcas`(
+	`id_marca` INT(8) AUTO_INCREMENT,
+	`nombre_marca` VARCHAR(45),
+	`logo_marca` VARCHAR(45),
+	`fecha_registro_marca` DATETIME,
+	`fecha_ultima_actualizacion` DATETIME,
+	fk_id_usuario_1
+	fk_id_estado_actividad_21 -- estado de cliente
+);
+
+
+-- TABLA ETIQUETA ETIQUETAS DE LAVADO
+CREATE TABLE `etiquetas_lavado`(
 	`id_etiqueta_lavado` INT(8) AUTO_INCREMENT,
+	`ancho_etiqueta_lavado` INT
+	`largo_etiqueta_lavado` INT
 	`imagen_etiqueta_lavado` VARCHAR(75),
 	`fecha_registro_etiqueta` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
 	fk_id_usuario_2
-);
-
-
--- TABLA INTERMIEDIA ORDEN_PRODUCCION Y ETIQUETA_LAVADO
-CREATE TABLE `ordenProduccion_etiquetaLavado`(
-	fk_id_orden_produccion
-	fk_id_etiqueta_lavado_2
+	fk_id_marca_1
+	fk_id_orden_produccion_6
 );
 
 
@@ -107,6 +117,8 @@ CREATE TABLE `avios`(
 	`nombre_avio` VARCHAR(20) --talleros, precios, hangtag,ganchos,
 	`imagen_avio` INT(8),--sensores, bolsas,broches,tuil,
 	`fecha_ultima_actualizacion` DATETIME, -- soguillas,elasticos,
+	fk_id_orden_produccion_7
+	fk_id_orden_guia_corte_1
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -223,7 +235,7 @@ CREATE TABLE `pedido_telas`( -- esto se mide a nivel de orden de produccion
 	`observaciones_pedido_tela` VARCHAR(100),
 	fk_id_orden_produccion
 	fk_id_usuario_8
-	fk_id_ordenes_guia_corte
+	fk_id_orden_guia_corte
 	fk_id_estado_actividad  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
@@ -289,6 +301,7 @@ CREATE TABLE `diseno_fichas`(
 	`fecha_ultima_actualizacion` DATETIME
 	fk_id_usuario_12
 	fk_id_estado_actividad_12  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+	fk_id_avio_1
 );
 
 
