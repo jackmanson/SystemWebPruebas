@@ -65,7 +65,7 @@ CREATE TABLE `ordenes_produccion`( -- Registros que llenan por usuario
 	`observaciones_orden_produccion` VARCHAR(100),
 	`fecha_registro_orden_produccion` DATETIME,
 	`fecha_embarque` DATETIME,
-	fk_id_ordenes_guia_corte
+	fk_id_orden_guia_corte_1
 	fk_id_cliente_1
 	fk_id_estado_actividad_3 -- estado de produccion
 	fk_id_hangtag_2
@@ -80,7 +80,7 @@ CREATE TABLE `clientes`(
 	`direccion_cliente` VARCHAR(70),
 	`fecha_registro_cliente` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
-	fk_id_usuario_1
+	fk_id_usuario_1 -- usuario que registro al cliente
 	fk_id_estado_actividad_4 -- estado de cliente
 );
 
@@ -92,22 +92,37 @@ CREATE TABLE `marcas`(
 	`logo_marca` VARCHAR(45),
 	`fecha_registro_marca` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
-	fk_id_usuario_1
+	fk_id_usuario_1 -- usuario que registro la marca
 	fk_id_estado_actividad_21 -- estado de cliente 
 );
 
 
--- TABLA ETIQUETA ETIQUETAS DE LAVADO
-CREATE TABLE `etiquetas_lavado`(
-	`id_etiqueta_lavado` INT(8) AUTO_INCREMENT,
+-- TABLA DE MODELOS DE ETIQUETA DE LAVADO
+CREATE TABLE `modelo_etiqueta_lavado`( --
+	`id_modelo_etiqueta_lavado` INT(8) AUTO_INCREMENT,
+	`imagen_modelo_etiqueta_lavado` VARCHAR(75), -- ubicacion del archivo
 	`ancho_etiqueta_lavado` INT
 	`largo_etiqueta_lavado` INT
-	`imagen_etiqueta_lavado` VARCHAR(75),
+	`observaciones_modelo` VARCHAR
 	`fecha_registro_etiqueta` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
-	fk_id_usuario_2
+	fk_id_usuario_2 -- usuario que registro el modelo 
+	fk_id_etiqueta_lavado_4
+);
+
+
+-- TABLA ETIQUETA ETIQUETAS DE LAVADO
+CREATE TABLE `etiquetas_lavado`( --
+	`id_etiqueta_lavado` INT(8) AUTO_INCREMENT,
+	`cantidad_etiquetas_lavado` INT,
 	fk_id_marca_1
-	fk_id_orden_produccion_6 --> eliminar este forign key por que no corresponde
+);
+
+
+-- TABLA INTERMEDIA ETIQUETA LAVADO Y ORDEN DE PRODUCCION
+CREATE TABLE `ordenProduccion_hangtags`(
+	fk_id_orden_produccion_6 --
+	fk_id_etiqueta_lavado_2
 );
 
 
