@@ -93,7 +93,7 @@ CREATE TABLE `marcas`(
 	`fecha_registro_marca` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
 	fk_id_usuario_1
-	fk_id_estado_actividad_21 -- estado de cliente
+	fk_id_estado_actividad_21 -- estado de cliente 
 );
 
 
@@ -107,7 +107,7 @@ CREATE TABLE `etiquetas_lavado`(
 	`fecha_ultima_actualizacion` DATETIME,
 	fk_id_usuario_2
 	fk_id_marca_1
-	fk_id_orden_produccion_6
+	fk_id_orden_produccion_6 --> eliminar este forign key por que no corresponde
 );
 
 
