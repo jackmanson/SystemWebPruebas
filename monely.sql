@@ -31,44 +31,55 @@ CREATE TABLE `usuarios`( -- Registros que llenan por usuario
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA TIPO_PRENDA
-CREATE TABLE `tipo_prenda_lista`( --- Registros que llenan por usuario
+-- TABLA TIPO_PRENDA  --> entidad - fuerte
+CREATE TABLE `tipo_prenda`( --- Registros que llenan por usuario
 	`id_tipo_prenda` INT(8) AUTO_INCREMENT,
 	`nombre_tipo_prenda` VARCHAR(45), -- polo, body , canesu, etc.
 	`descripcion` VARCHAR(100),
 	`fecha_registro_tipo_prenda` DATETIME
-	fk_id_tecnica_estampado -- total, parcial, pecho, espalda
+);
+  
+
+-- TABLA INTERMEDIA TIPO DE PRENDA Y TECNICA DE ESTAMPADO --> Revisar si tiene proposito esta tabla
+CREATE TABLE `tipo_prenda_tecnicas_estampado`(
+	fk_id_tipo_prenda_1 --
+	fk_id_tecnica_estampado
 );
 
 
 -- TABLA ESTILOS
 CREATE TABLE `estilos`( -- Registros que llenan por usuario
 	`id_estilo` INT(8) AUTO_INCREMENT,
-	`nombre_estilo` VARCHAR(45),
+	`nombre_estilo` VARCHAR(45), -- indicio de la marca y su codigo
 	`estilo_genero` VARCHAR(45), -- mujer, hombre, niño, niña, bebe,bebo
 	`descripcion` VARCHAR(100),
 	`cantidad_prendas` INT(10),
 	`tallas` VARCHAR(20), -- resolver problema con tallas
 	`curva` VARCHAR(20), -- resolver problema con curva
-	fk_tipo_prenda_lista_1 VARCHAR(45), -- leggings, polo, falda, short, bodys ,etc
-	fk_id_tecnica_estampado -- puff - glitter - plano - dischard - suave - etc
-	fk_id_ordene_produccion
+	fk_tipo_prenda_2 VARCHAR(45), -- leggings, polo, falda, short, bodys ,etc
+	fk_id_tecnica_estampado -- puff - glitter - plano - dischard - suave - covertura etc
+	fk_id_orden_produccion
 	fk_id_diseno_ficha -- total, parcial, pecho, espalda 
 	fk_id_hangtag_1
 	fk_id_etiqueta_lavado_1
+	fk_id_codigo_estilo_produccion
 );
 
 
 -- TABLA ORDEN DE PRODUCCION --> entidad
 CREATE TABLE `ordenes_produccion`( -- Registros que llenan por usuario
 	`id_orden_produccion` INT(8) AUTO_INCREMENT,
+	`numero_orden` VARCHAR,
+	`cantidad_total_prendas` INT,
 	`observaciones_orden_produccion` VARCHAR(100),
-	`fecha_registro_orden_produccion` DATETIME,
+	`fecha_inicial_envio` DATETIME
 	`fecha_embarque` DATETIME,
-	fk_id_orden_guia_corte_1
+	`fecha_registro_orden_produccion` DATETIME, -- Indicio de la aprobacion de la orden
 	fk_id_cliente_1
-	fk_id_estado_actividad_3 -- estado de produccion
+	fk_id_estado_actividad_3 -- estado de produccion / espera - confirmado - cancelado
 	fk_id_hangtag_2
+	fk_id_orden_guia_corte_1
+	fk_id_usuario_9
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -89,16 +100,17 @@ CREATE TABLE `clientes`(
 CREATE TABLE `marcas`(
 	`id_marca` INT(8) AUTO_INCREMENT,
 	`nombre_marca` VARCHAR(45),
-	`logo_marca` VARCHAR(45),
+	`logo_marca` VARCHAR(45), -- ubicacion archivo
 	`fecha_registro_marca` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
 	fk_id_usuario_1 -- usuario que registro la marca
 	fk_id_estado_actividad_21 -- estado de cliente 
+	fk_id_usuario_10
 );
 
 
 -- TABLA DE MODELOS DE ETIQUETA DE LAVADO
-CREATE TABLE `modelo_etiqueta_lavado`( --
+CREATE TABLE `modelos_etiqueta_lavado`( --  revisar con esa tabla junto a etiqueta de lavado
 	`id_modelo_etiqueta_lavado` INT(8) AUTO_INCREMENT,
 	`imagen_modelo_etiqueta_lavado` VARCHAR(75), -- ubicacion del archivo
 	`ancho_etiqueta_lavado` INT
@@ -111,7 +123,7 @@ CREATE TABLE `modelo_etiqueta_lavado`( --
 );
 
 
--- TABLA ETIQUETA ETIQUETAS DE LAVADO
+-- TABLA ETIQUETAS DE LAVADO --> revisar esta tabla  falta completar contenido
 CREATE TABLE `etiquetas_lavado`( --
 	`id_etiqueta_lavado` INT(8) AUTO_INCREMENT,
 	`cantidad_etiquetas_lavado` INT,
@@ -232,7 +244,6 @@ CREATE TABLE `colores_rip`( -- Registros que llenan por usuario
 	`tipo_rollo` VARCHAR(45), -- abierta, tubular
 	`tipo_rip` VARCHAR(15), -- jersey, gamuza, melange, 
 	`tejido_rip` VARCHAR(45), -- 30/1 - 24/1 - 20/1
-	`estado_tipo_rip` VARCHAR(15),
 	`fecha_registro_rip` DATETIME
 	fk_id_proveedor
 	fk_id_usuario_7
@@ -321,7 +332,7 @@ CREATE TABLE `diseno_fichas`(
 
 
 -- TABLA TECNICAS DE ESTAMPADO
-CREATE TABLE `tecnicas_estampado`(
+CREATE TABLE `tecnicas_estampado`(  -- puff - glitter - plano - dischard - suave - covertura etc
 	`id_tecnica_estampado` INT(8) AUTO_INCREMENT, -- PUFF,GLITTER,SUGAR,SPAY_FLEY,ETC
 	`nombre_tecnica_estampado` VARCHAR
 	`descripcion_tecnica` VARCHAR
@@ -389,8 +400,8 @@ CREATE TABLE `muestras_estampado`(
 -- TABLA PLANCHADO
 CREATE TABLE `planchado`(
 	`id_planchado` INT(8) AUTO_INCREMENT,
+	`cantidad_planchado` INT
 	`observaciones_planchado` VARCHAR
-	`estado_planchado` VARCHAR 
 	`fecha_registro_planchado` DATETIME
 	`fecha_ultima_actualizacion` DATETIME
 	fk_id_orden_produccion
@@ -443,7 +454,7 @@ CREATE TABLE `comentarios`(
 	fk_id_orden_estampado_programacion 
 	fk_id_control_distribucion 
 	fk_id_patronaje_molde
-	fk_id_codigo_orden_produccion 
+	fk_id_codigo_prenda_produccion 
 	fk_id_seguimiento_muestra_estampado 
 	fk_id_verificacion_control_entrega
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
@@ -481,7 +492,7 @@ CREATE TABLE `patronaje_moldes`(
 	fk_id_orden_produccion_3
 	fk_id_etiqueta_lavado_3
 	fk_id_etiqueta_estampada
-	fk_id_tipo_prenda
+	fk_id_tipo_prenda_3
 	fk_id_estado_actividad_19  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
@@ -498,14 +509,31 @@ CREATE TABLE `seguimiento_muestras_estampado`(
 );
 
 
--- TABLA CODIGO ORDEN DE PRODUCCION  -- revisar
-CREATE TABLE `codigos_orden_produccion`( -- solucionar el ingreso de datos de codigos
-	`id_codigo_orden_produccion` INT(8) AUTO_INCREMENT,
-	`estado_codigo_orden_produccion` VARCHAR -- agregar mas campos
-	`fecha_registro_codigo_orden_produccion` DATETIME
+-- TABLA CODIGO PRENDA DE PRODUCCION  -- revisar
+CREATE TABLE `codigos_prenda_produccion`( -- solucionar el ingreso de datos de codigos
+	`id_codigo_prenda_produccion` INT(8) AUTO_INCREMENT,
+
+	-- falta completar el contenido aqui
+
+	`estado_codigo_prenda_produccion` VARCHAR -- agregar mas campos
+	`fecha_registro_codigo_prenda_produccion` DATETIME
 	`fecha_ultima_actualizacion` VARCHAR
 	fk_id_usuario_24
 	fk_id_orden_produccion_5
+);
+
+
+-- TABLA CODIGO ESTILO PRENDA DE PRODUCCION  -- revisar
+CREATE TABLE `codigos_estilo_produccion`( -- solucionar el ingreso de datos de codigos
+	`id_codigo_estilo_produccion` INT(8) AUTO_INCREMENT,
+
+	-- falta completar el contenido aqui
+
+	`estado_codigo_estilo_produccion` VARCHAR -- agregar mas campos
+	`fecha_registro_estilo_produccion` DATETIME
+	`fecha_ultima_actualizacion` VARCHAR
+	fk_id_usuario_24
+	fk_id_codigo_prenda_produccion
 );
 
 
