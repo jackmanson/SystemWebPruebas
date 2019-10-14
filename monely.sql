@@ -61,7 +61,6 @@ CREATE TABLE `estilos`( -- Registros que llenan por usuario
 	fk_id_orden_produccion
 	fk_id_diseno_ficha -- total, parcial, pecho, espalda 
 	fk_id_hangtag_1
-	fk_id_etiqueta_lavado_1
 	fk_id_codigo_estilo_produccion
 );
 
@@ -77,7 +76,6 @@ CREATE TABLE `ordenes_produccion`( -- Registros que llenan por usuario
 	`fecha_registro_orden_produccion` DATETIME, -- Indicio de la aprobacion de la orden
 	fk_id_cliente_1
 	fk_id_estado_actividad_3 -- estado de produccion / espera - confirmado - cancelado
-	fk_id_hangtag_2
 	fk_id_orden_guia_corte_1
 	fk_id_usuario_9
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
@@ -109,43 +107,51 @@ CREATE TABLE `marcas`(
 );
 
 
--- TABLA DE MODELOS DE ETIQUETA DE LAVADO
-CREATE TABLE `modelos_etiqueta_lavado`( --  revisar con esa tabla junto a etiqueta de lavado
-	`id_modelo_etiqueta_lavado` INT(8) AUTO_INCREMENT,
-	`imagen_modelo_etiqueta_lavado` VARCHAR(75), -- ubicacion del archivo
+-- TABLA DE ETIQUETA DE LAVADO
+CREATE TABLE `etiqueta_lavado`( --  revisar con esa tabla junto a etiqueta de lavado
+	`id_etiqueta_lavado` INT(8) AUTO_INCREMENT,
+	`imagen_etiqueta_lavado` VARCHAR(75), -- ubicacion del archivo
+	`descripcion_etiqueta` VARCHAR
 	`ancho_etiqueta_lavado` INT
 	`largo_etiqueta_lavado` INT
-	`observaciones_modelo` VARCHAR
 	`fecha_registro_etiqueta` DATETIME,
-	`fecha_ultima_actualizacion` DATETIME,
-	fk_id_usuario_2 -- usuario que registro el modelo 
+	`fecha_ultima_actualizacion` DATETI ME,
+	fk_id_usuario_2 -- usuario que registro
 	fk_id_etiqueta_lavado_4
+	fk_id_marca_1
 );
 
 
--- TABLA ETIQUETAS DE LAVADO --> revisar esta tabla  falta completar contenido
-CREATE TABLE `etiquetas_lavado`( --
-	`id_etiqueta_lavado` INT(8) AUTO_INCREMENT,
-	`cantidad_etiquetas_lavado` INT,
-	fk_id_marca_1
+-- TABLA INTERMEDIA DE ETIQUETAS DE LAVADO Y ESTILOS --> revisar esta tabla  falta completar contenido
+CREATE TABLE `etiquetasLavado_estilo`( --
+	fk_id_etiqueta_lavado
+	fk_id_estilo
 );
 
 
 -- TABLA INTERMEDIA ETIQUETA LAVADO Y ORDEN DE PRODUCCION
 CREATE TABLE `ordenProduccion_hangtags`(
-	fk_id_orden_produccion_6 --
-	fk_id_etiqueta_lavado_2
+	fk_id_orden_produccion_6
+	fk_id_hangtag
 );
 
 
+-- TABLA INTERMEDIA ORDEN DE PRODUCCION Y AVIOS
+CREATE TABLE `ordenProduccion_avios`(
+	fk_id_orden_produccion_7
+	fk_id_avios
+);
+
+
+
 -- TABLA AVIOS --> entidad  
-CREATE TABLE `avios`(
-	`id_avio` INT(8) AUTO_INCREMENT,
+CREATE TABLE `avios`(  -- la programacion hara el calculo del total para lo que se necesita en avios
+	`id_avios` INT(8) AUTO_INCREMENT,
 	`nombre_avio` VARCHAR(20) --talleros, precios, hangtag,ganchos,
 	`imagen_avio` INT(8),--sensores, bolsas,broches,tuil,
+	`fecha_registro_avios` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME, -- soguillas,elasticos,
-	fk_id_orden_produccion_7
-	fk_id_orden_guia_corte_1
+	fk_id_cliente_
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -195,7 +201,7 @@ CREATE TABLE `proveedores`( -- Registros que llenan por usuario
 
 
 -- TABLA INTERMEDIA HANGTAG Y PROVEEDORES
-CREATE TABLE `ordenProduccion_hangtags`(
+CREATE TABLE `hangtags_proveedores`(
 	fk_id_hangtag
 	fk_id_proveedor 
 );
@@ -251,7 +257,7 @@ CREATE TABLE `colores_rip`( -- Registros que llenan por usuario
 );
 
 
--- TABLA GESTION TELAS --> entidad  
+-- TABLA GESTION TELAS --> entidad  - Jaime
 CREATE TABLE `pedido_telas`( -- esto se mide a nivel de orden de produccion
 	`id_pedido_tela` INT(8) AUTO_INCREMENT,  -- Registros que llenan por usuario
 	`consumo_prenda` INT(8),
@@ -277,7 +283,7 @@ CREATE TABLE `ordenes_guias_cortes`( -- Registros que llenan por usuario
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA CORTE DE TELAS --> entidad
+-- TABLA CORTE DE TELAS --> entidad - Isac 
 CREATE TABLE `corte_orden_telas`( -- Registros que llenan por usuario
 	`id_corte_orden_tela` INT(8) AUTO_INCREMENT,
 	`capas_minimas` INT(8),
@@ -490,7 +496,6 @@ CREATE TABLE `patronaje_moldes`(
 	`fecha_ultima_actualizacion` DATETIME
 	fk_id_usuario_22
 	fk_id_orden_produccion_3
-	fk_id_etiqueta_lavado_3
 	fk_id_etiqueta_estampada
 	fk_id_tipo_prenda_3
 	fk_id_estado_actividad_19  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
