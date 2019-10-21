@@ -4,16 +4,63 @@ CREATE TABLE `personas`( -- Registros que llenan por usuario
     `nombres` VARCHAR(45) NOT NULL,
     `apellido_paterno` VARCHAR(45) NOT NULL,
     `apellido_materno` VARCHAR(45) NOT NULL,
-    `telefono` VARCHAR(20) NOT NULL,
-    `direccion` VARCHAR(60) NOT NULL,
     `email` VARCHAR(35) NOT NULL,
     `foto` VARCHAR(100), 
+    fk_id_departamento
+    fk_id_distrito
+    fk_id_calle
+    fk_id_nacionalidad
     `fecha_alta_persona` DATETIME, /* -- ver si se puede mejorar el tipo de campo -- */
     `fecha_baja_persona` DATETIME, /* -- ver si se puede mejorar el tipo de campo -- */
     `fk_id_estado_actividad_1`INT(8), -- estado persona --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
     CONSTRAINT pk_id_persona PRIMARY KEY (id_persona),
     CONSTRAINT fk_id_estado_actividad FOREIGN KEY (fk_id_estado_actividad_1)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+
+-- TABLA TIPO TELEFONO
+CREATE TABLE `tipo_telefono`(
+	`id_tipo_telefono` INT
+	`nombre_tipo_telefono` VARCHAR
+);
+
+
+-- TABLA INTERMEDIA PERSONAS Y TIPO TELEFONO
+CREATE TABLE `personas_tipoTelefono`(
+	fk_id_persona
+	fk_id_tipo_telefono
+	`numero_telefono` VARCHAR
+);
+
+
+-- TABLA DEPARTAMENTO
+CREATE TABLE `departamento`(
+	`id_departamento` INT
+	`nombre_departamento` VARCHAR
+);
+
+
+-- TABLA DISTRITO
+CREATE TABLE `distrito`(
+	`id_distrito` INT
+	`nombre_distrito` VARCHAR
+	fk_id_departamento
+);
+
+
+-- TABLA CALLE
+CREATE TABLE `calle`(
+	`id_calle` INT
+	`nombre_calle` VARCHAR
+	fk_id_distrito
+);
+
+
+-- TABLA NACIONALIDAD
+CREATE TABLE `nacionalidad`(
+	`id_nacionalidad` INT
+	`nombre_nacionalidad` VARCHAR
+)
 
 
 -- TABLA USUARIO -->  entidad - debil
@@ -54,8 +101,6 @@ CREATE TABLE `estilos`( -- Registros que llenan por usuario
 	`estilo_genero` VARCHAR(45), -- mujer, hombre, niño, niña, bebe,bebo
 	`descripcion` VARCHAR(100),
 	`cantidad_prendas` INT(10),
-	`tallas` VARCHAR(20), -- resolver problema con tallas
-	`curva` VARCHAR(20), -- resolver problema con curva
 	fk_tipo_prenda_2 VARCHAR(45), -- leggings, polo, falda, short, bodys ,etc
 	fk_id_tecnica_estampado -- puff - glitter - plano - dischard - suave - covertura etc
 	fk_id_orden_produccion
@@ -65,11 +110,26 @@ CREATE TABLE `estilos`( -- Registros que llenan por usuario
 );
 
 
+-- TABLA INTERMEDIA ESTILOS Y TALLAS
+CREATE TABLE `estilos_tallas`(
+	fk_id_estilo
+	fk_id_talla 
+	`curva_talla` INT
+);
+
+
+-- TABLA TALLAS
+CREATE TABLE `tallas`(
+	`id_talla` INT
+	`talla` VARCHAR -- 2,4,6,8,10,12,14,16,16X,6/9,9/12,12/18,18/24,24/36,S,M,L y otros
+);
+
+
 -- TABLA ORDEN DE PRODUCCION --> entidad
 CREATE TABLE `ordenes_produccion`( -- Registros que llenan por usuario
 	`id_orden_produccion` INT(8) AUTO_INCREMENT,
 	`numero_orden` VARCHAR,
-	`cantidad_total_prendas` INT,
+	`cantidad_total_prendas` INT,  -- revisar este camnpo si es posible la suma o es mejor en programacion
 	`observaciones_orden_produccion` VARCHAR(100),
 	`fecha_inicial_envio` DATETIME
 	`fecha_embarque` DATETIME,
@@ -272,13 +332,14 @@ CREATE TABLE `pedido_telas`( -- esto se mide a nivel de orden de produccion
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA ORDENES DE GUIA DE CORTE --> entidad
+-- TABLA ORDENES DE GUIA DE CORTE --> entidad -- Esta es la tabla principal
 CREATE TABLE `ordenes_guias_cortes`( -- Registros que llenan por usuario
 	`id_orden_guia_corte` INT(8) AUTO_INCREMENT,
-	`fecha_registro_guia_corte` DATETIME,
+	`numero_guia` INT
+	`fecha_registro_guia_corte` DATETIME, -- fecha que se creo la guia
 	`fecha_ultima_actualizacion` DATETIME,
 	`observaciones_orden_guia_corte` VARCHAR(100),
-	fk_id_usuario_9
+	fk_id_usuario_9 --> registra Diego, Sra. Monica, Sebastian, etc.
 	fk_id_estado_actividad_9  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
@@ -288,22 +349,31 @@ CREATE TABLE `corte_orden_telas`( -- Registros que llenan por usuario
 	`id_corte_orden_tela` INT(8) AUTO_INCREMENT,
 	`capas_minimas` INT(8),
 	`capas_maximas` INT(8),
-	`corte_demasia` INT(8),
+	`corte_demasia` INT(8), 
 	`corte_fallados` INT,
-	`ancho_rollo` INT -- resta 2 centimetros de cada extremo 
-	`largo_rollo` INT
+	`ancho_rollo_tendido` INT -- resta 2 centimetros de cada extremo 
+	`largo_rollo_tendido` INT -- el largo lo da patronaje segun el tendido del sistema --> debe ser implementado despues
 	`numero_mesa` INT -- mesa 1 / mesa 2 / mesa 3
 	`observaciones_corte_orden_tela` VARCHAR(100),
 	`fecha_ingreso_corte_orden_tela` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
 	fk_id_orden_guia_corte
-	fk_id_usuario_10
+	fk_id_orden_produccion
+	fk_id_estilo
+	fk_id_usuario_10 --> Registra Isac, Luis, etc.
 	fk_id_estado_actividad_10  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
+-- TABLA INTERMEDIA CORTE DE TELAS Y ESTILOS
+CREATE TABLE `corteTelas_estilos`(
+	fk_id_corte_orden_tela_1
+	fk_id_estilo
+);
+
+
 -- TABLA DISEÑO --
-CREATE TABLE `diseno_micas`(
+CREATE TABLE `diseno_micas`( 
 	`id_diseno_mica` INT(8) AUTO_INCREMENT,
 	`nombre_referencia_diseno` VARCHAR(45),
 	`colores_de_separacion` INT,
