@@ -385,7 +385,8 @@ CREATE TABLE `diseno_micas`(
 	`cambios_para_produccion` VARCHAR(500),
 	`observaciones_diseno_produccion` VARCHAR(100),
 	`fecha_de_impresion` DATETIME
-	fk_id_usuario_11
+	fk_id_ploter --> crear tabla de impresoras
+	fk_id_usuario_11 --> registra la impresion de la mica
 	fk_id_orden_produccion
 	fk_id_estilo
 	fk_id_orden_estampado_programacion
@@ -406,6 +407,14 @@ CREATE TABLE `diseno_fichas`(
 	fk_id_avio_1
 );
 
+
+-- TABLA PLOTER
+CREATE TABLE `ploter`(
+	`id_ploter` INT(8) AUTO_INCREMENT,
+	`nombre_ploter` VARCHAR(45),
+	`descripcion` DATETIME
+	fk_id_estado_actividad_12  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+);
 
 -- TABLA TECNICAS DE ESTAMPADO
 CREATE TABLE `tecnicas_estampado`(  -- puff - glitter - plano - dischard - suave - covertura etc
