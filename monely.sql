@@ -104,7 +104,6 @@ CREATE TABLE `estilos`( -- Registros que llenan por usuario
 	fk_tipo_prenda_2 VARCHAR(45), -- leggings, polo, falda, short, bodys ,etc
 	fk_id_tecnica_estampado -- puff - glitter - plano - dischard - suave - covertura etc
 	fk_id_orden_produccion
-	fk_id_diseno_ficha -- total, parcial, pecho, espalda 
 	fk_id_hangtag_1
 	fk_id_codigo_estilo_produccion
 );
@@ -345,7 +344,7 @@ CREATE TABLE `ordenes_guias_cortes`( -- Registros que llenan por usuario
 
 
 -- TABLA CORTE DE TELAS --> entidad - Isac 
-CREATE TABLE `corte_orden_telas`( -- Registros que llenan por usuario
+CREATE TABLE `corte_orden_telas`( -- REFIERE AL TENDIDO Y CORTE --> Registros que llenan por usuario
 	`id_corte_orden_tela` INT(8) AUTO_INCREMENT,
 	`capas_minimas` INT(8),
 	`capas_maximas` INT(8),
@@ -353,22 +352,22 @@ CREATE TABLE `corte_orden_telas`( -- Registros que llenan por usuario
 	`corte_fallados` INT,
 	`ancho_rollo_tendido` INT -- resta 2 centimetros de cada extremo 
 	`largo_rollo_tendido` INT -- el largo lo da patronaje segun el tendido del sistema --> debe ser implementado despues
-	`numero_mesa` INT -- mesa 1 / mesa 2 / mesa 3
 	`observaciones_corte_orden_tela` VARCHAR(100),
 	`fecha_ingreso_corte_orden_tela` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
+	fk_id_mesa_tendido -- mesa 1 / mesa 2 / mesa 3
+	fk_id_estilo
 	fk_id_orden_guia_corte
 	fk_id_orden_produccion
-	fk_id_estilo
 	fk_id_usuario_10 --> Registra Isac, Luis, etc.
 	fk_id_estado_actividad_10  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA INTERMEDIA CORTE DE TELAS Y ESTILOS
-CREATE TABLE `corteTelas_estilos`(
-	fk_id_corte_orden_tela_1
-	fk_id_estilo
+-- TABLA MESAS DE TENDIDO Y CORTE
+CREATE TABLE `mesa_tendido`( -- mesa 1 / mesa 2 / mesa 3
+	`id_mesa_tendido` INT
+	`nombre_mesa` VARCHAR
 );
 
 
@@ -385,26 +384,26 @@ CREATE TABLE `diseno_micas`(
 	`cambios_para_produccion` VARCHAR(500),
 	`observaciones_diseno_produccion` VARCHAR(100),
 	`fecha_de_impresion` DATETIME
-	fk_id_ploter --> crear tabla de impresoras
+	fk_id_impresora --> crear tabla de impresoras
 	fk_id_usuario_11 --> registra la impresion de la mica
 	fk_id_orden_produccion
 	fk_id_estilo
 	fk_id_orden_estampado_programacion
-	fk_id_diseno_ficha
 	fk_id_codigos_orden_produccion
 	fk_id_estado_actividad_11  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
 
--- TABLA DISENO_MICAS
-CREATE TABLE `diseno_fichas`(
-	`id_diseno_ficha` INT(8) AUTO_INCREMENT,
-	`observaciones_diseno_ficha` VARCHAR(45),
-	`fecha_registro_diseno_ficha` DATETIME
-	`fecha_ultima_actualizacion` DATETIME
-	fk_id_usuario_12
-	fk_id_estado_actividad_12  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
-	fk_id_avio_1
+-- TABLA PLOTERS
+CREATE TABLE `impresoras`( -- ploter 7880, ploter 7800, etc
+	`id_impresora` INT
+	`tipo_impresora` VARCHAR  -- ploter, impresora convensional, multifuncional
+	`marca_impresora` -- epson , etc
+	`serie_impresora` --7800, 7880 stylus , etc
+	`formato_impresion` -- A4,A3,A5, rollo
+	`ancho_bandeja` -- 60cm , 70cm, 120cm
+	`material_impresion` -- micas,bond,micas y bond, etc
+	`tipo_impresion` -- tinta, laser
 );
 
 
@@ -464,7 +463,6 @@ CREATE TABLE `revelado_estampado`(
 	fk_id_diseno_micas
 	fk_id_orden_produccion
 	fk_id_etiqueta_estampada
-	fk_id_diseno_ficha 
 	fk_id_estado_actividad_14  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 
 
@@ -477,7 +475,6 @@ CREATE TABLE `muestras_estampado`(
 	fk_id_orden_produccion
 	fk_id_patronaje_molde
 	fk_id_usuario_16
-	fk_id_diseno_ficha 
 	fk_id_estado_actividad_15  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
@@ -492,7 +489,6 @@ CREATE TABLE `planchado`(
 	fk_id_orden_produccion
 	fk_id_patronaje_molde
 	fk_id_usuario_17
-	fk_id_diseno_ficha 
 	fk_id_estado_actividad_16  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
@@ -533,7 +529,6 @@ CREATE TABLE `comentarios`(
 	fk_id_orden_guia_corte
 	fk_id_corte_orden_tela
 	fk_id_diseno_mica
-	fk_id_diseno_ficha
 	fk_id_revelado_estampado
 	fk_id_planchado 
 	fk_id_orden_estampado_programacion 
@@ -561,14 +556,13 @@ CREATE TABLE `control_distribucion`( -- revision de esta tabla
 	fk_id codigos_orden_produccion
 	fk_id_patronaje_molde
 	fk_id_etiqueta_estampada
-	fk_id_diseno_ficha
 	fk_id_corte_orden_tela
 	fk_id_estado_actividad_18  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
 
 -- TABLA PATRONAJE Y MOLDES
-CREATE TABLE `patronaje_moldes`(
+CREATE TABLE `patronaje_moldes`( -- muestra tambien Ubicacion de diseño total, parcial, pecho, espalda 
 	`id_patronaje_molde` INT(8) AUTO_INCREMENT,
 	`ubicacion_diseno` VARCHAR(70),
 	`fecha_registro_patronaje_molde` DATETIME
