@@ -388,7 +388,7 @@ CREATE TABLE `diseno_micas`(
 	fk_id_usuario_11 --> registra la impresion de la mica
 	fk_id_orden_produccion
 	fk_id_estilo
-	fk_id_orden_estampado_programacion
+	fk_id_orden_estampado_programacion -- revisar
 	fk_id_codigos_orden_produccion
 	fk_id_estado_actividad_11  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
@@ -455,15 +455,21 @@ CREATE TABLE `maquinas_estampado`(   -- maquina1, maquina2,maquina3,maquina4_eti
 
 
 -- TABLA REVELADO ESTAMPADO
-CREATE TABLE `revelado_estampado`(
-	`id_revelado_estampado` INT(8) AUTO_INCREMENT,
+CREATE TABLE `revelado_estampado`( -- solo para confirmar la tarea
+	`id_revelado_estampado` INT(8) AUTO_INCREMENT, -- implementar posteriormente esta tabla
+	`cantidad_cuadros` INT
+	`emulsion_usada` VARCHAR
 	`fecha_registro_revelado_estampado` DATETIME
 	`fecha_ultima_actualizacion` DATETIME
+	fk_id_maquina_estampado
 	fk_id_usuario_15
-	fk_id_diseno_micas
+	fk_id_estilo
+	fk_id_diseno_mica
+	fk_id_patronaje_molde  -- verificar si es necesario
 	fk_id_orden_produccion
 	fk_id_etiqueta_estampada
 	fk_id_estado_actividad_14  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+);
 
 
 -- TABLA MUESTRAS ESTAMPADO
@@ -472,10 +478,13 @@ CREATE TABLE `muestras_estampado`(
 	`comentarios_muestra` VARCHAR
 	`fecha_registro_muestra_estampado` DATETIME
 	`fecha_ultima_actualizacion` DATETIME
+	fk_id_estilo
 	fk_id_orden_produccion
-	fk_id_patronaje_molde
-	fk_id_usuario_16
-	fk_id_estado_actividad_15  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+	fk_id_patronaje_molde  -- verificar si es necesario
+	fk_id_usuario_queAsigna
+	fk_id_estado_actividad -- muestra enviada
+	fk_id_usuario_queRecibe
+	fk_id_estado_actividad_15  -- muestra recibida
 );
 
 
@@ -483,9 +492,12 @@ CREATE TABLE `muestras_estampado`(
 CREATE TABLE `planchado`(
 	`id_planchado` INT(8) AUTO_INCREMENT,
 	`cantidad_planchado` INT
+	`temperatura` VARCHAR
+	`tiempo_plancha` INT
 	`observaciones_planchado` VARCHAR
 	`fecha_registro_planchado` DATETIME
 	`fecha_ultima_actualizacion` DATETIME
+	fk_id_estilo
 	fk_id_orden_produccion
 	fk_id_patronaje_molde
 	fk_id_usuario_17
@@ -497,14 +509,27 @@ CREATE TABLE `planchado`(
 CREATE TABLE `orden_estampado_programacion`( -- ordenar por maquina x fecha x recursos
 	`id_orden_estampado_programacion` INT(8) AUTO_INCREMENT,
 	`observaciones_programacion` VARCHAR
-	`fecha_produccion` DATETIME
-	`fecha_registro_programacion` DATETIME
-	`fecha_ultima_actualizacion` VARCHAR
+	`fecha_registro_programacion` DATETIME --> fecha registro de tarea
+	fk_id_estilo
+	fk_id_orden_produccion
 	fk_id_ordene_guia_corte
-	fk_id_maquina_estampado
-	fk_id_usuario_18
-	fk_id_estado_actividad_17  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+	fk_id_muestra_estampado
+	fk_id_maquina_estampado -- maquina asignada
+	fk_id_estado_actividad_17  -- estado terminado o no --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+	fk_id_estado_actividad -- Jerarquia --> urgente / muy urgente / programado
 );
+
+
+-- TABLA INTERMEDIA ORDEN ESTAMPADO PROGRAMACION Y  USUARIO
+CREATE TABLE `programacion_usuario`( -- cambia constante la programacion
+	fk_id_orden_estampado_programacion
+	fk_id_usuario
+	`hora_inicio` TIME -- revisar si es valido este dato o comose maneja
+	`hora_fin` TIME -- revisar si es valido este dato o comose maneja
+	`fecha_produccion` DATETIME --> dia que se realiza produccion
+	`fecha_ultima_actualizacion` VARCHAR --> ultima fecha de cambios
+);
+
 
 
 -- TABLA ESTADOS PROCESOS  --> para todos los estados de procesos
@@ -516,28 +541,7 @@ CREATE TABLE `estados_actividad`( -- pendiente-gris / confirmado-verde / en proc
 );
 
 
--- TABLA COMENTARIOS DE USUARIOS --> entidad
-CREATE TABLE `comentarios`(
-	`id_comentario` INT(8) AUTO_INCREMENT,
-	`comentarios`
-	`fecha_comentario`
-	fk_id_usuario_20
-	fk_id_estilo_3
-	fk_id_orden_produccion_1
-	fk_id_pedido_hangtag
-	fk_id_pedido_tela
-	fk_id_orden_guia_corte
-	fk_id_corte_orden_tela
-	fk_id_diseno_mica
-	fk_id_revelado_estampado
-	fk_id_planchado 
-	fk_id_orden_estampado_programacion 
-	fk_id_control_distribucion 
-	fk_id_patronaje_molde
-	fk_id_codigo_prenda_produccion 
-	fk_id_seguimiento_muestra_estampado 
-	fk_id_verificacion_control_entrega
-)ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
+
 
 
 
@@ -547,17 +551,22 @@ CREATE TABLE `comentarios`(
 
 
 -- TABLA CONTROL DE DISTRIBUCION
-CREATE TABLE `control_distribucion`( -- revision de esta tabla
+CREATE TABLE `control_distribucion`( -- Magaly recibe --> eti.lavado, tela
 	`id_control_distribucion` INT(8) AUTO_INCREMENT,
 	`fecha_registro_control_distribucion` DATETIME
 	`fecha_ultima_actualizacion` VARCHAR
 	fk_id_usuario_21
-	fk_id_orden_produccion_2
+	fk_id_diseno_mica
+	fk_id_estilo --> 
+	fk_id_orden_produccion
+	fk_id_orden_guia_corte
+	fk_id_corte_orden_tela
 	fk_id codigos_orden_produccion
 	fk_id_patronaje_molde
 	fk_id_etiqueta_estampada
-	fk_id_corte_orden_tela
-	fk_id_estado_actividad_18  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+	fk_id_estado_actividad_recibido  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+	fk_id_estado_actividad_envio
+	fk_id_estado_actividad
 );
 
 
@@ -572,18 +581,6 @@ CREATE TABLE `patronaje_moldes`( -- muestra tambien Ubicacion de diseño total, 
 	fk_id_etiqueta_estampada
 	fk_id_tipo_prenda_3
 	fk_id_estado_actividad_19  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
-);
-
-
--- TABLA SEGUIMIENTO DE MUESTRAS DE ESTAMPADO    -- revisar
-CREATE TABLE `seguimiento_muestras_estampado`(
-	`id_seguimiento_muestra_estampado` INT(8) AUTO_INCREMENT,
-	`fecha_registro_seguimiento_muestra_estampado` DATETIME
-	`fecha_ultima_actualizacion` VARCHAR
-	fk_id_usuario_23
-	fk_id_orden_produccion_4
-	fk_id_estilo_4
-	fk_id_estado_actividad_20  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
 
@@ -615,12 +612,26 @@ CREATE TABLE `codigos_estilo_produccion`( -- solucionar el ingreso de datos de c
 );
 
 
--- TABLA VERIFICACION CONTROL ENTREGAS --------> 
-CREATE TABLE `verificaciones_control_entregas`(
-	`id_verificacion_control_entrega` INT(8) AUTO_INCREMENT,
-	`nombre_verificacion_control` VARCHAR  -- verificado,no_verificado
-	`fecha_ultima_actualizacion` DATETIME
-	fk_id_usuario_25
-);
 
-
+-- TABLA COMENTARIOS DE USUARIOS --> entidad -- crear una tabla comentario x tabla
+CREATE TABLE `comentarios`( -- revisar si todas las tablas estan aqui
+	`id_comentario` INT(8) AUTO_INCREMENT,
+	`comentario` VARCHAR 500
+	`fecha_comentario` DATETIME
+	fk_id_usuario_20
+	fk_id_estilo_3
+	fk_id_orden_produccion_1
+	fk_id_pedido_hangtag
+	fk_id_pedido_tela
+	fk_id_orden_guia_corte
+	fk_id_corte_orden_tela
+	fk_id_diseno_mica
+	fk_id_revelado_estampado
+	fk_id_planchado 
+	fk_id_orden_estampado_programacion 
+	fk_id_control_distribucion 
+	fk_id_patronaje_molde
+	fk_id_codigo_prenda_produccion 
+	fk_id_seguimiento_muestra_estampado 
+	fk_id_verificacion_control_entrega
+)ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
