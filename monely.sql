@@ -551,14 +551,24 @@ CREATE TABLE `estados_actividad`( -- pendiente-gris / confirmado-verde / en proc
 
 
 
-
-
-
-
-
+-- TABLA REGISTRO DE CONTROL DE DISTRIBUCION DE CORTES Y PRENDAS QUE PASAN POR AREA DE DISTRIBUCION
+CREATE TABLE `control_distribuciond`( -- pendiente-gris / confirmado-verde / en proceso-amarillo / atrazado-rojo / finalizado-azul
+	`id_control_distribucion` INT(8) AUTO_INCREMENT, -- estado persona --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+	`nombre_estado` VARCHAR -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+	`fecha_ultima_actualizacion` VARCHAR
+	fk_id_usuario_19
+	fk_id_diseno_mica
+	fk_id_estilo --> 
+	fk_id_orden_produccion
+	fk_id_orden_guia_corte
+	fk_id_corte_orden_tela
+	fk_id codigos_orden_produccion
+	fk_id_patronaje_molde
+	fk_id_etiqueta_estampada
+);
 
 -- TABLA REGISTRO DE CONTROL DE DISTRIBUCION DE CORTES Y PRENDAS QUE PASAN POR AREA DE DISTRIBUCION
-CREATE TABLE `control_distribucion_recibir`( -- Magaly recibe --> eti.lavado, tela de corte, ecia
+CREATE TABLE `control_recibir`( -- Magaly recibe --> eti.lavado, tela de corte, ecia
 	`id_control_distribucion_recibir` INT(8) AUTO_INCREMENT,
 	`cantidad_recibida` INT -- se contabiliza los cortes o prendas en proceso y registra
 	`descripcion` VARCHAR -- descripcion simple de lo que se recibe
@@ -567,20 +577,12 @@ CREATE TABLE `control_distribucion_recibir`( -- Magaly recibe --> eti.lavado, te
 	fk_id_usuario_queRecibe -- Magaly
 	fk_id_usuario_queEnvia -- Luis, Isac, chato 
 	fk_id_area_trabajo_envia -- Area que envia el producto en proceso 
-	fk_id_diseno_mica
-	fk_id_estilo --> 
-	fk_id_orden_produccion
-	fk_id_orden_guia_corte
-	fk_id_corte_orden_tela
-	fk_id codigos_orden_produccion
-	fk_id_patronaje_molde
-	fk_id_etiqueta_estampada
 	fk_id_estado_actividad_producto -- calidad, defectuoso, necesita correcciones, volver a hacer, incompleto
 );
 
 
 -- TABLA REGISTRO DE CONTROL DE DISTRIBUCION DE CORTES Y PRENDAS QUE PASAN POR AREA DE DISTRIBUCION
-CREATE TABLE `control_distribucion_envia`( -- Magaly recibe --> eti.lavado, tela de corte, ecia
+CREATE TABLE `control_envia`( -- Magaly recibe --> eti.lavado, tela de corte, ecia
 	`id_control_distribucion_envia` INT(8) AUTO_INCREMENT,
 	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
 	`descripcion` VARCHAR -- descripcion simple de lo que se recibe
@@ -589,14 +591,6 @@ CREATE TABLE `control_distribucion_envia`( -- Magaly recibe --> eti.lavado, tela
 	fk_id_usuario_queEnvia -- Magaly
 	fk_id_usuario_queRecibe -- Luis, Isac, chato 
 	fk_id_area_trabajo_recibe -- Area que recibe el producto en proceso 
-	fk_id_diseno_mica
-	fk_id_estilo --> 
-	fk_id_orden_produccion
-	fk_id_orden_guia_corte
-	fk_id_corte_orden_tela
-	fk_id codigos_orden_produccion
-	fk_id_patronaje_molde
-	fk_id_etiqueta_estampada
 	fk_id_estado_actividad_producto -- calidad, defectuoso, necesita correcciones, volver a hacer
 );
 
