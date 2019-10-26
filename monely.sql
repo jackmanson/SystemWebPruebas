@@ -60,7 +60,14 @@ CREATE TABLE `calle`(
 CREATE TABLE `nacionalidad`(
 	`id_nacionalidad` INT
 	`nombre_nacionalidad` VARCHAR
-)
+);
+
+
+-- TABLA AREA DE TRABAJO
+CREATE TABLE `area_trabajo`( --/* administracion,comercial,diseño,patronaje,corte,estampado,telas,control y empaque */
+	`id_area_trabajo` INT
+	`nombre_area_trabajo` VARCHAR
+);
 
 
 -- TABLA USUARIO -->  entidad - debil
@@ -69,10 +76,10 @@ CREATE TABLE `usuarios`( -- Registros que llenan por usuario
     `nickname` VARCHAR(15),
     `pass` VARCHAR(100),
     `perfil_usuario` VARCHAR(20), /* administrador - editor - consultor*/
-    `area_trabajo` VARCHAR(15), /* administracion,comercial,diseño,patronaje,corte,estampado,telas,control y empaque */
     `fecha_alta_usuario` DATETIME, /* -- ver si se puede mejorar el tipo de campo -- */
     `fecha_baja_usuario` DATETIME, /* -- ver si se puede mejorar el tipo de campo -- */
     fk_id_persona_1
+    fk_id_area_trabajo 
     fk_id_estado_actividad_2  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
     CONSTRAINT
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
@@ -550,12 +557,16 @@ CREATE TABLE `estados_actividad`( -- pendiente-gris / confirmado-verde / en proc
 
 
 
--- TABLA CONTROL DE DISTRIBUCION
-CREATE TABLE `control_distribucion`( -- Magaly recibe --> eti.lavado, tela
-	`id_control_distribucion` INT(8) AUTO_INCREMENT,
+-- TABLA REGISTRO DE CONTROL DE DISTRIBUCION DE CORTES Y PRENDAS QUE PASAN POR AREA DE DISTRIBUCION
+CREATE TABLE `control_distribucion_recibir`( -- Magaly recibe --> eti.lavado, tela de corte, ecia
+	`id_control_distribucion_recibir` INT(8) AUTO_INCREMENT,
+	`cantidad_recibida` INT -- se contabiliza los cortes o prendas en proceso y registra
+	`descripcion` VARCHAR -- descripcion simple de lo que se recibe
 	`fecha_registro_control_distribucion` DATETIME
 	`fecha_ultima_actualizacion` VARCHAR
-	fk_id_usuario_21
+	fk_id_usuario_queRecibe -- Magaly
+	fk_id_usuario_queEnvia -- Luis, Isac, chato 
+	fk_id_area_trabajo_envia -- Area que envia el producto en proceso 
 	fk_id_diseno_mica
 	fk_id_estilo --> 
 	fk_id_orden_produccion
@@ -564,10 +575,31 @@ CREATE TABLE `control_distribucion`( -- Magaly recibe --> eti.lavado, tela
 	fk_id codigos_orden_produccion
 	fk_id_patronaje_molde
 	fk_id_etiqueta_estampada
-	fk_id_estado_actividad_recibido  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
-	fk_id_estado_actividad_envio
-	fk_id_estado_actividad
+	fk_id_estado_actividad_producto -- calidad, defectuoso, necesita correcciones, volver a hacer, incompleto
 );
+
+
+-- TABLA REGISTRO DE CONTROL DE DISTRIBUCION DE CORTES Y PRENDAS QUE PASAN POR AREA DE DISTRIBUCION
+CREATE TABLE `control_distribucion_envia`( -- Magaly recibe --> eti.lavado, tela de corte, ecia
+	`id_control_distribucion_envia` INT(8) AUTO_INCREMENT,
+	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
+	`descripcion` VARCHAR -- descripcion simple de lo que se recibe
+	`fecha_registro_control_distribucion` DATETIME
+	`fecha_ultima_actualizacion` VARCHAR
+	fk_id_usuario_queEnvia -- Magaly
+	fk_id_usuario_queRecibe -- Luis, Isac, chato 
+	fk_id_area_trabajo_recibe -- Area que recibe el producto en proceso 
+	fk_id_diseno_mica
+	fk_id_estilo --> 
+	fk_id_orden_produccion
+	fk_id_orden_guia_corte
+	fk_id_corte_orden_tela
+	fk_id codigos_orden_produccion
+	fk_id_patronaje_molde
+	fk_id_etiqueta_estampada
+	fk_id_estado_actividad_producto -- calidad, defectuoso, necesita correcciones, volver a hacer
+);
+
 
 
 -- TABLA PATRONAJE Y MOLDES
