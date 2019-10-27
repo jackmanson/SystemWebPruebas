@@ -2,11 +2,13 @@
 CREATE TABLE `personas`( -- Registros que llenan por usuario
     `id_persona` INT(8) AUTO_INCREMENT,
     `nombres` VARCHAR(45) NOT NULL,
+    `dni` VARCHAR
     `apellido_paterno` VARCHAR(45) NOT NULL,
     `apellido_materno` VARCHAR(45) NOT NULL,
     `email` VARCHAR(35) NOT NULL,
     `foto` VARCHAR(100), 
     fk_id_departamento
+    fk_id_ciudad
     fk_id_distrito
     fk_id_calle
     fk_id_nacionalidad
@@ -21,7 +23,7 @@ CREATE TABLE `personas`( -- Registros que llenan por usuario
 -- TABLA TIPO TELEFONO
 CREATE TABLE `tipo_telefono`(
 	`id_tipo_telefono` INT
-	`nombre_tipo_telefono` VARCHAR
+	`nombre_tipo_telefono` VARCHAR -- fijo- movil - nextel - etc.
 );
 
 
@@ -40,18 +42,26 @@ CREATE TABLE `departamento`(
 );
 
 
+-- TABLA CIUDAD
+CREATE TABLE `ciudad`(
+	`id_ciudad` INT
+	`nombre_ciudad` VARCHAR
+	fk_id_departamento
+);
+
+
 -- TABLA DISTRITO
 CREATE TABLE `distrito`(
 	`id_distrito` INT
 	`nombre_distrito` VARCHAR
-	fk_id_departamento
+	fk_id_ciudad
 );
 
 
 -- TABLA CALLE
 CREATE TABLE `calle`(
 	`id_calle` INT
-	`nombre_calle` VARCHAR
+	`numero_calle` VARCHAR
 	fk_id_distrito
 );
 
@@ -66,7 +76,45 @@ CREATE TABLE `nacionalidad`(
 -- TABLA AREA DE TRABAJO
 CREATE TABLE `area_trabajo`( --/* administracion,comercial,diseño,patronaje,corte,estampado,telas,control y empaque */
 	`id_area_trabajo` INT
-	`nombre_area_trabajo` VARCHAR
+	`nombre_area_trabajo` VARCHAR  -- areas internas o servicios de terceros
+);
+
+
+CREATE TABLE `perfil_usuario`(
+	`id_perfil_usuario` INT
+	`nombre_perfil` VARCHAR /* administrador - editor - consultor - proveedor*/
+);
+
+
+CREATE TABLE `empresas_empleadoras`(
+	`id_empleador` INT
+	`razon_social` VARCHAR
+	`ruc` VARCHAR
+	`fecha_constitucion` DATETIME
+	`tipo_contitucion` -- SA - EIRL etc
+	`fecha_registro` DATETIME
+	fk_id_departamento
+    fk_id_ciudad
+    fk_id_distrito
+    fk_id_calle
+    fk_id_nacionalidad
+	fk_id_estado_actividad
+);
+
+
+-- TABLA INTERMEDIA EMPRESAS EMPLEADORAS Y TIPO TELEFONO
+CREATE TABLE `empresasEmpleadoras_tipoTelefono`(
+	fk_id_empleador
+	fk_id_tipo_telefono
+	`numero_telefono` VARCHAR
+);
+
+
+CREATE TABLE `trabajadores`(
+	`id_trabajador` INT
+	fk_id_area_trabajo
+	fk_id_empleador
+	fk_id_persona
 );
 
 
@@ -75,11 +123,10 @@ CREATE TABLE `usuarios`( -- Registros que llenan por usuario
     `id_usuario` INT(8) AUTO_INCREMENT,
     `nickname` VARCHAR(15),
     `pass` VARCHAR(100),
-    `perfil_usuario` VARCHAR(20), /* administrador - editor - consultor*/
     `fecha_alta_usuario` DATETIME, /* -- ver si se puede mejorar el tipo de campo -- */
     `fecha_baja_usuario` DATETIME, /* -- ver si se puede mejorar el tipo de campo -- */
     fk_id_persona_1
-    fk_id_area_trabajo 
+    fk_id_perfil_usuario /* administrador - editor - consultor - proveedor*/
     fk_id_estado_actividad_2  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
     CONSTRAINT
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
@@ -190,8 +237,8 @@ CREATE TABLE `etiqueta_lavado`( --  revisar con esa tabla junto a etiqueta de la
 
 -- TABLA INTERMEDIA DE ETIQUETAS DE LAVADO Y ESTILOS --> revisar esta tabla  falta completar contenido
 CREATE TABLE `etiquetasLavado_estilo`( --
-	fk_id_etiqueta_lavado
 	fk_id_estilo
+	fk_id_etiqueta_lavado
 );
 
 
@@ -237,10 +284,10 @@ CREATE TABLE `hangtags`( -- Registros que llenan por usuario
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA PEDIDOS DE HANGTAGS 
+-- TABLA PEDIDOS DE HANGTAGS A TERCEROS --> SOLICITANDO
 CREATE TABLE `hangtags_pedido`( -- Registros que llenan por usuario
 	`id_pedido_hangtag` INT(8) AUTO_INCREMENT,
-	`cantidad_hangtags` INT
+	`cantidad_hangtags` INT -- se supone incluye un redondeo por el solicitante
 	`observaciones_pedido_hangtag`
 	`fecha_registro_pedido_hangtag` DATETIME
 	`fecha_ultima_actualizacion` DATETIME, -- soguillas,elasticos,
@@ -252,17 +299,30 @@ CREATE TABLE `hangtags_pedido`( -- Registros que llenan por usuario
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA PROVEEDORES
+-- TABLA PROVEEDORES - INSUMOS O SERVICIOS
 CREATE TABLE `proveedores`( -- Registros que llenan por usuario
 	`id_proveedor` INT(8) AUTO_INCREMENT,
 	`razon_social_proveedor` VARCHAR(45),
 	`ruc_proveedor` VARCHAR(45),
-	`direccion_proveedor` VARCHAR(70),
-	`nombre_insumo` VARCHAR(45),
+	`nombre_insumo_servicio` VARCHAR(45),
 	`fecha_registro_proveedor` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
-	fk_id_usuario_5
+    fk_id_departamento
+    fk_id_ciudad
+    fk_id_distrito
+    fk_id_calle
+    fk_id_nacionalidad
+	fk_id_usuario_5 -- usuario que registro al proveedor
+	fk_id_usuario_representante -- usuario contacto intermediario
 	fk_id_estado_actividad_6 -- estado de proveedor
+);
+
+
+-- TABLA INTERMEDIA PROVEEDORES Y TIPO TELEFONO
+CREATE TABLE `proveedores_tipoTelefono`(
+	fk_id_proveedor
+	fk_id_tipo_telefono
+	`numero_telefono` VARCHAR
 );
 
 
@@ -287,6 +347,20 @@ CREATE TABLE `estilos_coloresRip`(
 );
 
 
+-- TABLA DE TIPO DE TELAS
+CREATE TABLE `tipo_telas`(
+	`id_tipo_tela` INT
+	`tipo_tela` VARCHAR   -- jersey, gamuza, melange, 
+);
+
+
+-- TABLA DE TIPO DE TEJIDO DE TELA
+CREATE TABLE `tipo_tejidos`(   -- 30/1 - 24/1 - 20/1
+	`id_tipo_tejido` INT
+	`tipo_tejido` VARCHAR
+);
+
+
 -- TABLA COLOR DE TELAS
 CREATE TABLE `colores_telas`(  -- Registros que llenan por usuario
 	`id_color_tela` INT(8) AUTO_INCREMENT,
@@ -294,11 +368,11 @@ CREATE TABLE `colores_telas`(  -- Registros que llenan por usuario
 	`partida_tela` VARCHAR(20),
 	`color_tela_interno` VARCHAR(15),
 	`nombre_color_tela_proveedor` VARCHAR(15),
-	`porcentaje_componentes` VARCHAR(25), -- 100% algodon 
-	`tipo_rollo` VARCHAR(45), -- abierta, tubular
-	`tipo_tela` VARCHAR(15), -- jersey, gamuza, melange, 
-	`tejido_tela` VARCHAR(45), -- 30/1 - 24/1 - 20/1
+	`porcentaje_componentes` VARCHAR(25), -- 100% algodon se completa en programacion
 	`fecha_registro_tela` DATETIME,
+	fk_id_tipo_tejido  -- 30/1 - 24/1 - 20/1
+	fk_id_tipo_tela    -- jersey, gamuza, melange, 
+	fk_id_tipo_rollo  -- abierta, tubular,abierta
 	fk_id_proveedor
  	fk_id_usuario_6
  	fk_id_estado_actividad_7  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
@@ -313,10 +387,10 @@ CREATE TABLE `colores_rip`( -- Registros que llenan por usuario
 	`color_rip_interno` VARCHAR(15),
 	`nombre_color_rip_proveedor` VARCHAR(15),
 	`porcentaje_componentes` VARCHAR(25), -- 100% algodon 
-	`tipo_rollo` VARCHAR(45), -- abierta, tubular
-	`tipo_rip` VARCHAR(15), -- jersey, gamuza, melange, 
-	`tejido_rip` VARCHAR(45), -- 30/1 - 24/1 - 20/1
 	`fecha_registro_rip` DATETIME
+	fk_id_tipo_tejido  -- 30/1 - 24/1 - 20/1
+	fk_id_tipo_tela    -- jersey, gamuza, melange, 
+	fk_id_tipo_rollo  -- abierta, tubular,abierta
 	fk_id_proveedor
 	fk_id_usuario_7
 	fk_id_estado_actividad_8  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
@@ -350,7 +424,7 @@ CREATE TABLE `ordenes_guias_cortes`( -- Registros que llenan por usuario
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA CORTE DE TELAS --> entidad - Isac 
+-- TABLA CORTE DE TELAS - TENDIDO --> entidad - Isac 
 CREATE TABLE `corte_orden_telas`( -- REFIERE AL TENDIDO Y CORTE --> Registros que llenan por usuario
 	`id_corte_orden_tela` INT(8) AUTO_INCREMENT,
 	`capas_minimas` INT(8),
@@ -362,13 +436,29 @@ CREATE TABLE `corte_orden_telas`( -- REFIERE AL TENDIDO Y CORTE --> Registros qu
 	`observaciones_corte_orden_tela` VARCHAR(100),
 	`fecha_ingreso_corte_orden_tela` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
+	fk_id_tipo_rollo
 	fk_id_mesa_tendido -- mesa 1 / mesa 2 / mesa 3
 	fk_id_estilo
-	fk_id_orden_guia_corte
 	fk_id_orden_produccion
+	fk_id_orden_guia_corte
 	fk_id_usuario_10 --> Registra Isac, Luis, etc.
 	fk_id_estado_actividad_10  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
+
+
+-- TABLA INTERMEDIA CORTE ORDEN DE TELAS CON TALLAS
+CREATE TABLE `corteTelas_tallas`(
+	fk_id_corte_orden_tela
+	fk_id_talla
+	`cantidad` INT -- cantidad por talla segun prenda
+);
+
+
+-- TABLA TIPO DE ROLLO
+CREATE TABLE `tipo_rollo`(
+	`id_tipo_rollo` INT
+	`tipo_rollo` VARCHAR -- tela abierta / cerrada / tubular
+);
 
 
 -- TABLA MESAS DE TENDIDO Y CORTE
@@ -479,7 +569,7 @@ CREATE TABLE `revelado_estampado`( -- solo para confirmar la tarea
 );
 
 
--- TABLA MUESTRAS ESTAMPADO
+-- TABLA MUESTRAS ESTAMPADO APROBADA PARA PRODUCCION
 CREATE TABLE `muestras_estampado`(
 	`id_muestra_estampado` INT(8) AUTO_INCREMENT,
 	`comentarios_muestra` VARCHAR
@@ -488,10 +578,7 @@ CREATE TABLE `muestras_estampado`(
 	fk_id_estilo
 	fk_id_orden_produccion
 	fk_id_patronaje_molde  -- verificar si es necesario
-	fk_id_usuario_queAsigna
 	fk_id_estado_actividad -- muestra enviada
-	fk_id_usuario_queRecibe
-	fk_id_estado_actividad_15  -- muestra recibida
 );
 
 
@@ -538,7 +625,6 @@ CREATE TABLE `programacion_usuario`( -- cambia constante la programacion
 );
 
 
-
 -- TABLA ESTADOS PROCESOS  --> para todos los estados de procesos
 CREATE TABLE `estados_actividad`( -- pendiente-gris / confirmado-verde / en proceso-amarillo / atrazado-rojo / finalizado-azul
 	`id_estado_actividad` INT(8) AUTO_INCREMENT, -- estado persona --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
@@ -548,51 +634,108 @@ CREATE TABLE `estados_actividad`( -- pendiente-gris / confirmado-verde / en proc
 );
 
 
-
-
-
--- TABLA REGISTRO DE CONTROL DE DISTRIBUCION DE CORTES Y PRENDAS QUE PASAN POR AREA DE DISTRIBUCION
-CREATE TABLE `control_distribuciond`( -- pendiente-gris / confirmado-verde / en proceso-amarillo / atrazado-rojo / finalizado-azul
-	`id_control_distribucion` INT(8) AUTO_INCREMENT, -- estado persona --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
-	`nombre_estado` VARCHAR -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
-	`fecha_ultima_actualizacion` VARCHAR
-	fk_id_usuario_19
-	fk_id_diseno_mica
-	fk_id_estilo --> 
-	fk_id_orden_produccion
-	fk_id_orden_guia_corte
-	fk_id_corte_orden_tela
-	fk_id codigos_orden_produccion
-	fk_id_patronaje_molde
-	fk_id_etiqueta_estampada
-);
-
--- TABLA REGISTRO DE CONTROL DE DISTRIBUCION DE CORTES Y PRENDAS QUE PASAN POR AREA DE DISTRIBUCION
-CREATE TABLE `control_recibir`( -- Magaly recibe --> eti.lavado, tela de corte, ecia
-	`id_control_distribucion_recibir` INT(8) AUTO_INCREMENT,
-	`cantidad_recibida` INT -- se contabiliza los cortes o prendas en proceso y registra
+-- TABLA REGISTRO DE CONTROL DE ENVIOS Y RECEPCION --> CON ESTO LA AREA DISTRIBUCION SE AUTOMATIZA
+CREATE TABLE `control_envios_recepcion`( -- Magaly recibe --> eti.lavado, tela de corte, ecia
+	`id_control_envio` INT(8) AUTO_INCREMENT,
+	`cantidad_total` INT -- se contabiliza el total por envio
 	`descripcion` VARCHAR -- descripcion simple de lo que se recibe
-	`fecha_registro_control_distribucion` DATETIME
+	`fecha_registro_queEnvia` DATETIME
 	`fecha_ultima_actualizacion` VARCHAR
-	fk_id_usuario_queRecibe -- Magaly
 	fk_id_usuario_queEnvia -- Luis, Isac, chato 
 	fk_id_area_trabajo_envia -- Area que envia el producto en proceso 
-	fk_id_estado_actividad_producto -- calidad, defectuoso, necesita correcciones, volver a hacer, incompleto
-);
-
-
--- TABLA REGISTRO DE CONTROL DE DISTRIBUCION DE CORTES Y PRENDAS QUE PASAN POR AREA DE DISTRIBUCION
-CREATE TABLE `control_envia`( -- Magaly recibe --> eti.lavado, tela de corte, ecia
-	`id_control_distribucion_envia` INT(8) AUTO_INCREMENT,
-	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
-	`descripcion` VARCHAR -- descripcion simple de lo que se recibe
-	`fecha_registro_control_distribucion` DATETIME
-	`fecha_ultima_actualizacion` VARCHAR
-	fk_id_usuario_queEnvia -- Magaly
-	fk_id_usuario_queRecibe -- Luis, Isac, chato 
+	fk_id_usuario_queRecibe -- Magaly
 	fk_id_area_trabajo_recibe -- Area que recibe el producto en proceso 
-	fk_id_estado_actividad_producto -- calidad, defectuoso, necesita correcciones, volver a hacer
+	fk_id_estado_actividad_producto -- El que recibe confirma --> calidad, defectuoso, necesita correcciones, volver a hacer
+	fk_id_estado_actividad_confirmacion -- El que recibe confirma --> llegada
 );
+
+
+
+
+
+
+-- REVISAR --> FALTA DEFINIR TABLA DE CONTROL DE PROVEEDORES / ACABADOS
+-- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y  PROVEEDOR
+CREATE TABLE `envios_confeccion`(
+	fk_id_control_envio
+	fk_id_estilo
+	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
+	`l`
+);
+
+
+
+
+
+
+
+-- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y  ETIQUETA DE LAVADO
+CREATE TABLE `envios_etiquetaLavado`(
+	fk_id_control_envio
+	fk_id_etiqueta_lavado
+	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
+);
+
+
+-- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y  AVIOS
+CREATE TABLE `envios_avios`(
+	fk_id_control_envio
+	fk_id_avios
+	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
+);
+
+
+-- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y HANGTAG
+CREATE TABLE `envios_hangtags`(
+	fk_id_control_envio
+	fk_id_hangtag
+	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
+);
+
+
+-- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y CORTE ORDE DE TALAS
+CREATE TABLE `envios_corteOrdenTela`(
+	fk_id_control_envio
+	fk_id_corte_orden_tela
+	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
+);
+
+
+-- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y DISEÑO MICAS
+CREATE TABLE `envios_disenoMicas`(
+	fk_id_control_envio
+	fk_id_diseno_mica
+	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
+);
+
+
+-- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y REVELADO DE CUADROS
+CREATE TABLE `envios_reveladoEstampado`(
+	fk_id_control_envio
+	fk_id_revelado_estampado
+	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
+);
+
+
+-- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y REVELADO DE CUADROS
+CREATE TABLE `envios_muestraEstampado`(
+	fk_id_control_envio
+	fk_id_muestra_estampado
+	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
+);
+
+
+-- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y REVELADO DE CUADROS
+CREATE TABLE `envios_planchado`(
+	fk_id_control_envio
+	fk_id_planchado
+	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
+);
+
+
+
+
+
 
 
 
@@ -737,6 +880,11 @@ CREATE TABLE `comentarios_ordenProgramacion`( -- revisar si todas las tablas est
 	fk_id_usuario_20
 	fk_id_orden_estampado_programacion
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
+
+
+
+
+
 
 -- TABLA COMENTARIOS DE USUARIOS --> entidad 
 CREATE TABLE `comentarios_controlDistribucion`( -- revisar si todas las tablas estan aqui
