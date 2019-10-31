@@ -656,11 +656,11 @@ CREATE TABLE `control_envios_recepcion`( -- Magaly recibe --> eti.lavado, tela d
 
 -- REVISAR --> FALTA DEFINIR TABLA DE CONTROL DE PROVEEDORES / ACABADOS
 -- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y  PROVEEDOR
-CREATE TABLE `envios_confeccion`(
+CREATE TABLE `envios_corteOrdenTela`(
 	fk_id_control_envio
-	fk_id_estilo
-	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
-	`l`
+	fk_id_corte_orden_tela
+	`cantidad_delantera` INT -- se contabiliza los cortes o prendas en proceso y registra
+	`cantidad_espalda` INT 
 );
 
 
@@ -782,6 +782,9 @@ CREATE TABLE `codigos_estilo_produccion`( -- solucionar el ingreso de datos de c
 
 
 
+
+
+
 -- TABLA COMENTARIOS DE USUARIOS --> entidad 
 CREATE TABLE `comentarios_estilos`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
@@ -881,6 +884,14 @@ CREATE TABLE `comentarios_ordenProgramacion`( -- revisar si todas las tablas est
 	fk_id_orden_estampado_programacion
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
+-- TABLA COMENTARIOS DE USUARIOS --> entidad 
+CREATE TABLE `comentarios_patronajeMolde`( -- revisar si todas las tablas estan aqui
+	`id_comentario` INT(8) AUTO_INCREMENT,
+	`comentario` VARCHAR 500
+	`fecha_comentario` DATETIME
+	fk_id_usuario_20
+	fk_id_patronaje_molde
+)ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
 
@@ -895,12 +906,4 @@ CREATE TABLE `comentarios_controlDistribucion`( -- revisar si todas las tablas e
 	fk_id_control_distribucion
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
--- TABLA COMENTARIOS DE USUARIOS --> entidad 
-CREATE TABLE `comentarios_patronajeMolde`( -- revisar si todas las tablas estan aqui
-	`id_comentario` INT(8) AUTO_INCREMENT,
-	`comentario` VARCHAR 500
-	`fecha_comentario` DATETIME
-	fk_id_usuario_20
-	fk_id_patronaje_molde
-)ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
