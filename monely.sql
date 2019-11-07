@@ -304,6 +304,7 @@ CREATE TABLE `proveedores`( -- Registros que llenan por usuario
 	`id_proveedor` INT(8) AUTO_INCREMENT,
 	`razon_social_proveedor` VARCHAR(45),
 	`ruc_proveedor` VARCHAR(45),
+	`rubro_proveedor` VARCHAR(45),
 	`nombre_insumo_servicio` VARCHAR(45),
 	`fecha_registro_proveedor` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
@@ -650,25 +651,6 @@ CREATE TABLE `control_envios_recepcion`( -- Magaly recibe --> eti.lavado, tela d
 );
 
 
-
-
-
-
--- REVISAR --> FALTA DEFINIR TABLA DE CONTROL DE PROVEEDORES / ACABADOS
--- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y  PROVEEDOR
-CREATE TABLE `envios_corteOrdenTela`(
-	fk_id_control_envio
-	fk_id_corte_orden_tela
-	`cantidad_delantera` INT -- se contabiliza los cortes o prendas en proceso y registra
-	`cantidad_espalda` INT 
-);
-
-
-
-
-
-
-
 -- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y  ETIQUETA DE LAVADO
 CREATE TABLE `envios_etiquetaLavado`(
 	fk_id_control_envio
@@ -697,6 +679,7 @@ CREATE TABLE `envios_hangtags`(
 CREATE TABLE `envios_corteOrdenTela`(
 	fk_id_control_envio
 	fk_id_corte_orden_tela
+	fk_id_patronaje_molde
 	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
 );
 
@@ -794,6 +777,7 @@ CREATE TABLE `comentarios_estilos`( -- revisar si todas las tablas estan aqui
 	fk_id_estilo
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
+
 -- TABLA COMENTARIOS DE USUARIOS --> entidad 
 CREATE TABLE `comentarios_ordenProduccion`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
@@ -802,6 +786,7 @@ CREATE TABLE `comentarios_ordenProduccion`( -- revisar si todas las tablas estan
 	fk_id_usuario_20
 	fk_id_orden_produccion
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
+
 
 -- TABLA COMENTARIOS DE USUARIOS --> entidad 
 CREATE TABLE `comentarios_pedidoHangtags`( -- revisar si todas las tablas estan aqui
@@ -812,6 +797,7 @@ CREATE TABLE `comentarios_pedidoHangtags`( -- revisar si todas las tablas estan 
 	fk_id_pedido_hangtag
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
+
 -- TABLA COMENTARIOS DE USUARIOS --> entidad 
 CREATE TABLE `comentarios_pedidoTelas`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
@@ -820,6 +806,7 @@ CREATE TABLE `comentarios_pedidoTelas`( -- revisar si todas las tablas estan aqu
 	fk_id_usuario_20
 	fk_id_pedido_tela
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
+
 
 -- TABLA COMENTARIOS DE USUARIOS --> entidad 
 CREATE TABLE `comentarios_ordenGuiaCorte`( -- revisar si todas las tablas estan aqui
@@ -830,6 +817,7 @@ CREATE TABLE `comentarios_ordenGuiaCorte`( -- revisar si todas las tablas estan 
 	fk_id_orden_guia_corte
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
+
 -- TABLA COMENTARIOS DE USUARIOS --> entidad 
 CREATE TABLE `comentarios_corteOrdenTela`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
@@ -838,6 +826,7 @@ CREATE TABLE `comentarios_corteOrdenTela`( -- revisar si todas las tablas estan 
 	fk_id_usuario_20
 	fk_id_corte_orden_tela
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
+
 
 -- TABLA COMENTARIOS DE USUARIOS --> entidad 
 CREATE TABLE `comentarios_disenoMica`( -- revisar si todas las tablas estan aqui
@@ -848,6 +837,7 @@ CREATE TABLE `comentarios_disenoMica`( -- revisar si todas las tablas estan aqui
 	fk_id_diseno_mica
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
+
 -- TABLA COMENTARIOS DE USUARIOS --> entidad 
 CREATE TABLE `comentarios_reveladoEstamapdo`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
@@ -856,6 +846,7 @@ CREATE TABLE `comentarios_reveladoEstamapdo`( -- revisar si todas las tablas est
 	fk_id_usuario_20
 	fk_id_revelado_estampado
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
+
 
 -- TABLA COMENTARIOS DE USUARIOS --> entidad 
 CREATE TABLE `comentarios_muestraEstamapdo`( -- revisar si todas las tablas estan aqui
@@ -866,6 +857,7 @@ CREATE TABLE `comentarios_muestraEstamapdo`( -- revisar si todas las tablas esta
 	fk_id_muestra_estampado
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
+
 -- TABLA COMENTARIOS DE USUARIOS --> entidad 
 CREATE TABLE `comentarios_planchado`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
@@ -875,6 +867,7 @@ CREATE TABLE `comentarios_planchado`( -- revisar si todas las tablas estan aqui
 	fk_id_planchado
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
+
 -- TABLA COMENTARIOS DE USUARIOS --> entidad 
 CREATE TABLE `comentarios_ordenProgramacion`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
@@ -883,6 +876,7 @@ CREATE TABLE `comentarios_ordenProgramacion`( -- revisar si todas las tablas est
 	fk_id_usuario_20
 	fk_id_orden_estampado_programacion
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
+
 
 -- TABLA COMENTARIOS DE USUARIOS --> entidad 
 CREATE TABLE `comentarios_patronajeMolde`( -- revisar si todas las tablas estan aqui
@@ -894,16 +888,13 @@ CREATE TABLE `comentarios_patronajeMolde`( -- revisar si todas las tablas estan 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
-
-
-
 -- TABLA COMENTARIOS DE USUARIOS --> entidad 
-CREATE TABLE `comentarios_controlDistribucion`( -- revisar si todas las tablas estan aqui
+CREATE TABLE `comentarios_controlEnvios`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
 	`fecha_comentario` DATETIME
 	fk_id_usuario_20
-	fk_id_control_distribucion
+	fk_id_control_envio
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
