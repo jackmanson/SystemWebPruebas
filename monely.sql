@@ -6,7 +6,7 @@ CREATE TABLE `personas`( -- Registros que llenan por usuario
     `apellido_paterno` VARCHAR(45) NOT NULL,
     `apellido_materno` VARCHAR(45) NOT NULL,
     `email` VARCHAR(35) NOT NULL,
-    `foto` VARCHAR(100), 
+    `foto` VARCHAR(100),
     fk_id_departamento
     fk_id_ciudad
     fk_id_distrito
@@ -139,7 +139,7 @@ CREATE TABLE `tipo_prenda`( --- Registros que llenan por usuario
 	`descripcion` VARCHAR(100),
 	`fecha_registro_tipo_prenda` DATETIME
 );
-  
+
 
 -- TABLA INTERMEDIA TIPO DE PRENDA Y TECNICA DE ESTAMPADO --> Revisar si tiene proposito esta tabla
 CREATE TABLE `tipo_prenda_tecnicas_estampado`(
@@ -166,7 +166,7 @@ CREATE TABLE `estilos`( -- Registros que llenan por usuario
 -- TABLA INTERMEDIA ESTILOS Y TALLAS
 CREATE TABLE `estilos_tallas`(
 	fk_id_estilo
-	fk_id_talla 
+	fk_id_talla
 	`curva_talla` INT
 );
 
@@ -215,7 +215,7 @@ CREATE TABLE `marcas`(
 	`fecha_registro_marca` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
 	fk_id_usuario_1 -- usuario que registro la marca
-	fk_id_estado_actividad_21 -- estado de cliente 
+	fk_id_estado_actividad_21 -- estado de cliente
 	fk_id_usuario_10
 );
 
@@ -257,7 +257,7 @@ CREATE TABLE `ordenProduccion_avios`(
 
 
 
--- TABLA AVIOS --> entidad  
+-- TABLA AVIOS --> entidad
 CREATE TABLE `avios`(  -- la programacion hara el calculo del total para lo que se necesita en avios
 	`id_avios` INT(8) AUTO_INCREMENT,
 	`nombre_avio` VARCHAR(20) --talleros, precios, hangtag,ganchos,
@@ -276,7 +276,7 @@ CREATE TABLE `hangtags`( -- Registros que llenan por usuario
 	`ancho_hangtag` INT
 	`largo_hangtag` INT
 	`descripcion_hangtag` VARCHAR
-	`cargar_archivo_hangtag` -- enlace de la ubicacion del archivo 
+	`cargar_archivo_hangtag` -- enlace de la ubicacion del archivo
 	`fecha_registro_hangtag` DATETIME
 	`fecha_ultima_actualizacion` DATETIME, -- soguillas,elasticos,
 	fk_id_cliente_2
@@ -330,7 +330,7 @@ CREATE TABLE `proveedores_tipoTelefono`(
 -- TABLA INTERMEDIA HANGTAG Y PROVEEDORES
 CREATE TABLE `hangtags_proveedores`(
 	fk_id_hangtag
-	fk_id_proveedor 
+	fk_id_proveedor
 );
 
 
@@ -351,7 +351,7 @@ CREATE TABLE `estilos_coloresRip`(
 -- TABLA DE TIPO DE TELAS
 CREATE TABLE `tipo_telas`(
 	`id_tipo_tela` INT
-	`tipo_tela` VARCHAR   -- jersey, gamuza, melange, 
+	`tipo_tela` VARCHAR   -- jersey, gamuza, melange,
 );
 
 
@@ -372,7 +372,7 @@ CREATE TABLE `colores_telas`(  -- Registros que llenan por usuario
 	`porcentaje_componentes` VARCHAR(25), -- 100% algodon se completa en programacion
 	`fecha_registro_tela` DATETIME,
 	fk_id_tipo_tejido  -- 30/1 - 24/1 - 20/1
-	fk_id_tipo_tela    -- jersey, gamuza, melange, 
+	fk_id_tipo_tela    -- jersey, gamuza, melange,
 	fk_id_tipo_rollo  -- abierta, tubular,abierta
 	fk_id_proveedor
  	fk_id_usuario_6
@@ -387,10 +387,10 @@ CREATE TABLE `colores_rip`( -- Registros que llenan por usuario
 	`partida_rip` VARCHAR(20),
 	`color_rip_interno` VARCHAR(15),
 	`nombre_color_rip_proveedor` VARCHAR(15),
-	`porcentaje_componentes` VARCHAR(25), -- 100% algodon 
+	`porcentaje_componentes` VARCHAR(25), -- 100% algodon
 	`fecha_registro_rip` DATETIME
 	fk_id_tipo_tejido  -- 30/1 - 24/1 - 20/1
-	fk_id_tipo_tela    -- jersey, gamuza, melange, 
+	fk_id_tipo_tela    -- jersey, gamuza, melange,
 	fk_id_tipo_rollo  -- abierta, tubular,abierta
 	fk_id_proveedor
 	fk_id_usuario_7
@@ -425,14 +425,14 @@ CREATE TABLE `ordenes_guias_cortes`( -- Registros que llenan por usuario
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA CORTE DE TELAS - TENDIDO --> entidad - Isac 
+-- TABLA CORTE DE TELAS - TENDIDO --> entidad - Isac
 CREATE TABLE `corte_orden_telas`( -- REFIERE AL TENDIDO Y CORTE --> Registros que llenan por usuario
 	`id_corte_orden_tela` INT(8) AUTO_INCREMENT,
 	`capas_minimas` INT(8),
 	`capas_maximas` INT(8),
-	`corte_demasia` INT(8), 
+	`corte_demasia` INT(8),
 	`corte_fallados` INT,
-	`ancho_rollo_tendido` INT -- resta 2 centimetros de cada extremo 
+	`ancho_rollo_tendido` INT -- resta 2 centimetros de cada extremo
 	`largo_rollo_tendido` INT -- el largo lo da patronaje segun el tendido del sistema --> debe ser implementado despues
 	`observaciones_corte_orden_tela` VARCHAR(100),
 	`fecha_ingreso_corte_orden_tela` DATETIME,
@@ -470,7 +470,7 @@ CREATE TABLE `mesa_tendido`( -- mesa 1 / mesa 2 / mesa 3
 
 
 -- TABLA DISEÑO --
-CREATE TABLE `diseno_micas`( 
+CREATE TABLE `diseno_micas`(
 	`id_diseno_mica` INT(8) AUTO_INCREMENT,
 	`nombre_referencia_diseno` VARCHAR(45),
 	`colores_de_separacion` INT,
@@ -642,10 +642,10 @@ CREATE TABLE `control_envios_recepcion`( -- Magaly recibe --> eti.lavado, tela d
 	`descripcion` VARCHAR -- descripcion simple de lo que se recibe
 	`fecha_registro_queEnvia` DATETIME
 	`fecha_ultima_actualizacion` VARCHAR
-	fk_id_usuario_queEnvia -- Luis, Isac, chato 
-	fk_id_area_trabajo_envia -- Area que envia el producto en proceso 
+	fk_id_usuario_queEnvia -- Luis, Isac, chato
+	fk_id_area_trabajo_envia -- Area que envia el producto en proceso
 	fk_id_usuario_queRecibe -- Magaly
-	fk_id_area_trabajo_recibe -- Area que recibe el producto en proceso 
+	fk_id_area_trabajo_recibe -- Area que recibe el producto en proceso
 	fk_id_estado_actividad_producto -- El que recibe confirma --> calidad, defectuoso, necesita correcciones, volver a hacer
 	fk_id_estado_actividad_confirmacion -- El que recibe confirma --> llegada
 );
@@ -723,17 +723,23 @@ CREATE TABLE `envios_planchado`(
 
 
 -- TABLA PATRONAJE Y MOLDES
-CREATE TABLE `patronaje_moldes`( -- muestra tambien Ubicacion de diseño total, parcial, pecho, espalda 
+CREATE TABLE `patronaje_moldes`( -- muestra tambien Ubicacion de diseño total, parcial, pecho, espalda
 	`id_patronaje_molde` INT(8) AUTO_INCREMENT,
 	`ubicacion_diseno` VARCHAR(70),
 	`fecha_registro_patronaje_molde` DATETIME
 	`fecha_ultima_actualizacion` DATETIME
+  fk_id_orden_guia_corte
 	fk_id_usuario_22
 	fk_id_orden_produccion_3
 	fk_id_etiqueta_estampada
 	fk_id_tipo_prenda_3
 	fk_id_estado_actividad_19  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
+
+
+-- TABLA DE MEDIDAS DE CONFECCION
+CREATE TABLE `
+
 
 
 -- TABLA CODIGO PRENDA DE PRODUCCION  -- revisar
@@ -768,7 +774,7 @@ CREATE TABLE `codigos_estilo_produccion`( -- solucionar el ingreso de datos de c
 
 
 
--- TABLA COMENTARIOS DE USUARIOS --> entidad 
+-- TABLA COMENTARIOS DE USUARIOS --> entidad
 CREATE TABLE `comentarios_estilos`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
@@ -778,7 +784,7 @@ CREATE TABLE `comentarios_estilos`( -- revisar si todas las tablas estan aqui
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA COMENTARIOS DE USUARIOS --> entidad 
+-- TABLA COMENTARIOS DE USUARIOS --> entidad
 CREATE TABLE `comentarios_ordenProduccion`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
@@ -788,7 +794,7 @@ CREATE TABLE `comentarios_ordenProduccion`( -- revisar si todas las tablas estan
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA COMENTARIOS DE USUARIOS --> entidad 
+-- TABLA COMENTARIOS DE USUARIOS --> entidad
 CREATE TABLE `comentarios_pedidoHangtags`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
@@ -798,7 +804,7 @@ CREATE TABLE `comentarios_pedidoHangtags`( -- revisar si todas las tablas estan 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA COMENTARIOS DE USUARIOS --> entidad 
+-- TABLA COMENTARIOS DE USUARIOS --> entidad
 CREATE TABLE `comentarios_pedidoTelas`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
@@ -808,7 +814,7 @@ CREATE TABLE `comentarios_pedidoTelas`( -- revisar si todas las tablas estan aqu
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA COMENTARIOS DE USUARIOS --> entidad 
+-- TABLA COMENTARIOS DE USUARIOS --> entidad
 CREATE TABLE `comentarios_ordenGuiaCorte`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
@@ -818,7 +824,7 @@ CREATE TABLE `comentarios_ordenGuiaCorte`( -- revisar si todas las tablas estan 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA COMENTARIOS DE USUARIOS --> entidad 
+-- TABLA COMENTARIOS DE USUARIOS --> entidad
 CREATE TABLE `comentarios_corteOrdenTela`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
@@ -828,7 +834,7 @@ CREATE TABLE `comentarios_corteOrdenTela`( -- revisar si todas las tablas estan 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA COMENTARIOS DE USUARIOS --> entidad 
+-- TABLA COMENTARIOS DE USUARIOS --> entidad
 CREATE TABLE `comentarios_disenoMica`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
@@ -838,7 +844,7 @@ CREATE TABLE `comentarios_disenoMica`( -- revisar si todas las tablas estan aqui
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA COMENTARIOS DE USUARIOS --> entidad 
+-- TABLA COMENTARIOS DE USUARIOS --> entidad
 CREATE TABLE `comentarios_reveladoEstamapdo`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
@@ -848,7 +854,7 @@ CREATE TABLE `comentarios_reveladoEstamapdo`( -- revisar si todas las tablas est
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA COMENTARIOS DE USUARIOS --> entidad 
+-- TABLA COMENTARIOS DE USUARIOS --> entidad
 CREATE TABLE `comentarios_muestraEstamapdo`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
@@ -858,7 +864,7 @@ CREATE TABLE `comentarios_muestraEstamapdo`( -- revisar si todas las tablas esta
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA COMENTARIOS DE USUARIOS --> entidad 
+-- TABLA COMENTARIOS DE USUARIOS --> entidad
 CREATE TABLE `comentarios_planchado`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
@@ -868,7 +874,7 @@ CREATE TABLE `comentarios_planchado`( -- revisar si todas las tablas estan aqui
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA COMENTARIOS DE USUARIOS --> entidad 
+-- TABLA COMENTARIOS DE USUARIOS --> entidad
 CREATE TABLE `comentarios_ordenProgramacion`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
@@ -878,7 +884,7 @@ CREATE TABLE `comentarios_ordenProgramacion`( -- revisar si todas las tablas est
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA COMENTARIOS DE USUARIOS --> entidad 
+-- TABLA COMENTARIOS DE USUARIOS --> entidad
 CREATE TABLE `comentarios_patronajeMolde`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
@@ -888,7 +894,7 @@ CREATE TABLE `comentarios_patronajeMolde`( -- revisar si todas las tablas estan 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
--- TABLA COMENTARIOS DE USUARIOS --> entidad 
+-- TABLA COMENTARIOS DE USUARIOS --> entidad
 CREATE TABLE `comentarios_controlEnvios`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
@@ -896,5 +902,3 @@ CREATE TABLE `comentarios_controlEnvios`( -- revisar si todas las tablas estan a
 	fk_id_usuario_20
 	fk_id_control_envio
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
-
-
