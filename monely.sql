@@ -94,10 +94,10 @@ CREATE TABLE `empresas_empleadoras`(
 	`tipo_contitucion` -- SA - EIRL etc
 	`fecha_registro` DATETIME
 	fk_id_departamento
-    fk_id_ciudad
-    fk_id_distrito
-    fk_id_calle
-    fk_id_nacionalidad
+  fk_id_ciudad
+  fk_id_distrito
+  fk_id_calle
+  fk_id_nacionalidad
 	fk_id_estado_actividad
 );
 
@@ -308,11 +308,11 @@ CREATE TABLE `proveedores`( -- Registros que llenan por usuario
 	`nombre_insumo_servicio` VARCHAR(45),
 	`fecha_registro_proveedor` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
-    fk_id_departamento
-    fk_id_ciudad
-    fk_id_distrito
-    fk_id_calle
-    fk_id_nacionalidad
+  fk_id_departamento
+  fk_id_ciudad
+  fk_id_distrito
+  fk_id_calle
+  fk_id_nacionalidad
 	fk_id_usuario_5 -- usuario que registro al proveedor
 	fk_id_usuario_representante -- usuario contacto intermediario
 	fk_id_estado_actividad_6 -- estado de proveedor
@@ -717,48 +717,33 @@ CREATE TABLE `envios_planchado`(
 
 
 -- TABLA PAISES Y NACIONALIDADES
-CREATE TABLE `paises_nacionalidad`(
+CREATE TABLE `paises`(
 	`id_pais` INT
 	`pais_nacionalidad` VARCHAR
 );
 
 
--- TABLA INTERMEDIA ESTILOS Y TALLAS
-CREATE TABLE `medidaPrendasConfeccion_tallas`(
-	fk_id_prenda_confeccion
-	fk_id_talla 
-	`curva_talla` INT
-);
 
 
 
 
 
 
+-- INICIAN TABLAS DE PATRONAJE --
 
 -- TABLA PATRONAJE Y MOLDES
 CREATE TABLE `patronaje_moldes`( -- muestra tambien Ubicacion de diseño total, parcial, pecho, espalda
 	`id_patronaje_molde` INT(8) AUTO_INCREMENT,
-	`ubicacion_diseno` VARCHAR(70),
+  `descripcion` VARCHAR(70),
 	`fecha_registro_patronaje_molde` DATETIME
 	`fecha_ultima_actualizacion` DATETIME
+  fk_id_usuario_22 -- usuario que genera el registro
   fk_id_orden_guia_corte
-	fk_id_usuario_22
 	fk_id_orden_produccion_3
+  fk_id_estilo
+  fk_id_etiqueta_lavado
 	fk_id_etiqueta_estampada
 	fk_id_tipo_prenda_3
-	fk_id_estado_actividad_19  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
-);
-
-
--- REVISAR ESTAS TABLAS DERIVADAS DE LA TABLA PATRONAJE
--- TABLA MEDIDAS DE PRENDA PARA CONFECCION
-CREATE TABLE `medidas_prenda_confeccion`(
-	`id_prenda_confeccion` INT
-	`numero_molde` VARCHAR
-	`fecha_ultima_actualizacion` DATETIME
-	`fecha_registro` DATETIME
-	fk_id_orden_guia_corte
 	fk_id_cliente
 	fk_id_estilo
 	fk_id_pais
@@ -766,24 +751,108 @@ CREATE TABLE `medidas_prenda_confeccion`(
 	fk_id_color_rip
 	fk_id_color_tela
 	fk_id_tipo_tela
-	fk_id_ubicacion
+  fk_id_estado_actividad_19  -- estado proceso --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
 
--- TABLA DE UBICACION DE DISEÑO A ESTAMPAR
-CREATE TABLE `ubicacion_diseño`(
-	`id_ubicacion` INT
-	`imagen_vista_delantero` VARCHAR
-	`descripcion_vista_delantero` VARCHAR
-	`imagen_vista_espalda` VARCHAR
-	`descripcion_vista_espalda` VARCHAR
-	
-	`referencia` VARCHAR -- Referencia que se toma para la ubicacion
-	`medida_1` DECIMAL -- refencia un ancho
-	`medida_2` DECIMAL -- referencia un largo
+-- TABLA INTERMEDIA ESTILOS Y TALLAS
+CREATE TABLE `patronajeMoldes_tallas`(
+	fk_id_patronaje_molde
+	fk_id_talla
+	`curva_talla` INT
 );
 
 
+-- TABLA MEDIDAS DE PRENDA PARA CONFECCION
+CREATE TABLE `medidas_prenda_confeccion`(
+	`id_medias_prenda_confeccion` INT
+	`numero_molde` VARCHAR
+  `proceso` VARCHAR -- estampado delantero y etiqueta en espalda interna
+  `imagen_referencia` VARCHAR -- imagen de la ubicaion de las medidas
+	`fecha_registro` DATETIME
+  `fecha_ultima_actualizacion` DATETIME
+	fk_id_patronaje_molde
+);
+
+
+-- TABLA INTERMEDIA MEDIDA DE PRENDAS DE CONFECCION Y TALLAS
+CREATE TABLE `medidaPrendas_tallas`(
+  fk_id_medias_prenda_confeccion
+  fk_id_talla -- agreagar en la tabla de tallas el campo TOLERANCIA +/-
+  `medida` DECIMAL -- ver que valor corresponde si float o decimal
+);
+
+
+-- TABLA INTERMEDIA MEDIDAS DE PRENDA DE CONFECCION Y CODIGO DE MEDIDA
+CREATE TABLE `medidasPrendas_codigoMedida`(
+  fk_id_medias_prenda_confeccion
+  fk_id_codigo_medidas
+  `descripcion_medidas` VARCHAR
+);
+
+-- TABLA DE CODIGOS DE MEDIDAS DE patronaje
+CREATE TABLE `codigoMedidas_patronaje`(
+  `id_codigo_medidas`INT
+  `codigo_nombre` VARCHAR -- A,B,C,D,E,F,G,H,I,J, ETC
+);
+
+
+-- TABLA DE CONSTRUCCION DE PRENDAS
+CREATE TABLE `construcion_prendas`(
+  `id_construccion_prendas` INT
+  `observaciones` VARCHAR
+  `fecha_registro` DATETIME
+  `fecha_ultima_actualizacion` DATETIME
+  fk_id_etiqueta_estampada -- interna
+  fk_id_etiqueta_lavado
+  fk_id_patronaje_molde
+);
+
+-- TABLA INTERMEDIA CONSTRUCCION DE PRENDAS Y TIPO DE prendas
+CREATE TABLE `construccion_tipoPrenda`(
+  fk_id_construccion_prendas
+  fk_id_tipo_prenda -- polo, pantalon etc.
+  fk_id_vista_prenda -- frontal,delantero, espalda, back
+  `imagen_referencia` VARCHAR -- imagen de la prenda
+);
+
+-- TABLA INTERMEDIA CONSTRUCCION DE PRENDA Y PIEZA DE PRENDAS
+CREATE TABLE `construccionPrenda_piezas`(
+  fk_id_construccion_prendas
+  fk_id_pieza_prenda -- delantero, espalda, manga,basta,cuello etc
+  `descripcion_contruccion` VARCHAR -- detalla medidas y  mas
+);
+
+-- TABLA VISTAS DE PRENDA
+CREATE TABLE `vistas_prenda`(
+  `id_vista_prenda` INT
+  `vista_prenda` VARCHAR -- frontal,delantero, espalda, back
+);
+
+-- TABLA DE UBICACION DE PIEZAS DE PRENDAS
+CREATE TABLE `piezas_prendas`(
+  `id_pieza_prenda` INT
+  `pieza_prenda` VARCHAR  -- delantero, espalda, manga,cuello, etc
+);
+
+-- TABLA DE COSTURAS
+CREATE TABLE `costuras`(
+  `id_costuras`INT
+  `codigo_nombre` VARCHAR -- A,B,C,D,E,F,G,H,I,J, ETC
+);
+
+-- TABLA INTERMEDIA CONSTRUCCION Y  COSTURAS
+
+-- TABLA INTERMEDIA CONSTRUCCION Y PIEZAS
+
+-- TABLA INTERMEDIA CONSTRUCCION Y PIEZAS X CONSUMO
+
+-- TABLA INTERMEDIA CONSTRUCCION Y avios
+
+
+
+
+-- FIN DE TABLAS DE PATRONAJE
 
 
 
