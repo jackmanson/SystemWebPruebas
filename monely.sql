@@ -857,35 +857,23 @@ CREATE TABLE `costuras`(
 
 
 
+-- INICIAN TABLAS DE CODIGOS Y PRECIOS --
 
--- TABLA CODIGO PRENDA DE PRODUCCION  -- revisar
-CREATE TABLE `codigos_prenda_produccion`( -- solucionar el ingreso de datos de codigos
+
+-- TABLA CODIGO PRENDA DE PRODUCCION  -- revisar si funciona almanezar objetos JSON como texto plano 
+CREATE TABLE `codigos_prenda_produccion`( -- revisar el ingreso de datos de codigos
 	`id_codigo_prenda_produccion` INT(8) AUTO_INCREMENT,
-
-	-- falta completar el contenido aqui
-
-	`estado_codigo_prenda_produccion` VARCHAR -- agregar mas campos
+	`campo_cabezeras` VARCHAR
+	`campo_datos` VARCHAR
 	`fecha_registro_codigo_prenda_produccion` DATETIME
 	`fecha_ultima_actualizacion` VARCHAR
-	fk_id_usuario_24
+	fk_id_usuario_24  -- usuario que registra
 	fk_id_orden_produccion_5
+	fk_id_estado_actividad -- Jerarquia --> urgente / muy urgente / programado
 );
 
 
--- TABLA CODIGO ESTILO PRENDA DE PRODUCCION  -- revisar
-CREATE TABLE `codigos_estilo_produccion`( -- solucionar el ingreso de datos de codigos
-	`id_codigo_estilo_produccion` INT(8) AUTO_INCREMENT,
-
-	-- falta completar el contenido aqui
-
-	`estado_codigo_estilo_produccion` VARCHAR -- agregar mas campos
-	`fecha_registro_estilo_produccion` DATETIME
-	`fecha_ultima_actualizacion` VARCHAR
-	fk_id_usuario_24
-	fk_id_codigo_prenda_produccion
-);
-
-
+-- FIN DE TABLAS DE CODIGOS Y PRECIOS
 
 
 
