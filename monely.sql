@@ -719,7 +719,8 @@ CREATE TABLE `envios_planchado`(
 -- TABLA PAISES Y NACIONALIDADES
 CREATE TABLE `paises`(
 	`id_pais` INT
-	`pais_nacionalidad` VARCHAR
+	`nombre_pais` VARCHAR
+  `nombre_nacionalidad` VARCHAR
 );
 
 
@@ -768,7 +769,7 @@ CREATE TABLE `medidas_prenda_confeccion`(
 	`id_medias_prenda_confeccion` INT
 	`numero_molde` VARCHAR
   `proceso` VARCHAR -- estampado delantero y etiqueta en espalda interna
-  `imagen_referencia` VARCHAR -- imagen de la ubicaion de las medidas
+  `imagen_referencia` VARCHAR -- FORMA DE MEDIR - imagen de la ubicaion de las medidas
 	`fecha_registro` DATETIME
   `fecha_ultima_actualizacion` DATETIME
 	fk_id_patronaje_molde
@@ -860,7 +861,7 @@ CREATE TABLE `costuras`(
 -- INICIAN TABLAS DE CODIGOS Y PRECIOS --
 
 
--- TABLA CODIGO PRENDA DE PRODUCCION  -- revisar si funciona almanezar objetos JSON como texto plano 
+-- TABLA CODIGO PRENDA DE PRODUCCION  -- revisar si funciona almanezar objetos JSON como texto plano
 CREATE TABLE `codigos_prenda_produccion`( -- revisar el ingreso de datos de codigos
 	`id_codigo_prenda_produccion` INT(8) AUTO_INCREMENT,
 	`campo_cabezeras` VARCHAR
