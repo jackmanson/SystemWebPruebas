@@ -719,12 +719,9 @@ CREATE TABLE `envios_planchado`(
 -- TABLA PAISES Y NACIONALIDADES
 CREATE TABLE `paises`(
 	`id_pais` INT
-	`pais_nacionalidad` VARCHAR
+	`nombre_pais` VARCHAR
+  `nombre_nacionalidad` VARCHAR
 );
-
-
-
-
 
 
 
@@ -749,6 +746,7 @@ CREATE TABLE `patronaje_moldes`( -- muestra tambien Ubicacion de diseño total, 
 	fk_id_pais
 	fk_id_marca
   fk_id_estado_actividad_19  -- estado proceso --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+  fk_id_orden_produccion
 );
 
 
@@ -765,12 +763,9 @@ CREATE TABLE `medidas_prenda_confeccion`(
 	`id_medias_prenda_confeccion` INT
 	`numero_molde` VARCHAR
   `proceso` VARCHAR -- estampado delantero y etiqueta en espalda interna
-  `imagen_referencia` VARCHAR -- imagen de la ubicaion de las medidas
+  `imagen_referencia` VARCHAR -- FORMA DE MEDIR - imagen de la ubicaion de las medidas
 	`fecha_registro` DATETIME
   `fecha_ultima_actualizacion` DATETIME
-  	fk_id_color_rip
-	fk_id_color_tela
-	fk_id_tipo_tela
 	fk_id_patronaje_molde
 );
 
@@ -805,9 +800,9 @@ CREATE TABLE `construcion_prendas`(
   `observaciones` VARCHAR
   `fecha_registro` DATETIME
   `fecha_ultima_actualizacion` DATETIME
-  fk_id_etiqueta_estampada -- interna
   fk_id_etiqueta_lavado
   fk_id_medias_prenda_confeccion
+  fk_id_orden_produccion
 );
 
 -- TABLA INTERMEDIA CONSTRUCION DE PRENDAS Y COMNTARIO DE ETIQUEA DE LAVADO
@@ -828,10 +823,28 @@ CREATE TABLE `construccionPreda_tipoPrenda`(
 CREATE TABLE `construccionPrenda_piezas`(
   fk_id_construccion_prendas
   fk_id_pieza_prenda -- delantero, espalda, manga,basta,cuello etc
+  fk_id_tipo_tela -- jersey
+  fk_id_color_tela
   `descripcion_contruccion` VARCHAR -- detalla medidas y  mas
   `consumo_metros` VARCHAR -- CONSUMO DE CUELLO X METRO - 1 MT PARA 70 PRENDAS / CONSUMO DE TAPETE X METRO - 1 MT PARA 130 PRENDAS
-  `cantidad_piezas` INT
-  
+  `cantidad_piezas` VARCHAR -- 1 pieza / 2 piezas /
+);
+
+-- TABLA INTERMEDIA CONSTRUCCION DE PRENDA Y TELA COMPLEMENTO
+CREATE TABLE `construccionPrenda_telaComplemento`(
+  fk_id_construccion_prendas
+  fk_id_telaComplemento
+  fk_id_tipo_tela -- jersey
+  fk_id_color_rip  --> RIB 1x1 / 2x2 etc
+  `descripcion_contruccion` VARCHAR -- detalla medidas y  mas
+  `consumo_metros` VARCHAR -- CONSUMO DE CUELLO X METRO - 1 MT PARA 70 PRENDAS / CONSUMO DE TAPETE X METRO - 1 MT PARA 130 PRENDAS
+  `cantidad_piezas` VARCHAR -- en cintera / otros
+);
+
+-- TABLA DE CUELLO Y TAPETES
+CREATE TABLE `telaComplemento`( --> RIB 1x1 / 2x2 etc
+  `id_telaComplemento` INT -- piezas de prenda complemento
+  `nombre_telaComplemento` VARCHAR -- cuello / tapetera / parches / otros
 );
 
 -- TABLA VISTAS DE PRENDA
@@ -859,11 +872,6 @@ CREATE TABLE `construcionPrenda_costuras`(
 	`puntada` INT -- 12 ppp, 14 ppp, etc
 );
 
--- TABLA INTERMEDIA CONSTRUCCION Y PIEZAS X CONSUMO
-CREATE TABLE ``(
-
-);
-
 -- TABLA INTERMEDIA CONSTRUCCION Y AVIOS
 CREATE TABLE `construcionPrenda_avios`(
 	fk_id_construccion_prendas
@@ -874,6 +882,47 @@ CREATE TABLE `construcionPrenda_avios`(
 
 
 
+-- TABLA DE ETIQUETAS ESTAMPADAS Y fecha_registro_tecnica_estampado
+CREATE TABLE `ubicaion_artes`(
+  `id_ubicaion_artes` INT
+  `imagen_referencial` VARCHAR -- ubicaion de etiqueta estampada
+  `observaciones_etiqueta` VARCHAR -- ubicaion
+  `colorPantone` VARCHAR -- color referencial para estampado
+  `fecha_registro` DATETIME
+  `fecha_ultima_actualizacion` DATETIME
+  fk_id_etiqueta_lavado
+  fk_id_etiqueta_estampada
+  fk_id_construccion_prendas
+  fk_id_orden_produccion
+);
+
+
+
+-- TABLA DE MEDIDAS ACABADAS PARA CONFECCION
+CREATE TABLE `medidas_acabadas_confeccion`(
+	`id_medias_acabadas_confeccion` INT
+	`descripcion` VARCHAR
+	`fecha_registro` DATETIME
+  `fecha_ultima_actualizacion` DATETIME
+	fk_id_medias_prenda_confeccion
+);
+
+
+-- TABLA INTERMEDIA MEDIDA DE PRENDAS DE CONFECCION Y TALLAS
+CREATE TABLE `medidasAcabadas_tallas`(
+  fk_id_medias_acabadas_confeccion
+  fk_id_talla -- agreagar en la tabla de tallas el campo TOLERANCIA +/-
+  `medida` DECIMAL -- ver que valor corresponde si float o decimal
+);
+
+
+-- TABLA INTERMEDIA MEDIDAS DE PRENDA DE CONFECCION Y CODIGO DE MEDIDA
+CREATE TABLE `medidasAcabadas_codigoMedida`(
+  fk_id_medias_acabadas_confeccion
+  fk_id_codigo_medidas
+  `descripcion_medidas` VARCHAR
+  `tolerancia` DECIMAL -- TOL +/-  0.5 etc
+);
 
 -- FIN DE TABLAS DE PATRONAJE
 
@@ -883,18 +932,17 @@ CREATE TABLE `construcionPrenda_avios`(
 -- INICIAN TABLAS DE CODIGOS Y PRECIOS --
 
 
--- TABLA CODIGO PRENDA DE PRODUCCION  -- revisar si funciona almanezar objetos JSON como texto plano 
+-- TABLA CODIGO PRENDA DE PRODUCCION  -- revisar si funciona almanezar objetos JSON como texto plano
 CREATE TABLE `codigos_prenda_produccion`( -- revisar el ingreso de datos de codigos
 	`id_codigo_prenda_produccion` INT(8) AUTO_INCREMENT,
-	`campo_cabezeras` VARCHAR
-	`campo_datos` VARCHAR
+	`descripcion` VARCHAR
+  `contenido_plano_JSON` VARCHAR -- codigos en texto JSON plano
 	`fecha_registro_codigo_prenda_produccion` DATETIME
 	`fecha_ultima_actualizacion` VARCHAR
 	fk_id_usuario_24  -- usuario que registra
 	fk_id_orden_produccion_5
 	fk_id_estado_actividad -- Jerarquia --> urgente / muy urgente / programado
 );
-
 
 -- FIN DE TABLAS DE CODIGOS Y PRECIOS
 
