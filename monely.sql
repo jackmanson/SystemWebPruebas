@@ -261,7 +261,7 @@ CREATE TABLE `ordenProduccion_avios`(
 CREATE TABLE `avios`(  -- la programacion hara el calculo del total para lo que se necesita en avios
 	`id_avios` INT(8) AUTO_INCREMENT,
 	`nombre_avio` VARCHAR(20) --talleros, precios, hangtag,ganchos,
-	`imagen_avio` INT(8),--sensores, bolsas,broches,tuil,
+	`imagen_avio` INT(8),--sensores, bolsas,broches,tuil,hilo
 	`fecha_registro_avios` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME, -- soguillas,elasticos,
 	fk_id_cliente_
@@ -738,7 +738,7 @@ CREATE TABLE `patronaje_moldes`( -- muestra tambien Ubicacion de diseño total, 
 	`fecha_registro_patronaje_molde` DATETIME
 	`fecha_ultima_actualizacion` DATETIME
   fk_id_usuario_22 -- usuario que genera el registro
-  fk_id_orden_guia_corte
+  fk_id_orden_guia_corte --> referencia principal
 	fk_id_orden_produccion_3
   fk_id_estilo
   fk_id_etiqueta_lavado
@@ -748,9 +748,6 @@ CREATE TABLE `patronaje_moldes`( -- muestra tambien Ubicacion de diseño total, 
 	fk_id_estilo
 	fk_id_pais
 	fk_id_marca
-	fk_id_color_rip
-	fk_id_color_tela
-	fk_id_tipo_tela
   fk_id_estado_actividad_19  -- estado proceso --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
@@ -771,6 +768,9 @@ CREATE TABLE `medidas_prenda_confeccion`(
   `imagen_referencia` VARCHAR -- imagen de la ubicaion de las medidas
 	`fecha_registro` DATETIME
   `fecha_ultima_actualizacion` DATETIME
+  	fk_id_color_rip
+	fk_id_color_tela
+	fk_id_tipo_tela
 	fk_id_patronaje_molde
 );
 
@@ -788,6 +788,7 @@ CREATE TABLE `medidasPrendas_codigoMedida`(
   fk_id_medias_prenda_confeccion
   fk_id_codigo_medidas
   `descripcion_medidas` VARCHAR
+  `tolerancia` DECIMAL -- TOL +/-  0.5 etc
 );
 
 -- TABLA DE CODIGOS DE MEDIDAS DE patronaje
@@ -795,6 +796,7 @@ CREATE TABLE `codigoMedidas_patronaje`(
   `id_codigo_medidas`INT
   `codigo_nombre` VARCHAR -- A,B,C,D,E,F,G,H,I,J, ETC
 );
+
 
 
 -- TABLA DE CONSTRUCCION DE PRENDAS
@@ -805,13 +807,19 @@ CREATE TABLE `construcion_prendas`(
   `fecha_ultima_actualizacion` DATETIME
   fk_id_etiqueta_estampada -- interna
   fk_id_etiqueta_lavado
-  fk_id_patronaje_molde
+  fk_id_medias_prenda_confeccion
+);
+
+-- TABLA INTERMEDIA CONSTRUCION DE PRENDAS Y COMNTARIO DE ETIQUEA DE LAVADO
+CREATE TABLE `construcionPrenda_etiquetaLavado`(
+	fk_id_construccion_prendas
+	fk_id_etiqueta_lavado
+	`comentario_ubicacion` VARCHAR
 );
 
 -- TABLA INTERMEDIA CONSTRUCCION DE PRENDAS Y TIPO DE prendas
-CREATE TABLE `construccion_tipoPrenda`(
+CREATE TABLE `construccionPreda_tipoPrenda`(
   fk_id_construccion_prendas
-  fk_id_tipo_prenda -- polo, pantalon etc.
   fk_id_vista_prenda -- frontal,delantero, espalda, back
   `imagen_referencia` VARCHAR -- imagen de la prenda
 );
@@ -821,6 +829,9 @@ CREATE TABLE `construccionPrenda_piezas`(
   fk_id_construccion_prendas
   fk_id_pieza_prenda -- delantero, espalda, manga,basta,cuello etc
   `descripcion_contruccion` VARCHAR -- detalla medidas y  mas
+  `consumo_metros` VARCHAR -- CONSUMO DE CUELLO X METRO - 1 MT PARA 70 PRENDAS / CONSUMO DE TAPETE X METRO - 1 MT PARA 130 PRENDAS
+  `cantidad_piezas` INT
+  
 );
 
 -- TABLA VISTAS DE PRENDA
@@ -838,16 +849,28 @@ CREATE TABLE `piezas_prendas`(
 -- TABLA DE COSTURAS
 CREATE TABLE `costuras`(
   `id_costuras`INT
-  `codigo_nombre` VARCHAR -- A,B,C,D,E,F,G,H,I,J, ETC
+  `codigo_nombre` VARCHAR -- recta, remalle, mellicera, recubierto,tapetera ETC
 );
 
 -- TABLA INTERMEDIA CONSTRUCCION Y  COSTURAS
-
--- TABLA INTERMEDIA CONSTRUCCION Y PIEZAS
+CREATE TABLE `construcionPrenda_costuras`(
+	fk_id_construccion_prendas
+	fk_id_costuras
+	`puntada` INT -- 12 ppp, 14 ppp, etc
+);
 
 -- TABLA INTERMEDIA CONSTRUCCION Y PIEZAS X CONSUMO
+CREATE TABLE ``(
 
--- TABLA INTERMEDIA CONSTRUCCION Y avios
+);
+
+-- TABLA INTERMEDIA CONSTRUCCION Y AVIOS
+CREATE TABLE `construcionPrenda_avios`(
+	fk_id_construccion_prendas
+	fk_id_avios
+	`descripcion` VARCHAR
+	`medida_cantidad` VARCHAR
+);
 
 
 
