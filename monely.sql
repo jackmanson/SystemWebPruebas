@@ -7,17 +7,27 @@ CREATE TABLE `personas`( -- Registros que llenan por usuario
     `apellido_materno` VARCHAR(45) NOT NULL,
     `email` VARCHAR(35) NOT NULL,
     `foto` VARCHAR(100),
-    fk_id_departamento
-    fk_id_ciudad
-    fk_id_distrito
-    fk_id_calle
-    fk_id_nacionalidad
+    fk_id_departamento_4
+    fk_id_ciudad_4
+    fk_id_distrito_4
+    fk_id_calle_3
+    fk_id_nacionalidad_3
+    fk_id_estado_civil_1 VARCHAR
+    `numero_hijos` INT
+    `fecha_nacimiento` DATETIME
     `fecha_alta_persona` DATETIME, /* -- ver si se puede mejorar el tipo de campo -- */
     `fecha_baja_persona` DATETIME, /* -- ver si se puede mejorar el tipo de campo -- */
     `fk_id_estado_actividad_1`INT(8), -- estado persona --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
     CONSTRAINT pk_id_persona PRIMARY KEY (id_persona),
     CONSTRAINT fk_id_estado_actividad FOREIGN KEY (fk_id_estado_actividad_1)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+
+-- TABLA TIPO TELEFONO
+CREATE TABLE `estado_civil`(
+	`id_estado_civil` INT
+	`estado` VARCHAR -- cadasdo / soltero / divorciado / viudo.
+);
 
 
 -- TABLA TIPO TELEFONO
@@ -29,8 +39,8 @@ CREATE TABLE `tipo_telefono`(
 
 -- TABLA INTERMEDIA PERSONAS Y TIPO TELEFONO
 CREATE TABLE `personas_tipoTelefono`(
-	fk_id_persona
-	fk_id_tipo_telefono
+	fk_id_persona_2
+	fk_id_tipo_telefono_1
 	`numero_telefono` VARCHAR
 );
 
@@ -46,7 +56,7 @@ CREATE TABLE `departamento`(
 CREATE TABLE `ciudad`(
 	`id_ciudad` INT
 	`nombre_ciudad` VARCHAR
-	fk_id_departamento
+	fk_id_departamento_1
 );
 
 
@@ -54,7 +64,7 @@ CREATE TABLE `ciudad`(
 CREATE TABLE `distrito`(
 	`id_distrito` INT
 	`nombre_distrito` VARCHAR
-	fk_id_ciudad
+	fk_id_ciudad_1
 );
 
 
@@ -62,7 +72,7 @@ CREATE TABLE `distrito`(
 CREATE TABLE `calle`(
 	`id_calle` INT
 	`numero_calle` VARCHAR
-	fk_id_distrito
+	fk_id_distrito_1
 );
 
 
@@ -93,28 +103,33 @@ CREATE TABLE `empresas_empleadoras`(
 	`fecha_constitucion` DATETIME
 	`tipo_contitucion` -- SA - EIRL etc
 	`fecha_registro` DATETIME
-	fk_id_departamento
-  fk_id_ciudad
-  fk_id_distrito
-  fk_id_calle
-  fk_id_nacionalidad
-	fk_id_estado_actividad
+	fk_id_departamento_2
+  	fk_id_ciudad_2
+  	fk_id_distrito_2
+  	fk_id_calle_1
+  	fk_id_nacionalidad_1
+	fk_id_estado_actividad_2
 );
 
 
 -- TABLA INTERMEDIA EMPRESAS EMPLEADORAS Y TIPO TELEFONO
 CREATE TABLE `empresasEmpleadoras_tipoTelefono`(
-	fk_id_empleador
-	fk_id_tipo_telefono
+	fk_id_empleador_1
+	fk_id_tipo_telefono_2
 	`numero_telefono` VARCHAR
 );
 
-
+-- TABLA TRABAJADORES
 CREATE TABLE `trabajadores`(
 	`id_trabajador` INT
-	fk_id_area_trabajo
-	fk_id_empleador
-	fk_id_persona
+	`seguro_social` VARCHAR
+	`grado_instruccion` VARCHAR
+	`especialidad_carrera` VARCHAR -- ingeniero / administrador / diseñador /  mecanico / cortador / patronisata etc.
+	`fecha_ingreso_labores` DATETIME
+	`fecha_finaliza_labores` DATETIME
+	fk_id_area_trabajo_1
+	fk_id_empleador_2
+	fk_id_persona_3
 );
 
 
@@ -126,8 +141,8 @@ CREATE TABLE `usuarios`( -- Registros que llenan por usuario
     `fecha_alta_usuario` DATETIME, /* -- ver si se puede mejorar el tipo de campo -- */
     `fecha_baja_usuario` DATETIME, /* -- ver si se puede mejorar el tipo de campo -- */
     fk_id_persona_1
-    fk_id_perfil_usuario /* administrador - editor - consultor - proveedor*/
-    fk_id_estado_actividad_2  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+    fk_id_perfil_usuario_1 /* administrador - editor - consultor - proveedor*/
+    fk_id_estado_actividad_3  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
     CONSTRAINT
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
@@ -144,7 +159,7 @@ CREATE TABLE `tipo_prenda`( --- Registros que llenan por usuario
 -- TABLA INTERMEDIA TIPO DE PRENDA Y TECNICA DE ESTAMPADO --> Revisar si tiene proposito esta tabla
 CREATE TABLE `tipo_prenda_tecnicas_estampado`(
 	fk_id_tipo_prenda_1 --
-	fk_id_tecnica_estampado
+	fk_id_tecnica_estampado_1
 );
 
 
@@ -156,17 +171,17 @@ CREATE TABLE `estilos`( -- Registros que llenan por usuario
 	`descripcion` VARCHAR(100),
 	`cantidad_prendas` INT(10),
 	fk_tipo_prenda_2 VARCHAR(45), -- leggings, polo, falda, short, bodys ,etc
-	fk_id_tecnica_estampado -- puff - glitter - plano - dischard - suave - covertura etc
-	fk_id_orden_produccion
+	fk_id_tecnica_estampado_2 -- puff - glitter - plano - dischard - suave - covertura etc
+	fk_id_orden_produccion_16
 	fk_id_hangtag_1
-	fk_id_codigo_estilo_produccion
+	fk_id_codigo_prenda_produccion_1
 );
 
 
 -- TABLA INTERMEDIA ESTILOS Y TALLAS
 CREATE TABLE `estilos_tallas`(
-	fk_id_estilo
-	fk_id_talla
+	fk_id_estilo_1
+	fk_id_talla_1
 	`curva_talla` INT
 );
 
@@ -187,10 +202,10 @@ CREATE TABLE `ordenes_produccion`( -- Registros que llenan por usuario
 	`fecha_inicial_envio` DATETIME
 	`fecha_embarque` DATETIME,
 	`fecha_registro_orden_produccion` DATETIME, -- Indicio de la aprobacion de la orden
-	fk_id_cliente_1
-	fk_id_estado_actividad_3 -- estado de produccion / espera - confirmado - cancelado
+	fk_id_cliente_7
+	fk_id_estado_actividad_4 -- estado de produccion / espera - confirmado - cancelado
 	fk_id_orden_guia_corte_1
-	fk_id_usuario_9
+	fk_id_usuario_1
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -202,8 +217,8 @@ CREATE TABLE `clientes`(
 	`direccion_cliente` VARCHAR(70),
 	`fecha_registro_cliente` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
-	fk_id_usuario_1 -- usuario que registro al cliente
-	fk_id_estado_actividad_4 -- estado de cliente
+	fk_id_usuario_2 -- usuario que registro al cliente
+	fk_id_estado_actividad_5 -- estado de cliente
 );
 
 
@@ -214,9 +229,9 @@ CREATE TABLE `marcas`(
 	`logo_marca` VARCHAR(45), -- ubicacion archivo
 	`fecha_registro_marca` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
-	fk_id_usuario_1 -- usuario que registro la marca
-	fk_id_estado_actividad_21 -- estado de cliente
-	fk_id_usuario_10
+	fk_id_usuario_3 -- usuario que registro la marca
+	fk_id_estado_actividad_6 -- estado de cliente
+	fk_id_usuario_4
 );
 
 
@@ -229,30 +244,29 @@ CREATE TABLE `etiqueta_lavado`( --  revisar con esa tabla junto a etiqueta de la
 	`largo_etiqueta_lavado` INT
 	`fecha_registro_etiqueta` DATETIME,
 	`fecha_ultima_actualizacion` DATETI ME,
-	fk_id_usuario_2 -- usuario que registro
-	fk_id_etiqueta_lavado_4
+	fk_id_usuario_5 -- usuario que registro
 	fk_id_marca_1
 );
 
 
 -- TABLA INTERMEDIA DE ETIQUETAS DE LAVADO Y ESTILOS --> revisar esta tabla  falta completar contenido
 CREATE TABLE `etiquetasLavado_estilo`( --
-	fk_id_estilo
-	fk_id_etiqueta_lavado
+	fk_id_estilo_2
+	fk_id_etiqueta_lavado_1
 );
 
 
 -- TABLA INTERMEDIA ETIQUETA LAVADO Y ORDEN DE PRODUCCION
 CREATE TABLE `ordenProduccion_hangtags`(
-	fk_id_orden_produccion_6
-	fk_id_hangtag
+	fk_id_orden_produccion_2
+	fk_id_hangtag_2
 );
 
 
 -- TABLA INTERMEDIA ORDEN DE PRODUCCION Y AVIOS
 CREATE TABLE `ordenProduccion_avios`(
-	fk_id_orden_produccion_7
-	fk_id_avios
+	fk_id_orden_produccion_3
+	fk_id_avios_4
 );
 
 
@@ -264,7 +278,7 @@ CREATE TABLE `avios`(  -- la programacion hara el calculo del total para lo que 
 	`imagen_avio` INT(8),--sensores, bolsas,broches,tuil,hilo
 	`fecha_registro_avios` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME, -- soguillas,elasticos,
-	fk_id_cliente_
+	fk_id_cliente_2
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -279,8 +293,8 @@ CREATE TABLE `hangtags`( -- Registros que llenan por usuario
 	`cargar_archivo_hangtag` -- enlace de la ubicacion del archivo
 	`fecha_registro_hangtag` DATETIME
 	`fecha_ultima_actualizacion` DATETIME, -- soguillas,elasticos,
-	fk_id_cliente_2
-	fk_id_usuario_3
+	fk_id_cliente_3
+	fk_id_usuario_6
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -291,11 +305,11 @@ CREATE TABLE `hangtags_pedido`( -- Registros que llenan por usuario
 	`observaciones_pedido_hangtag`
 	`fecha_registro_pedido_hangtag` DATETIME
 	`fecha_ultima_actualizacion` DATETIME, -- soguillas,elasticos,
-	fk_id_cliente_3
-	fk_id_usuario_4
-	fk_id_proveedor
+	fk_id_cliente_4
+	fk_id_usuario_7
+	fk_id_proveedor_1
 	fk_id_hangtag
-	fk_id_estado_actividad_5 -- estado de hangtag pedido
+	fk_id_estado_actividad_7 -- estado de hangtag pedido
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -308,21 +322,21 @@ CREATE TABLE `proveedores`( -- Registros que llenan por usuario
 	`nombre_insumo_servicio` VARCHAR(45),
 	`fecha_registro_proveedor` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
-  fk_id_departamento
-  fk_id_ciudad
-  fk_id_distrito
-  fk_id_calle
-  fk_id_nacionalidad
-	fk_id_usuario_5 -- usuario que registro al proveedor
-	fk_id_usuario_representante -- usuario contacto intermediario
-	fk_id_estado_actividad_6 -- estado de proveedor
+  fk_id_departamento_3
+  fk_id_ciudad_3
+  fk_id_distrito_3
+  fk_id_calle_2
+  fk_id_nacionalidad_2
+	fk_id_usuario_8 -- usuario que registro al proveedor
+	fk_id_usuario_representante_9 -- usuario contacto intermediario
+	fk_id_estado_actividad_8 -- estado de proveedor
 );
 
 
 -- TABLA INTERMEDIA PROVEEDORES Y TIPO TELEFONO
 CREATE TABLE `proveedores_tipoTelefono`(
-	fk_id_proveedor
-	fk_id_tipo_telefono
+	fk_id_proveedor_2
+	fk_id_tipo_telefono_3
 	`numero_telefono` VARCHAR
 );
 
@@ -330,21 +344,21 @@ CREATE TABLE `proveedores_tipoTelefono`(
 -- TABLA INTERMEDIA HANGTAG Y PROVEEDORES
 CREATE TABLE `hangtags_proveedores`(
 	fk_id_hangtag
-	fk_id_proveedor
+	fk_id_proveedor_3
 );
 
 
 -- TABLA INTERMEDIA ESTILOS Y COLORES_TELAS
 CREATE TABLE `estilos_coloresTelas`(
-	fk_id_estilo_1
-	fk_id_color_tela
+	fk_id_estilo_3
+	fk_id_color_tela_1
 );
 
 
 -- TABLA INTERMEDIA ESTILOS Y COLORES_TELAS
 CREATE TABLE `estilos_coloresRip`(
-	fk_id_estilo_2
-	fk_id_color_rip
+	fk_id_estilo_4
+	fk_id_color_rip_1
 );
 
 
@@ -371,12 +385,12 @@ CREATE TABLE `colores_telas`(  -- Registros que llenan por usuario
 	`nombre_color_tela_proveedor` VARCHAR(15),
 	`porcentaje_componentes` VARCHAR(25), -- 100% algodon se completa en programacion
 	`fecha_registro_tela` DATETIME,
-	fk_id_tipo_tejido  -- 30/1 - 24/1 - 20/1
-	fk_id_tipo_tela    -- jersey, gamuza, melange,
-	fk_id_tipo_rollo  -- abierta, tubular,abierta
-	fk_id_proveedor
- 	fk_id_usuario_6
- 	fk_id_estado_actividad_7  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+	fk_id_tipo_tejido_1  -- 30/1 - 24/1 - 20/1
+	fk_id_tipo_tela_1    -- jersey, gamuza, melange,
+	fk_id_tipo_rollo_1  -- abierta, tubular,abierta
+	fk_id_proveedor_4
+ 	fk_id_usuario_10
+ 	fk_id_estado_actividad_9  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
 
@@ -389,12 +403,12 @@ CREATE TABLE `colores_rip`( -- Registros que llenan por usuario
 	`nombre_color_rip_proveedor` VARCHAR(15),
 	`porcentaje_componentes` VARCHAR(25), -- 100% algodon
 	`fecha_registro_rip` DATETIME
-	fk_id_tipo_tejido  -- 30/1 - 24/1 - 20/1
-	fk_id_tipo_tela    -- jersey, gamuza, melange,
-	fk_id_tipo_rollo  -- abierta, tubular,abierta
-	fk_id_proveedor
-	fk_id_usuario_7
-	fk_id_estado_actividad_8  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+	fk_id_tipo_tejido_2  -- 30/1 - 24/1 - 20/1
+	fk_id_tipo_tela_2    -- jersey, gamuza, melange,
+	fk_id_tipo_rollo_2  -- abierta, tubular,abierta
+	fk_id_proveedor_5
+	fk_id_usuario_11
+	fk_id_estado_actividad_10  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
 
@@ -406,10 +420,10 @@ CREATE TABLE `pedido_telas`( -- esto se mide a nivel de orden de produccion
 	`fecha_llegada_almacen_tela` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
 	`observaciones_pedido_tela` VARCHAR(100),
-	fk_id_orden_produccion
-	fk_id_usuario_8
-	fk_id_orden_guia_corte
-	fk_id_estado_actividad  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+	fk_id_orden_produccion_4
+	fk_id_usuario_12
+	fk_id_orden_guia_corte_2
+	fk_id_estado_actividad_11  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -420,8 +434,8 @@ CREATE TABLE `ordenes_guias_cortes`( -- Registros que llenan por usuario
 	`fecha_registro_guia_corte` DATETIME, -- fecha que se creo la guia
 	`fecha_ultima_actualizacion` DATETIME,
 	`observaciones_orden_guia_corte` VARCHAR(100),
-	fk_id_usuario_9 --> registra Diego, Sra. Monica, Sebastian, etc.
-	fk_id_estado_actividad_9  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+	fk_id_usuario_13 --> registra Diego, Sra. Monica, Sebastian, etc.
+	fk_id_estado_actividad_12  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -437,20 +451,20 @@ CREATE TABLE `corte_orden_telas`( -- REFIERE AL TENDIDO Y CORTE --> Registros qu
 	`observaciones_corte_orden_tela` VARCHAR(100),
 	`fecha_ingreso_corte_orden_tela` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
-	fk_id_tipo_rollo
-	fk_id_mesa_tendido -- mesa 1 / mesa 2 / mesa 3
-	fk_id_estilo
-	fk_id_orden_produccion
-	fk_id_orden_guia_corte
-	fk_id_usuario_10 --> Registra Isac, Luis, etc.
-	fk_id_estado_actividad_10  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+	fk_id_tipo_rollo_3
+	fk_id_mesa_tendido_1 -- mesa 1 / mesa 2 / mesa 3
+	fk_id_estilo_5
+	fk_id_orden_produccion_5
+	fk_id_orden_guia_corte_3
+	fk_id_usuario_14 --> Registra Isac, Luis, etc.
+	fk_id_estado_actividad_13  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
 -- TABLA INTERMEDIA CORTE ORDEN DE TELAS CON TALLAS
 CREATE TABLE `corteTelas_tallas`(
-	fk_id_corte_orden_tela
-	fk_id_talla
+	fk_id_corte_orden_tela_1
+	fk_id_talla_2
 	`cantidad` INT -- cantidad por talla segun prenda
 );
 
@@ -482,13 +496,12 @@ CREATE TABLE `diseno_micas`(
 	`cambios_para_produccion` VARCHAR(500),
 	`observaciones_diseno_produccion` VARCHAR(100),
 	`fecha_de_impresion` DATETIME
-	fk_id_impresora --> crear tabla de impresoras
-	fk_id_usuario_11 --> registra la impresion de la mica
-	fk_id_orden_produccion
-	fk_id_estilo
-	fk_id_orden_estampado_programacion -- revisar
-	fk_id_codigos_orden_produccion
-	fk_id_estado_actividad_11  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+	fk_id_impresora_1 --> crear tabla de impresoras
+	fk_id_usuario_14 --> registra la impresion de la mica
+	fk_id_orden_produccion_6
+	fk_id_estilo_6
+	fk_id_orden_estampado_programacion_1 -- revisar
+	fk_id_estado_actividad_14  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
 
@@ -510,7 +523,7 @@ CREATE TABLE `ploter`(
 	`id_ploter` INT(8) AUTO_INCREMENT,
 	`nombre_ploter` VARCHAR(45),
 	`descripcion` DATETIME
-	fk_id_estado_actividad_12  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+	fk_id_estado_actividad_15  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
 -- TABLA TECNICAS DE ESTAMPADO
@@ -521,7 +534,7 @@ CREATE TABLE `tecnicas_estampado`(  -- puff - glitter - plano - dischard - suave
 	`foto_tecnica` VARCHAR
 	`fecha_registro_tecnica_estampado` DATETIME
 	`fecha_ultima_actualizacion` DATETIME
-	fk_id_usuario_13
+	fk_id_usuario_15
 );
 
 
@@ -532,8 +545,8 @@ CREATE TABLE `etiquetas_estampadas`(
 	`foto_etiqueta_estampada` VARCHAR
 	`fecha_registro_etiqueta_estampada` DATETIME
 	`fecha_ultima_actualizacion` DATETIME
-	fk_id_cliente_4
-	fk_id_usuario_14
+	fk_id_cliente_5
+	fk_id_usuario_16
 );
 
 
@@ -548,7 +561,7 @@ CREATE TABLE `maquinas_estampado`(   -- maquina1, maquina2,maquina3,maquina4_eti
 	`brazos_maquina_estampado` INT
 	`fecha_registro_maquina_estampado` DATETIME
 	`fecha_ultima_actualizacion` DATETIME
-	fk_id_estado_actividad_13  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+	fk_id_estado_actividad_16  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
 
@@ -559,14 +572,14 @@ CREATE TABLE `revelado_estampado`( -- solo para confirmar la tarea
 	`emulsion_usada` VARCHAR
 	`fecha_registro_revelado_estampado` DATETIME
 	`fecha_ultima_actualizacion` DATETIME
-	fk_id_maquina_estampado
-	fk_id_usuario_15
-	fk_id_estilo
-	fk_id_diseno_mica
+	fk_id_maquina_estampado_1
+	fk_id_usuario_17
+	fk_id_estilo_7
+	fk_id_diseno_mica_1
 	fk_id_patronaje_molde  -- verificar si es necesario
-	fk_id_orden_produccion
-	fk_id_etiqueta_estampada
-	fk_id_estado_actividad_14  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+	fk_id_orden_produccion_7
+	fk_id_etiqueta_estampada_1
+	fk_id_estado_actividad_17  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
 
@@ -576,10 +589,10 @@ CREATE TABLE `muestras_estampado`(
 	`comentarios_muestra` VARCHAR
 	`fecha_registro_muestra_estampado` DATETIME
 	`fecha_ultima_actualizacion` DATETIME
-	fk_id_estilo
-	fk_id_orden_produccion
+	fk_id_estilo_8
+	fk_id_orden_produccion_8
 	fk_id_patronaje_molde  -- verificar si es necesario
-	fk_id_estado_actividad -- muestra enviada
+	fk_id_estado_actividad_18 -- muestra enviada
 );
 
 
@@ -592,11 +605,11 @@ CREATE TABLE `planchado`(
 	`observaciones_planchado` VARCHAR
 	`fecha_registro_planchado` DATETIME
 	`fecha_ultima_actualizacion` DATETIME
-	fk_id_estilo
-	fk_id_orden_produccion
+	fk_id_estilo_9
+	fk_id_orden_produccion_9
 	fk_id_patronaje_molde
-	fk_id_usuario_17
-	fk_id_estado_actividad_16  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+	fk_id_usuario_18
+	fk_id_estado_actividad_19  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
 
@@ -605,20 +618,19 @@ CREATE TABLE `orden_estampado_programacion`( -- ordenar por maquina x fecha x re
 	`id_orden_estampado_programacion` INT(8) AUTO_INCREMENT,
 	`observaciones_programacion` VARCHAR
 	`fecha_registro_programacion` DATETIME --> fecha registro de tarea
-	fk_id_estilo
-	fk_id_orden_produccion
+	fk_id_estilo_10
+	fk_id_orden_produccion_10
 	fk_id_ordene_guia_corte
-	fk_id_muestra_estampado
-	fk_id_maquina_estampado -- maquina asignada
-	fk_id_estado_actividad_17  -- estado terminado o no --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
-	fk_id_estado_actividad -- Jerarquia --> urgente / muy urgente / programado
-);
+	fk_id_muestra_estampado_1
+	fk_id_maquina_estampado_2 -- maquina asignada
+	fk_id_estado_actividad_20  -- estado terminado o no --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
+); -- Jerarquia --> urgente / muy urgente / programado / finalizado
 
 
 -- TABLA INTERMEDIA ORDEN ESTAMPADO PROGRAMACION Y  USUARIO
 CREATE TABLE `programacion_usuario`( -- cambia constante la programacion
-	fk_id_orden_estampado_programacion
-	fk_id_usuario
+	fk_id_orden_estampado_programacion_2
+	fk_id_usuario_19
 	`hora_inicio` TIME -- revisar si es valido este dato o comose maneja
 	`hora_fin` TIME -- revisar si es valido este dato o comose maneja
 	`fecha_produccion` DATETIME --> dia que se realiza produccion
@@ -631,7 +643,7 @@ CREATE TABLE `estados_actividad`( -- pendiente-gris / confirmado-verde / en proc
 	`id_estado_actividad` INT(8) AUTO_INCREMENT, -- estado persona --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 	`nombre_estado` VARCHAR -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 	`fecha_ultima_actualizacion` VARCHAR
-	fk_id_usuario_19
+	fk_id_usuario_20
 );
 
 
@@ -642,34 +654,34 @@ CREATE TABLE `control_envios_recepcion`( -- Magaly recibe --> eti.lavado, tela d
 	`descripcion` VARCHAR -- descripcion simple de lo que se recibe
 	`fecha_registro_queEnvia` DATETIME
 	`fecha_ultima_actualizacion` VARCHAR
-	fk_id_usuario_queEnvia -- Luis, Isac, chato
-	fk_id_area_trabajo_envia -- Area que envia el producto en proceso
-	fk_id_usuario_queRecibe -- Magaly
-	fk_id_area_trabajo_recibe -- Area que recibe el producto en proceso
-	fk_id_estado_actividad_producto -- El que recibe confirma --> calidad, defectuoso, necesita correcciones, volver a hacer
-	fk_id_estado_actividad_confirmacion -- El que recibe confirma --> llegada
+	fk_id_usuario_queEnvia_21 -- Luis, Isac, chato
+	fk_id_area_trabajo_envia_2 -- Area que envia el producto en proceso
+	fk_id_usuario_queRecibe_22 -- Magaly
+	fk_id_area_trabajo_recibe_3 -- Area que recibe el producto en proceso
+	fk_id_estado_actividad_producto_21 -- El que recibe confirma --> calidad, defectuoso, necesita correcciones, volver a hacer
+	fk_id_estado_actividad_confirmacion_22 -- El que recibe confirma --> llegada
 );
 
 
 -- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y  ETIQUETA DE LAVADO
 CREATE TABLE `envios_etiquetaLavado`(
-	fk_id_control_envio
-	fk_id_etiqueta_lavado
+	fk_id_control_envio_1
+	fk_id_etiqueta_lavado_2
 	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
 );
 
 
 -- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y  AVIOS
 CREATE TABLE `envios_avios`(
-	fk_id_control_envio
-	fk_id_avios
+	fk_id_control_envio_2
+	fk_id_avios_2
 	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
 );
 
 
 -- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y HANGTAG
 CREATE TABLE `envios_hangtags`(
-	fk_id_control_envio
+	fk_id_control_envio_3
 	fk_id_hangtag
 	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
 );
@@ -677,8 +689,8 @@ CREATE TABLE `envios_hangtags`(
 
 -- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y CORTE ORDE DE TALAS
 CREATE TABLE `envios_corteOrdenTela`(
-	fk_id_control_envio
-	fk_id_corte_orden_tela
+	fk_id_control_envio_4
+	fk_id_corte_orden_tela_2
 	fk_id_patronaje_molde
 	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
 );
@@ -686,32 +698,32 @@ CREATE TABLE `envios_corteOrdenTela`(
 
 -- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y DISEÑO MICAS
 CREATE TABLE `envios_disenoMicas`(
-	fk_id_control_envio
-	fk_id_diseno_mica
+	fk_id_control_envio_5
+	fk_id_diseno_mica_2
 	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
 );
 
 
 -- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y REVELADO DE CUADROS
 CREATE TABLE `envios_reveladoEstampado`(
-	fk_id_control_envio
-	fk_id_revelado_estampado
+	fk_id_control_envio_6
+	fk_id_revelado_estampado_1
 	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
 );
 
 
 -- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y REVELADO DE CUADROS
 CREATE TABLE `envios_muestraEstampado`(
-	fk_id_control_envio
-	fk_id_muestra_estampado
+	fk_id_control_envio_7
+	fk_id_muestra_estampado_2
 	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
 );
 
 
 -- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y REVELADO DE CUADROS
 CREATE TABLE `envios_planchado`(
-	fk_id_control_envio
-	fk_id_planchado
+	fk_id_control_envio_8
+	fk_id_planchado_1
 	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
 );
 
@@ -719,8 +731,7 @@ CREATE TABLE `envios_planchado`(
 -- TABLA PAISES Y NACIONALIDADES
 CREATE TABLE `paises`(
 	`id_pais` INT
-	`nombre_pais` VARCHAR
-  `nombre_nacionalidad` VARCHAR
+	`nombre_pais` VARCHAR	
 );
 
 
@@ -734,26 +745,24 @@ CREATE TABLE `patronaje_moldes`( -- muestra tambien Ubicacion de diseño total, 
   `descripcion` VARCHAR(70),
 	`fecha_registro_patronaje_molde` DATETIME
 	`fecha_ultima_actualizacion` DATETIME
-  fk_id_usuario_22 -- usuario que genera el registro
-  fk_id_orden_guia_corte --> referencia principal
-	fk_id_orden_produccion_3
-  fk_id_estilo
-  fk_id_etiqueta_lavado
-	fk_id_etiqueta_estampada
-	fk_id_tipo_prenda_3
-	fk_id_cliente
-	fk_id_estilo
-	fk_id_pais
-	fk_id_marca
-  fk_id_estado_actividad_19  -- estado proceso --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
-  fk_id_orden_produccion
+  fk_id_usuario_23 -- usuario que genera el registro
+  fk_id_orden_guia_corte_4 --> referencia principal
+	fk_id_orden_produccion_11
+  fk_id_estilo_11
+  fk_id_etiqueta_lavado_3
+	fk_id_etiqueta_estampada_2
+	fk_id_tipo_prenda_2
+	fk_id_cliente_6
+	fk_id_pais_1
+	fk_id_marca_2
+  fk_id_estado_actividad_23  -- estado proceso --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
 
 -- TABLA INTERMEDIA ESTILOS Y TALLAS
 CREATE TABLE `patronajeMoldes_tallas`(
 	fk_id_patronaje_molde
-	fk_id_talla
+	fk_id_talla_3
 	`curva_talla` INT
 );
 
@@ -772,16 +781,16 @@ CREATE TABLE `medidas_prenda_confeccion`(
 
 -- TABLA INTERMEDIA MEDIDA DE PRENDAS DE CONFECCION Y TALLAS
 CREATE TABLE `medidaPrendas_tallas`(
-  fk_id_medias_prenda_confeccion
-  fk_id_talla -- agreagar en la tabla de tallas el campo TOLERANCIA +/-
+  fk_id_medias_prenda_confeccion_1
+  fk_id_talla_4 -- agreagar en la tabla de tallas el campo TOLERANCIA +/-
   `medida` DECIMAL -- ver que valor corresponde si float o decimal
 );
 
 
 -- TABLA INTERMEDIA MEDIDAS DE PRENDA DE CONFECCION Y CODIGO DE MEDIDA
 CREATE TABLE `medidasPrendas_codigoMedida`(
-  fk_id_medias_prenda_confeccion
-  fk_id_codigo_medidas
+  fk_id_medias_prenda_confeccion_2
+  fk_id_codigo_medidas_1
   `descripcion_medidas` VARCHAR
   `tolerancia` DECIMAL -- TOL +/-  0.5 etc
 );
@@ -800,31 +809,31 @@ CREATE TABLE `construcion_prendas`(
   `observaciones` VARCHAR
   `fecha_registro` DATETIME
   `fecha_ultima_actualizacion` DATETIME
-  fk_id_etiqueta_lavado
-  fk_id_medias_prenda_confeccion
-  fk_id_orden_produccion
+  fk_id_etiqueta_lavado_4
+  fk_id_medias_prenda_confeccion_3
+  fk_id_orden_produccion_12
 );
 
 -- TABLA INTERMEDIA CONSTRUCION DE PRENDAS Y COMNTARIO DE ETIQUEA DE LAVADO
 CREATE TABLE `construcionPrenda_etiquetaLavado`(
-	fk_id_construccion_prendas
-	fk_id_etiqueta_lavado
+	fk_id_construccion_prendas_1
+	fk_id_etiqueta_lavado_5
 	`comentario_ubicacion` VARCHAR
 );
 
 -- TABLA INTERMEDIA CONSTRUCCION DE PRENDAS Y TIPO DE prendas
 CREATE TABLE `construccionPreda_tipoPrenda`(
-  fk_id_construccion_prendas
-  fk_id_vista_prenda -- frontal,delantero, espalda, back
+  fk_id_construccion_prendas_2
+  fk_id_vista_prenda_1 -- frontal,delantero, espalda, back
   `imagen_referencia` VARCHAR -- imagen de la prenda
 );
 
 -- TABLA INTERMEDIA CONSTRUCCION DE PRENDA Y PIEZA DE PRENDAS
 CREATE TABLE `construccionPrenda_piezas`(
-  fk_id_construccion_prendas
-  fk_id_pieza_prenda -- delantero, espalda, manga,basta,cuello etc
-  fk_id_tipo_tela -- jersey
-  fk_id_color_tela
+  fk_id_construccion_prendas_3
+  fk_id_pieza_prenda_1 -- delantero, espalda, manga,basta,cuello etc
+  fk_id_tipo_tela_3 -- jersey
+  fk_id_color_tela_2
   `descripcion_contruccion` VARCHAR -- detalla medidas y  mas
   `consumo_metros` VARCHAR -- CONSUMO DE CUELLO X METRO - 1 MT PARA 70 PRENDAS / CONSUMO DE TAPETE X METRO - 1 MT PARA 130 PRENDAS
   `cantidad_piezas` VARCHAR -- 1 pieza / 2 piezas /
@@ -832,10 +841,10 @@ CREATE TABLE `construccionPrenda_piezas`(
 
 -- TABLA INTERMEDIA CONSTRUCCION DE PRENDA Y TELA COMPLEMENTO
 CREATE TABLE `construccionPrenda_telaComplemento`(
-  fk_id_construccion_prendas
-  fk_id_telaComplemento
-  fk_id_tipo_tela -- jersey
-  fk_id_color_rip  --> RIB 1x1 / 2x2 etc
+  fk_id_construccion_prendas_4
+  fk_id_telaComplemento_1
+  fk_id_tipo_tela_4 -- jersey
+  fk_id_color_rip_2  --> RIB 1x1 / 2x2 etc
   `descripcion_contruccion` VARCHAR -- detalla medidas y  mas
   `consumo_metros` VARCHAR -- CONSUMO DE CUELLO X METRO - 1 MT PARA 70 PRENDAS / CONSUMO DE TAPETE X METRO - 1 MT PARA 130 PRENDAS
   `cantidad_piezas` VARCHAR -- en cintera / otros
@@ -867,15 +876,15 @@ CREATE TABLE `costuras`(
 
 -- TABLA INTERMEDIA CONSTRUCCION Y  COSTURAS
 CREATE TABLE `construcionPrenda_costuras`(
-	fk_id_construccion_prendas
-	fk_id_costuras
+	fk_id_construccion_prendas_5
+	fk_id_costuras_1
 	`puntada` INT -- 12 ppp, 14 ppp, etc
 );
 
 -- TABLA INTERMEDIA CONSTRUCCION Y AVIOS
 CREATE TABLE `construcionPrenda_avios`(
-	fk_id_construccion_prendas
-	fk_id_avios
+	fk_id_construccion_prendas_6
+	fk_id_avios_3
 	`descripcion` VARCHAR
 	`medida_cantidad` VARCHAR
 );
@@ -890,10 +899,10 @@ CREATE TABLE `ubicaion_artes`(
   `colorPantone` VARCHAR -- color referencial para estampado
   `fecha_registro` DATETIME
   `fecha_ultima_actualizacion` DATETIME
-  fk_id_etiqueta_lavado
-  fk_id_etiqueta_estampada
-  fk_id_construccion_prendas
-  fk_id_orden_produccion
+  fk_id_etiqueta_lavado_6
+  fk_id_etiqueta_estampada_3
+  fk_id_construccion_prendas_7
+  fk_id_orden_produccion_13
 );
 
 
@@ -904,22 +913,22 @@ CREATE TABLE `medidas_acabadas_confeccion`(
 	`descripcion` VARCHAR
 	`fecha_registro` DATETIME
   `fecha_ultima_actualizacion` DATETIME
-	fk_id_medias_prenda_confeccion
+	fk_id_medias_prenda_confeccion_4
 );
 
 
 -- TABLA INTERMEDIA MEDIDA DE PRENDAS DE CONFECCION Y TALLAS
 CREATE TABLE `medidasAcabadas_tallas`(
-  fk_id_medias_acabadas_confeccion
-  fk_id_talla -- agreagar en la tabla de tallas el campo TOLERANCIA +/-
+  fk_id_medias_acabadas_confeccion_1
+  fk_id_talla_5 -- agreagar en la tabla de tallas el campo TOLERANCIA +/-
   `medida` DECIMAL -- ver que valor corresponde si float o decimal
 );
 
 
 -- TABLA INTERMEDIA MEDIDAS DE PRENDA DE CONFECCION Y CODIGO DE MEDIDA
 CREATE TABLE `medidasAcabadas_codigoMedida`(
-  fk_id_medias_acabadas_confeccion
-  fk_id_codigo_medidas
+  fk_id_medias_acabadas_confeccion_2
+  fk_id_codigo_medidas_2
   `descripcion_medidas` VARCHAR
   `tolerancia` DECIMAL -- TOL +/-  0.5 etc
 );
@@ -934,14 +943,15 @@ CREATE TABLE `medidasAcabadas_codigoMedida`(
 
 -- TABLA CODIGO PRENDA DE PRODUCCION  -- revisar si funciona almanezar objetos JSON como texto plano
 CREATE TABLE `codigos_prenda_produccion`( -- revisar el ingreso de datos de codigos
-	`id_codigo_prenda_produccion` INT(8) AUTO_INCREMENT,
+	`id_codigo_prenda_produccion` INT(8) AUTO_INCREMENT, -- este codigo es para estilo
 	`descripcion` VARCHAR
   `contenido_plano_JSON` VARCHAR -- codigos en texto JSON plano
 	`fecha_registro_codigo_prenda_produccion` DATETIME
 	`fecha_ultima_actualizacion` VARCHAR
 	fk_id_usuario_24  -- usuario que registra
-	fk_id_orden_produccion_5
-	fk_id_estado_actividad -- Jerarquia --> urgente / muy urgente / programado
+	fk_id_orden_produccion_14 -- revisar si esta bien este campo
+	fk_id_estilo_13
+	fk_id_estado_actividad_24 -- Jerarquia --> urgente / muy urgente / programado
 );
 
 -- FIN DE TABLAS DE CODIGOS Y PRECIOS
@@ -954,8 +964,8 @@ CREATE TABLE `comentarios_estilos`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
 	`fecha_comentario` DATETIME
-	fk_id_usuario_20
-	fk_id_estilo
+	fk_id_usuario_25
+	fk_id_estilo_12
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -964,8 +974,8 @@ CREATE TABLE `comentarios_ordenProduccion`( -- revisar si todas las tablas estan
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
 	`fecha_comentario` DATETIME
-	fk_id_usuario_20
-	fk_id_orden_produccion
+	fk_id_usuario_26
+	fk_id_orden_produccion_15
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -974,8 +984,8 @@ CREATE TABLE `comentarios_pedidoHangtags`( -- revisar si todas las tablas estan 
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
 	`fecha_comentario` DATETIME
-	fk_id_usuario_20
-	fk_id_pedido_hangtag
+	fk_id_usuario_27
+	fk_id_pedido_hangtag_1
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -984,8 +994,8 @@ CREATE TABLE `comentarios_pedidoTelas`( -- revisar si todas las tablas estan aqu
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
 	`fecha_comentario` DATETIME
-	fk_id_usuario_20
-	fk_id_pedido_tela
+	fk_id_usuario_28
+	fk_id_pedido_tela_1
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -994,8 +1004,8 @@ CREATE TABLE `comentarios_ordenGuiaCorte`( -- revisar si todas las tablas estan 
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
 	`fecha_comentario` DATETIME
-	fk_id_usuario_20
-	fk_id_orden_guia_corte
+	fk_id_usuario_29
+	fk_id_orden_guia_corte_5
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -1004,8 +1014,8 @@ CREATE TABLE `comentarios_corteOrdenTela`( -- revisar si todas las tablas estan 
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
 	`fecha_comentario` DATETIME
-	fk_id_usuario_20
-	fk_id_corte_orden_tela
+	fk_id_usuario_30
+	fk_id_corte_orden_tela_3
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -1014,8 +1024,8 @@ CREATE TABLE `comentarios_disenoMica`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
 	`fecha_comentario` DATETIME
-	fk_id_usuario_20
-	fk_id_diseno_mica
+	fk_id_usuario_31
+	fk_id_diseno_mica_3
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -1024,8 +1034,8 @@ CREATE TABLE `comentarios_reveladoEstamapdo`( -- revisar si todas las tablas est
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
 	`fecha_comentario` DATETIME
-	fk_id_usuario_20
-	fk_id_revelado_estampado
+	fk_id_usuario_32
+	fk_id_revelado_estampado_2
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -1034,8 +1044,8 @@ CREATE TABLE `comentarios_muestraEstamapdo`( -- revisar si todas las tablas esta
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
 	`fecha_comentario` DATETIME
-	fk_id_usuario_20
-	fk_id_muestra_estampado
+	fk_id_usuario_33
+	fk_id_muestra_estampado_3
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -1044,8 +1054,8 @@ CREATE TABLE `comentarios_planchado`( -- revisar si todas las tablas estan aqui
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
 	`fecha_comentario` DATETIME
-	fk_id_usuario_20
-	fk_id_planchado
+	fk_id_usuario_34
+	fk_id_planchado_2
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -1054,8 +1064,8 @@ CREATE TABLE `comentarios_ordenProgramacion`( -- revisar si todas las tablas est
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
 	`fecha_comentario` DATETIME
-	fk_id_usuario_20
-	fk_id_orden_estampado_programacion
+	fk_id_usuario_35
+	fk_id_orden_estampado_programacion_3
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
 
@@ -1064,7 +1074,7 @@ CREATE TABLE `comentarios_patronajeMolde`( -- revisar si todas las tablas estan 
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
 	`fecha_comentario` DATETIME
-	fk_id_usuario_20
+	fk_id_usuario_36
 	fk_id_patronaje_molde
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
 
@@ -1074,6 +1084,6 @@ CREATE TABLE `comentarios_controlEnvios`( -- revisar si todas las tablas estan a
 	`id_comentario` INT(8) AUTO_INCREMENT,
 	`comentario` VARCHAR 500
 	`fecha_comentario` DATETIME
-	fk_id_usuario_20
-	fk_id_control_envio
+	fk_id_usuario_37
+	fk_id_control_envio_9
 )ENGINE=InnoDB DEFAULT CHARSET=utf8_spanish_ci;
