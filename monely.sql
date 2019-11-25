@@ -500,7 +500,7 @@ CREATE TABLE `diseno_micas`(
 	fk_id_usuario_14 --> registra la impresion de la mica
 	fk_id_orden_produccion_6
 	fk_id_estilo_6
-	fk_id_orden_estampado_programacion_1 -- revisar
+	fk_id_orden_estampado_programacion_1 -- revisar 
 	fk_id_estado_actividad_14  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
