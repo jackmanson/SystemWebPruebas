@@ -547,6 +547,10 @@ CREATE TABLE `etiquetas_estampadas`(
 	`fecha_ultima_actualizacion` DATETIME
 	fk_id_cliente_5
 	fk_id_usuario_16
+	fk_id_usuario_actualiza_
+	fk_id_color_referencial -- verde / rojo / chicle / 
+	fk_id_marca_3
+	fk_id_cliente_8
 );
 
 
@@ -616,6 +620,7 @@ CREATE TABLE `planchado`(
 -- TABLA ORDEN ESTAMPADO PROGRAMACION
 CREATE TABLE `orden_estampado_programacion`( -- ordenar por maquina x fecha x recursos
 	`id_orden_estampado_programacion` INT(8) AUTO_INCREMENT,
+	`nivel_prioridad` VARCHAR
 	`observaciones_programacion` VARCHAR
 	`fecha_registro_programacion` DATETIME --> fecha registro de tarea
 	fk_id_estilo_10
@@ -651,7 +656,7 @@ CREATE TABLE `estados_actividad`( -- pendiente-gris / confirmado-verde / en proc
 CREATE TABLE `control_envios_recepcion`( -- Magaly recibe --> eti.lavado, tela de corte, ecia
 	`id_control_envio` INT(8) AUTO_INCREMENT,
 	`cantidad_total` INT -- se contabiliza el total por envio
-	`descripcion` VARCHAR -- descripcion simple de lo que se recibe
+	`descripcion` VARCHAR -- descripcion simple de lo que se envia
 	`fecha_registro_queEnvia` DATETIME
 	`fecha_ultima_actualizacion` VARCHAR
 	fk_id_usuario_queEnvia_21 -- Luis, Isac, chato
@@ -699,7 +704,7 @@ CREATE TABLE `envios_corteOrdenTela`(
 -- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y DISEÑO MICAS
 CREATE TABLE `envios_disenoMicas`(
 	fk_id_control_envio_5
-	fk_id_diseno_mica_2
+	fk_id_diseno_mica_2 
 	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
 );
 
@@ -796,7 +801,7 @@ CREATE TABLE `medidasPrendas_codigoMedida`(
 );
 
 -- TABLA DE CODIGOS DE MEDIDAS DE patronaje
-CREATE TABLE `codigoMedidas_patronaje`(
+CREATE TABLE `codigo_medidas_patronaje`(
   `id_codigo_medidas`INT
   `codigo_nombre` VARCHAR -- A,B,C,D,E,F,G,H,I,J, ETC
 );
@@ -896,15 +901,29 @@ CREATE TABLE `ubicaion_artes`(
   `id_ubicaion_artes` INT
   `imagen_referencial` VARCHAR -- ubicaion de etiqueta estampada
   `observaciones_etiqueta` VARCHAR -- ubicaion
-  `colorPantone` VARCHAR -- color referencial para estampado
   `fecha_registro` DATETIME
   `fecha_ultima_actualizacion` DATETIME
   fk_id_etiqueta_lavado_6
   fk_id_etiqueta_estampada_3
   fk_id_construccion_prendas_7
   fk_id_orden_produccion_13
+  fk_id_colorPantone -- color referencial para estampado
 );
 
+
+-- TABLA DE COLORES PANTONE
+CREATE TABLE `colores_pantone`(
+	`id_color_pantone` INT
+	`nombre_pantones` VARCHAR
+	fk_id_categoria_pantone
+);
+
+
+-- TABLA DE CATEGORIAS PANTONE
+CREATE TABLE `catergorias_pantone`(
+	`id_categoria_pantone` INT
+	`nombre_cantegoria` VARCHAR
+);
 
 
 -- TABLA DE MEDIDAS ACABADAS PARA CONFECCION
