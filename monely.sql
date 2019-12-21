@@ -8,7 +8,7 @@ CREATE TABLE `personas`( -- Registros que llenan por usuario
     `email` VARCHAR(35) NOT NULL,
     `foto` VARCHAR(100),
     fk_id_departamento_4
-    fk_id_ciudad_4
+    fk_id_provincia_4
     fk_id_distrito_4
     fk_id_calle_3
     fk_id_nacionalidad_3
@@ -52,10 +52,10 @@ CREATE TABLE `departamento`(
 );
 
 
--- TABLA CIUDAD
-CREATE TABLE `ciudad`(
-	`id_ciudad` INT
-	`nombre_ciudad` VARCHAR
+-- TABLA provincia
+CREATE TABLE `provincia`(  -- provincia
+	`id_provincia` INT
+	`nombre_provincia` VARCHAR
 	fk_id_departamento_1
 );
 
@@ -64,7 +64,7 @@ CREATE TABLE `ciudad`(
 CREATE TABLE `distrito`(
 	`id_distrito` INT
 	`nombre_distrito` VARCHAR
-	fk_id_ciudad_1
+	fk_id_provincia_1
 );
 
 
@@ -104,7 +104,7 @@ CREATE TABLE `empresas_empleadoras`(
 	`tipo_contitucion` -- SA - EIRL etc
 	`fecha_registro` DATETIME
 	fk_id_departamento_2
-  	fk_id_ciudad_2
+  	fk_id_provincia_2
   	fk_id_distrito_2
   	fk_id_calle_1
   	fk_id_nacionalidad_1
@@ -323,7 +323,7 @@ CREATE TABLE `proveedores`( -- Registros que llenan por usuario
 	`fecha_registro_proveedor` DATETIME,
 	`fecha_ultima_actualizacion` DATETIME,
   fk_id_departamento_3
-  fk_id_ciudad_3
+  fk_id_provincia_3
   fk_id_distrito_3
   fk_id_calle_2
   fk_id_nacionalidad_2
@@ -500,7 +500,7 @@ CREATE TABLE `diseno_micas`(
 	fk_id_usuario_14 --> registra la impresion de la mica
 	fk_id_orden_produccion_6
 	fk_id_estilo_6
-	fk_id_orden_estampado_programacion_1 -- revisar 
+	fk_id_orden_estampado_programacion_1 -- revisar
 	fk_id_estado_actividad_14  -- estado usuario --> activo - verde / usuario transitivo o temporal - naranja / inactivo - rojo
 );
 
@@ -515,6 +515,8 @@ CREATE TABLE `impresoras`( -- ploter 7880, ploter 7800, etc
 	`ancho_bandeja` -- 60cm , 70cm, 120cm
 	`material_impresion` -- micas,bond,micas y bond, etc
 	`tipo_impresion` -- tinta, laser
+	`modelo`
+	fk_id_estado_actividad
 );
 
 
@@ -547,10 +549,6 @@ CREATE TABLE `etiquetas_estampadas`(
 	`fecha_ultima_actualizacion` DATETIME
 	fk_id_cliente_5
 	fk_id_usuario_16
-	fk_id_usuario_actualiza_
-	fk_id_color_referencial -- verde / rojo / chicle / 
-	fk_id_marca_3
-	fk_id_cliente_8
 );
 
 
@@ -620,7 +618,6 @@ CREATE TABLE `planchado`(
 -- TABLA ORDEN ESTAMPADO PROGRAMACION
 CREATE TABLE `orden_estampado_programacion`( -- ordenar por maquina x fecha x recursos
 	`id_orden_estampado_programacion` INT(8) AUTO_INCREMENT,
-	`nivel_prioridad` VARCHAR
 	`observaciones_programacion` VARCHAR
 	`fecha_registro_programacion` DATETIME --> fecha registro de tarea
 	fk_id_estilo_10
@@ -656,7 +653,7 @@ CREATE TABLE `estados_actividad`( -- pendiente-gris / confirmado-verde / en proc
 CREATE TABLE `control_envios_recepcion`( -- Magaly recibe --> eti.lavado, tela de corte, ecia
 	`id_control_envio` INT(8) AUTO_INCREMENT,
 	`cantidad_total` INT -- se contabiliza el total por envio
-	`descripcion` VARCHAR -- descripcion simple de lo que se envia
+	`descripcion` VARCHAR -- descripcion simple de lo que se recibe
 	`fecha_registro_queEnvia` DATETIME
 	`fecha_ultima_actualizacion` VARCHAR
 	fk_id_usuario_queEnvia_21 -- Luis, Isac, chato
@@ -704,7 +701,7 @@ CREATE TABLE `envios_corteOrdenTela`(
 -- TABLA INTERMEDIA ENTRE CONTROL DE ENVIOS Y DISEÑO MICAS
 CREATE TABLE `envios_disenoMicas`(
 	fk_id_control_envio_5
-	fk_id_diseno_mica_2 
+	fk_id_diseno_mica_2
 	`cantidad_enviada` INT -- se contabiliza los cortes o prendas en proceso y registra
 );
 
@@ -736,7 +733,7 @@ CREATE TABLE `envios_planchado`(
 -- TABLA PAISES Y NACIONALIDADES
 CREATE TABLE `paises`(
 	`id_pais` INT
-	`nombre_pais` VARCHAR	
+	`nombre_pais` VARCHAR
 );
 
 
@@ -801,7 +798,7 @@ CREATE TABLE `medidasPrendas_codigoMedida`(
 );
 
 -- TABLA DE CODIGOS DE MEDIDAS DE patronaje
-CREATE TABLE `codigo_medidas_patronaje`(
+CREATE TABLE `codigoMedidas_patronaje`(
   `id_codigo_medidas`INT
   `codigo_nombre` VARCHAR -- A,B,C,D,E,F,G,H,I,J, ETC
 );
@@ -901,29 +898,15 @@ CREATE TABLE `ubicaion_artes`(
   `id_ubicaion_artes` INT
   `imagen_referencial` VARCHAR -- ubicaion de etiqueta estampada
   `observaciones_etiqueta` VARCHAR -- ubicaion
+  `colorPantone` VARCHAR -- color referencial para estampado
   `fecha_registro` DATETIME
   `fecha_ultima_actualizacion` DATETIME
   fk_id_etiqueta_lavado_6
   fk_id_etiqueta_estampada_3
   fk_id_construccion_prendas_7
   fk_id_orden_produccion_13
-  fk_id_colorPantone -- color referencial para estampado
 );
 
-
--- TABLA DE COLORES PANTONE
-CREATE TABLE `colores_pantone`(
-	`id_color_pantone` INT
-	`nombre_pantones` VARCHAR
-	fk_id_categoria_pantone
-);
-
-
--- TABLA DE CATEGORIAS PANTONE
-CREATE TABLE `catergorias_pantone`(
-	`id_categoria_pantone` INT
-	`nombre_cantegoria` VARCHAR
-);
 
 
 -- TABLA DE MEDIDAS ACABADAS PARA CONFECCION
@@ -972,6 +955,7 @@ CREATE TABLE `codigos_prenda_produccion`( -- revisar el ingreso de datos de codi
 	fk_id_estilo_13
 	fk_id_estado_actividad_24 -- Jerarquia --> urgente / muy urgente / programado
 );
+
 
 -- FIN DE TABLAS DE CODIGOS Y PRECIOS
 
