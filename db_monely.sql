@@ -1419,7 +1419,7 @@ COLLATE = utf8_spanish_ci;
 -- Table `db_monely`.`colores_rip`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_monely`.`colores_rip` (
-  `id_color_rip` INT NOT NULL AUTO_INCREMENT COMMENT '  ',
+  `id_color_rip` INT NOT NULL AUTO_INCREMENT COMMENT '	',
   `codigo_rip` VARCHAR(45) NULL,
   `partida_rip` VARCHAR(45) NULL,
   `nombrecolor_rip_interno` VARCHAR(45) NULL,
