@@ -9,7 +9,14 @@
 <body>
 	<h1>Procesos</h1>
 	<?= "hola mundo";?> 
+	<?php
+		session_start();
 
+		$_SESSION['variable_persistente'] = "Ingreso";
+
+		echo "<br>".$_SESSION['variable_persistente'];
+
+	?>
 	
 </body>
 </html>
