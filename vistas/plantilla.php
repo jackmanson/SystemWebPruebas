@@ -38,35 +38,36 @@
 	<nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
-		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>                        
-		</button>
-		<a class="navbar-brand" href="#">COMERCIAL MONELY E.I.R.L.</a>
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>                        
+			</button>
+			<a class="navbar-brand" href="#">COMERCIAL MONELY E.I.R.L.</a>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
-		<ul class="nav navbar-nav">
-			<li class="active"><a href="#">Home</a></li>
-			<li><a href="#">Ordenes</a></li>
-			<li><a href="#">Guías</a></li>
-			<li><a href="#">Reportes</a></li>
-		</ul>
-		<ul class="nav navbar-nav navbar-right">
-			<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-		</ul>
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="#">Ordenes</a></li>
+				<li><a href="#">Guías</a></li>
+				<li><a href="#">Reportes</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			</ul>
 		</div>
 	</div>
 	</nav>
 	
 	<!-- CUERPO DEL CONTENIDO --> 
 	<div class="container-fluid text-center">   
-		<div class="row content">
+		<div class="row content" id="todoAlto">
 
 			<!-- BARRA IZQUIERDA --> 
-			<div class="col-sm-2 sidenav">
-				 <form>
-				 	<!-- BUSCADOR --> 
+			<div class="col-sm-2 sidenav " id="todoAlto">
+				 <!-- BUSCADOR --> 
+				<form>
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="Buscar" id="tags">
 						<div class="input-group-btn">
@@ -79,7 +80,7 @@
 				<br/>
 
 				<!-- MENU -->
-				<ul class="list-group">
+				<ul class="list-group" id="todoAlto">
 					<li class="list-group-item active">Mensajes <span class="badge">12</span></li>
 					<li class="list-group-item">Diseño <span class="badge">5</span></li>
 					<li class="list-group-item">Abios <span class="badge">3</span></li>
