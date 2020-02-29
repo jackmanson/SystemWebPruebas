@@ -9,15 +9,32 @@ $(document).ready(function(){
       console.log("click");
   });
 
- // SELECTOR DE ASIDE LADO DERECHO
- $(".miAside").hide(); // ocualta la barra derecha
- 
+   // SELECTOR DE ASIDE LADO DERECHO
+   $(".miAside").hide(); // ocualta la barra derecha
+  
+  // TAMAÑO DE IMAGEN
+  $("#imagenUsuario").height("2em").css("margin","0.8em");
 
-});
+  // MENU DE USUARIO/*
+  var usuarioMenu1 = $( "#usuarioMenu" ).menu();
+  usuarioMenu1.width("180px").hide();
 
-/* AUTOCOMPLETADO EN EL BUSCADOR */
-$( function() {
-    var availableTags = [
+  $("#imagenUsuario").click(function(){ // ocualta y muestra el MENU DE USUARIO
+    usuarioMenu1.toggle("fade"); 
+  });
+
+  // clic al body del documento para que se oculte el MENU DE USUARIO
+  $("body").click(function(){
+    usuarioMenu1.width("180px").hide();    
+  });
+
+  // login
+  $(".classLogin").hide();
+
+
+
+  /* AUTOCOMPLETADO EN EL BUSCADOR */
+  var availableTags = [
       "ActionScript",
       "AppleScript",
       "Asp",
@@ -27,6 +44,7 @@ $( function() {
       "Clojure",
       "COBOL",
       "ColdFusion",
+      "Kuickic",
       "Erlang",
       "Fortran",
       "Groovy",
@@ -44,6 +62,8 @@ $( function() {
     $( "#tags" ).autocomplete({
       source: availableTags
     });
-  } );
+
+
+});
 
 
