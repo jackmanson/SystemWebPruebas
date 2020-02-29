@@ -1,8 +1,8 @@
 <?php
 	//header("location: vistas/plantilla.php");
-	require_once "controladores/plantilla.controlador.php";
+	require_once "controladores/controlador.plantilla.php";
 
-	$plantilla = new ControladorPlantilla();ç
+	$plantilla = new ControladorPlantilla();
 	$plantilla -> plantilla();
 
 ?>
