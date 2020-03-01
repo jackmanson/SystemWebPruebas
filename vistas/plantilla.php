@@ -23,46 +23,95 @@
 
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-	
-
-		
 
 
 	<link rel="stylesheet" type="text/css" href="css/main.css"/>
 	<script type="text/javascript" src="vistas/js/main.js"></script>
+
+	<style type="text/css">
+		#usuarioMenu{
+			margin: 0;
+			position: absolute;
+			top: 4em;
+			right: 25px;
+			z-index: 3000;
+		}
+		
+		/* cursos imagen */
+		#imagenUsuario{
+			cursor: pointer;
+		}
+
+		.list-group-item{
+			cursor: pointer;	
+		}
+		.icono-menu{
+			margin-right:  0.5em;
+		}
+
+		footer{
+			position: absolute;
+			bottom: 5px;
+		}
+		
+	</style>
+		
 
 </head>
 <body>
 <!-- Estructura de plantilla -->
 	<!-- BARRA TOP BLACK -->
 	<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>                        
-			</button>
-			<a class="navbar-brand" href="#">COMERCIAL MONELY E.I.R.L.</a>
+
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>                        
+				</button>
+				<a class="navbar-brand" href="#">COMERCIAL MONELY E.I.R.L.</a>
+				</div>
+				<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#">Ordenes</a></li>
+					<li><a href="#">Guías</a></li>
+					<li><a href="#">Reportes</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-envelope"></span></a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-bell"></span></a></li>
+					<li class="classLogin"><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+					<li><a href="#"><span class="nombreUsuario">Jasson Polo</span></a></li>
+					<li><img src="vistas/img/jass.png" class="img-circle" id="imagenUsuario" alt="Cinque Terre"/></li>
+				</ul>
+
+				<!-- Menu de usuario -->
+				<ul id="usuarioMenu">
+				  <li class="ui-state-disabled"><div class="rolUsuario">Administrador:</div></li>
+				  <li><div>Perfil</div></li>
+				  <li><div>Configuración</div></li>
+				  <!--<li><div>Electronics</div>
+				    <ul>
+				      <li class="ui-state-disabled"><div>Home Entertainment</div></li>
+				      <li><div>Car Hifi</div></li>
+				      <li><div>Utilities</div></li>
+				    </ul>
+				  </li>-->
+				  <li><div>Salir</div></li>
+				</ul>
+			</div>
+
+
 		</div>
-		<div class="collapse navbar-collapse" id="myNavbar">
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#">Ordenes</a></li>
-				<li><a href="#">Guías</a></li>
-				<li><a href="#">Reportes</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-			</ul>
-		</div>
-	</div>
 	</nav>
 	
 	<!-- CUERPO DEL CONTENIDO --> 
-	<div class="container-fluid text-center">   
-		<div class="row content" id="todoAlto">
+
+	<div class="container-fluid">   
+		<div class="row content">
 
 			<!-- BARRA IZQUIERDA --> 
 			<div class="col-sm-2 sidenav " id="todoAlto">
@@ -80,25 +129,60 @@
 				<br/>
 
 				<!-- MENU -->
-				<ul class="list-group" id="todoAlto">
-					<li class="list-group-item active">Mensajes <span class="badge">12</span></li>
-					<li class="list-group-item">Diseño <span class="badge">5</span></li>
-					<li class="list-group-item">Abios <span class="badge">3</span></li>
-					<li class="list-group-item">Gestión Telas <span class="badge">3</span></li>
-					<li class="list-group-item">Corte <span class="badge">3</span></li>
-					<li class="list-group-item">Estampado <span class="badge">3</span></li>
-					<li class="list-group-item">Confección <span class="badge">3</span></li>
-					<li class="list-group-item">Distribución <span class="badge">3</span></li>
-					<li class="list-group-item">Guías <span class="badge">3</span></li>
+
+				<ul class="list-group">
+					<li class="list-group-item"><span class="glyphicon glyphicon-calendar icono-menu"></span>Programación <span class="badge">5</span></li>
+					<li class="list-group-item"><span class="glyphicon glyphicon-edit icono-menu"></span>Diseño <span class="badge">5</span></li>
+					<li class="list-group-item"><span class="glyphicon glyphicon-paperclip icono-menu"></span>Abios <span class="badge">3</span></li>
+					<li class="list-group-item"><span class="glyphicon glyphicon-record icono-menu"></span>Gestión Telas <span class="badge">3</span></li>
+					<li class="list-group-item"><span class="glyphicon glyphicon-scissors icono-menu"></span>Corte <span class="badge">3</span></li>
+					<li class="list-group-item"><span class="glyphicon glyphicon-certificate icono-menu"></span>Estampado <span class="badge">3</span></li>
+					<li class="list-group-item"><span class="glyphicon glyphicon-pushpin icono-menu"></span>Confección <span class="badge">3</span></li>
+					<li class="list-group-item"><span class="glyphicon glyphicon-fullscreen icono-menu"></span>Distribución <span class="badge">3</span></li>
+					<li class="list-group-item"><span class="glyphicon glyphicon-list-alt icono-menu"></span>Ordenes<span class="badge">3</span></li>
+					<li class="list-group-item"><span class="glyphicon glyphicon-flag icono-menu"></span>Guías <span class="badge">3</span></li>
+
 				</ul> 
 			</div>
 
 			<!-- CONTENIDO --> 
 			<div class="col-sm-8 text-left"> 
 
-				<!-- TABLA DE DATOS -->		
+				<!-- TABLA DE DATOS PENDIENTES-->		
 				<div class="container">
-					<h2>Contenido de Campo</h2>
+					<h2>Pendientes</h2>
+					<p>The table-striped class adds zebra-stripes to a table:</p>            
+					<table class="table table-striped">
+						<thead>
+						<tr>
+							<th>Firstname</th>
+							<th>Lastname</th>
+							<th>Email</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>John</td>
+							<td>Doe</td>
+							<td>john@example.com</td>
+						</tr>
+						<tr>
+							<td>Mary</td>
+							<td>Moe</td>
+							<td>mary@example.com</td>
+						</tr>
+						<tr>
+							<td>July</td>
+							<td>Dooley</td>
+							<td>july@example.com</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<!-- TABLA DE DATOS FINALIZADOS-->		
+				<div class="container">
+					<h2>Finalizados</h2>
 					<p>The .table-striped class adds zebra-stripes to a table:</p>            
 					<table class="table table-striped">
 						<thead>
