@@ -25,8 +25,8 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
 
-	<link rel="stylesheet" type="text/css" href="css/main.css"/>
 	<script type="text/javascript" src="vistas/js/main.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/main.css"/>
 
 	<style type="text/css">
 		#usuarioMenu{
@@ -49,11 +49,6 @@
 			margin-right:  0.5em;
 		}
 
-		footer{
-			position: absolute;
-			bottom: 5px;
-		}
-		
 	</style>
 		
 

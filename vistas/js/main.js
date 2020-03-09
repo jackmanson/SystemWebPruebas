@@ -24,7 +24,7 @@ $(document).ready(function(){
   });
 
   // clic al body del documento para que se oculte el MENU DE USUARIO
-  $("body").click(function(){
+  $(document).click(function(){
     usuarioMenu1.width("180px").hide();    
   });
 
@@ -63,6 +63,8 @@ $(document).ready(function(){
       source: availableTags
     });
 
+    // BARRA IZQUIERDA
+    
 
 });
 
