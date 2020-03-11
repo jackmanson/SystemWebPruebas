@@ -26,7 +26,7 @@
 
 
 	<script type="text/javascript" src="vistas/js/main.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/main.css"/>
+	<link rel="stylesheet" type="text/css" href="vistas/css/plantilla.css"/>
 
 	<style type="text/css">
 		#usuarioMenu{
@@ -65,7 +65,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>                        
 				</button>
-				<a class="navbar-brand" href="#">COMERCIAL MONELY E.I.R.L.</a>
+				<a class="navbar-brand" href="#">PRODUCCIÓN TEXTIL	</a>
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">

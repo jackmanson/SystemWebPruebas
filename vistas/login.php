@@ -26,7 +26,7 @@
 
 
 	<script type="text/javascript" src="vistas/js/main.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/main.css"/>
+	<link rel="stylesheet" type="text/css" href="vistas/css/main.css"/>
 
 	<style type="text/css">
 		#usuarioMenu{
