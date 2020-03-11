@@ -2,7 +2,7 @@ $(document).ready(function(){
     console.log("Hola jquery")
 
   // SELECTOR DEL MENU DEL LADO IZQUIERDO
-  var listaMenu = $(".list-group-item").click(function(){
+  $(".list-group-item").click(function(){
       //$(this).css("background","red");
       $(".list-group-item").removeClass("active");
       $(this).addClass("active");
@@ -64,8 +64,40 @@ $(document).ready(function(){
     });
 
     // BARRA IZQUIERDA
+
+
+
+    // BOTTON CIRCULAR
+    $(".botonCircular").css("border-radius","50%");
+
     
 
+    // TABLA HOVER EN REGISTROS
+    /*$("tr").css("background","white"); --> FUNCIONA TAMBIEN CON ESTE PERO CON BOOSTRAP ES MAS SIMPLE YA ESTA INCORPORADO
+   
+    $("tr").mouseover(function(){
+    
+      if($("tr").css("background")=="#f9f9f9"){
+        $(this).css("background","#ffffff");
+      }else {
+        $(this).css("background","#f9f9f9");
+      }
+      
+    });
+
+    $("tr").mouseout(function(){
+
+      if($("tr").css("background")=="#ffffff"){
+        $(this).css("background","#f9f9f9f");
+      }else{
+        $(this).css("background","#ffffff");
+      }
+
+    });*/
+
+    // FOOTER BOTTON
+    $(".footerBotton").css("margin-top","10%");
+    
 });
 
 
