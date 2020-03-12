@@ -10,7 +10,7 @@ $(document).ready(function(){
   });
 
    // SELECTOR DE ASIDE LADO DERECHO
-   $(".miAside").hide(); // ocualta la barra derecha
+  $(".miAside").hide(); // ocualta la barra derecha
   
   // TAMAÑO DE IMAGEN
   $("#imagenUsuario").height("2em").css("margin","0.8em");
