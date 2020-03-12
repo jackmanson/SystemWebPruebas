@@ -151,21 +151,21 @@
 			<div class="row text-center slideanim">
 				<div class="col-sm-4">
 				<div class="thumbnail">
-					<img src="paris.jpg" alt="Paris" width="400" height="300">
+					<img src="vistas/img/01_estampado.jpeg" alt="Paris" width="400" height="300">
 					<p><strong>Estampado</strong></p>
 					<p>Pulpo de 18 brazos.</p>
 				</div>
 				</div>
 				<div class="col-sm-4">
 				<div class="thumbnail">
-					<img src="newyork.jpg" alt="New York" width="400" height="300">
+					<img src="vistas/img/02_diseñoarea.jpeg" alt="New York" width="400" height="300">
 					<p><strong>Diesño</strong></p>
 					<p>Equipo de Diseño.</p>
 				</div>
 				</div>
 				<div class="col-sm-4">
 				<div class="thumbnail">
-					<img src="sanfran.jpg" alt="San Francisco" width="400" height="300">
+					<img src="vistas/img/03_corte.jpeg" alt="San Francisco" width="400" height="300">
 					<p><strong>Corte</strong></p>
 					<p>Preparado de telas.</p>
 				</div>
