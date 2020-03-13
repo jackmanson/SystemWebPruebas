@@ -175,3 +175,30 @@ body {
       font-size: 150px;
     }
   }
+
+  @media (max-width:1199px) and (min-width:992px){
+    .nav li{
+      font-size: 10px !important;
+      line-height: 1.42857143 !important;
+      letter-spacing: 3px;
+    }
+
+    .navbar-brand{
+      
+    }
+
+  }
+
+  @media (max-width:991px) and (min-width:768px){
+    .nav li{
+      font-size: 12px !important;
+      line-height: 1.42857143 !important;
+      letter-spacing: 1px;
+    }
+
+    .nav li a{
+      padding: 1em 0.5em;
+    }
+
+
+  }

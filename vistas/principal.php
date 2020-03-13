@@ -1,3 +1,7 @@
+<?php
+	require_once "controladores/controlador.login.php";
+	$login = new ControladorLogin();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,21 +28,22 @@
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>                        
-			</button>
-			<a class="navbar-brand" href="#myPage">CM</a>
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>                        
+				</button>
+				<a class="navbar-brand" href="#myPage">CM</a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#about">ACERCA DE NOSOTROS</a></li>
-				<li><a href="#services">PRODUCTOS</a></li>
-				<li><a href="#portfolio">PORTFOLIO</a></li>
-				<li><a href="#pricing">PRECIOS EN TIENDA</a></li>
-				<li><a href="#contact">CONTACTO</a></li>
-			</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#about">ACERCA DE NOSOTROS</a></li>
+					<li><a href="#services">PRODUCTOS</a></li>
+					<li><a href="#portfolio">PORTFOLIO</a></li>
+					<li><a href="#pricing">PRECIOS EN TIENDA</a></li>
+					<li><a href="#contact">CONTACTO</a></li>
+					<li class="classLogin"><a href="<?=$login->loginDireccion();?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				</ul>
 			</div>
 		</div>
 	</nav>
@@ -49,7 +54,7 @@
 			<p>Especialistas en procesos textiles</p> 
 			<form>
 				<div class="input-group">
-				<input type="email" class="form-control" size="50" placeholder="Email Address" required>
+				<input type="email" class="form-control" size="50" placeholder="Deje su Email y le enviaremos novedades." required>
 				<div class="input-group-btn">
 					<button type="button" class="btn btn-danger">Subscribe</button>
 				</div>
@@ -67,7 +72,7 @@
 			<h2>Acerca de la compañia</h2><br>
 			<h4>El Perú tuvo la fortuna de gozar una gran variedad de materiales para la creación sin límites de telares hechos por los mismos peruanos en aquellos tiempos que solo podía ser utilizada por los más altos niveles jerárquicos de cada grupo social de ese tiempo.</h4><br>
 			<p>La empresa fue fundada el 21 de octubre del 2011, registrada dentro de las sociedades mercantiles y comerciales como una empresa individual de responsabilidad limitada, se encuentra dentro del sector venta al por mayor y realiza actividades de comercio exterior como importaciones y exportaciones. La empresa actualmente produce prendas de vestir como leggings, ajuares, kimonos y principalmente polos hechos con algodón y poliéster en su mayoría; pero, también trabajan con telas sintéticas según demanda; por el contrario, son pocas las veces que se produce con telas pesadas como franela o telas donde se aprovecha menos prendas por kilogramo. La esencia de esta empresa es que vende en su mayoría polos, ya sea para bebes, niños o jóvenes; no obstante, evita producir prendas donde el costo sea elevado en su producción como: dibujos bordados de gran tamaño, prendas con lavado y acabados muy especializados, estampados con pinturas de muy altísimo costo, entre otros más; por consecuencia, que muchos de los clientes no quieren afrontar precios elevados y en tiempos prolongados. Su mercado principal es el ámbito nacional donde distribuye toda su producción ya sea en provincia o en la capital; sin embargo, se exporta ocasionalmente a chile. Las estaciones donde hay más órdenes de compra se presenta en casi comienzos de otoño y finales de invierno; sin embargo, el mes más bajo del año es en enero. Actualmente cuenta con una cartera de clientes como Tottus, Saga Falabella, Ripley, Ripley chile, Oechsle, Maratton, Federación Peruana de Futbol, Paris, Umbro, Plaza Vea, entre otros que han generado importantes relaciones en el país.</p>
-			<br><button class="btn btn-default btn-lg">Get in Touch</button>
+			<br><!--<button class="btn btn-default btn-lg">Get in Touch</button>-->
 			</div>
 			<div class="col-sm-4">
 			<span class="glyphicon glyphicon-signal logo"></span>
@@ -150,25 +155,25 @@
 			<h4>Desarrollo de producto.</h4>
 			<div class="row text-center slideanim">
 				<div class="col-sm-4">
-				<div class="thumbnail">
-					<img src="vistas/img/01_estampado.jpeg" alt="Paris" width="400" height="300">
-					<p><strong>Estampado</strong></p>
-					<p>Pulpo de 18 brazos.</p>
-				</div>
-				</div>
-				<div class="col-sm-4">
-				<div class="thumbnail">
-					<img src="vistas/img/02_diseñoarea.jpeg" alt="New York" width="400" height="300">
-					<p><strong>Diesño</strong></p>
-					<p>Equipo de Diseño.</p>
-				</div>
+					<div class="thumbnail">
+						<img src="vistas/img/02_diseñoarea.jpeg" alt="New York" width="400" height="300">
+						<p><strong>Diesño</strong></p>
+						<p>Equipo de Diseño.</p>
+					</div>
 				</div>
 				<div class="col-sm-4">
-				<div class="thumbnail">
-					<img src="vistas/img/03_corte.jpeg" alt="San Francisco" width="400" height="300">
-					<p><strong>Corte</strong></p>
-					<p>Preparado de telas.</p>
+					<div class="thumbnail">
+						<img src="vistas/img/03_corte.jpeg" alt="San Francisco" width="400" height="300">
+						<p><strong>Corte</strong></p>
+						<p>Preparado de telas.</p>
+					</div>
 				</div>
+				<div class="col-sm-4">
+					<div class="thumbnail">
+						<img src="vistas/img/01_estampado.jpeg" alt="Paris" width="400" height="300">
+						<p><strong>Estampado</strong></p>
+						<p>Pulpo de 18 brazos.</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -212,64 +217,64 @@
 	<div id="pricing" class="container-fluid">
 		<div class="container">
 			<div class="text-center">
-				<h2>Pricing</h2>
-				<h4>Choose a payment plan that works for you</h4>
+				<h2>Oferta en Nuestra Tienda</h2>
+				<h4>Buenos precios en polos y prendas de algodón.</h4>
 			</div>
 			<div class="row slideanim">
 				<div class="col-sm-4 col-xs-12">
 				<div class="panel panel-default text-center">
 					<div class="panel-heading">
-					<h1>Basic</h1>
+						<h1>Polos</h1>
 					</div>
 					<div class="panel-body">
-					<p><strong>20</strong> Lorem</p>
-					<p><strong>15</strong> Ipsum</p>
-					<p><strong>5</strong> Dolor</p>
-					<p><strong>2</strong> Sit</p>
-					<p><strong>Endless</strong> Amet</p>
-					</div>
-					<div class="panel-footer">
-					<h3>$19</h3>
-					<h4>per month</h4>
-					<button class="btn btn-lg">Sign Up</button>
+						<p><strong>Jersey</strong> </p>
+						<p><strong>Coverturas</strong> </p>
+						<p><strong>Colores naturales</strong> </p>
+						<p><strong>Pasteles</strong> </p>
+						<p><strong>Todas las tallas</strong> Amet</p>
+						</div>
+						<div class="panel-footer">
+						<h4>Desde</h4>
+						<h3>S/. 4.00</h3>
+						<!-- <button class="btn btn-lg">Sign Up</button> -->
 					</div>
 				</div>      
 				</div>     
 				<div class="col-sm-4 col-xs-12">
 				<div class="panel panel-default text-center">
 					<div class="panel-heading">
-					<h1>Pro</h1>
+						<h1>Leggings</h1>
 					</div>
 					<div class="panel-body">
-					<p><strong>50</strong> Lorem</p>
-					<p><strong>25</strong> Ipsum</p>
-					<p><strong>10</strong> Dolor</p>
-					<p><strong>5</strong> Sit</p>
-					<p><strong>Endless</strong> Amet</p>
-					</div>
-					<div class="panel-footer">
-					<h3>$29</h3>
-					<h4>per month</h4>
-					<button class="btn btn-lg">Sign Up</button>
+						<p><strong>Jersey</strong> </p>
+						<p><strong>Coverturas</strong> </p>
+						<p><strong>Colores naturales</strong> </p>
+						<p><strong>Pasteles</strong> </p>
+						<p><strong>Todas las tallas</strong> Amet</p>
+						</div>
+						<div class="panel-footer">
+						<h4>Desde</h4>
+						<h3>S/. 12.00</h3>
+						<!-- <button class="btn btn-lg">Sign Up</button> -->
 					</div>
 				</div>      
 				</div>       
 				<div class="col-sm-4 col-xs-12">
 				<div class="panel panel-default text-center">
 					<div class="panel-heading">
-					<h1>Premium</h1>
+						<h1>Conjuntos</h1>
 					</div>
 					<div class="panel-body">
-					<p><strong>100</strong> Lorem</p>
-					<p><strong>50</strong> Ipsum</p>
-					<p><strong>25</strong> Dolor</p>
-					<p><strong>10</strong> Sit</p>
-					<p><strong>Endless</strong> Amet</p>
-					</div>
-					<div class="panel-footer">
-					<h3>$49</h3>
-					<h4>per month</h4>
-					<button class="btn btn-lg">Sign Up</button>
+						<p><strong>Jersey</strong> </p>
+						<p><strong>Coverturas</strong> </p>
+						<p><strong>Colores naturales</strong> </p>
+						<p><strong>Pasteles</strong> </p>
+						<p><strong>Todas las tallas</strong> Amet</p>
+						</div>
+						<div class="panel-footer">
+						<h4>Desde</h4>
+						<h3>S/. 20.00</h3>
+						<!-- <button class="btn btn-lg">Sign Up</button> -->
 					</div>
 				</div>      
 				</div>    
