@@ -1,7 +1,3 @@
-<?php
-	require_once "controladores/controlador.login.php";
-	$login = new ControladorLogin();
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -42,7 +38,7 @@
 					<li><a href="#portfolio">PORTFOLIO</a></li>
 					<li><a href="#pricing">PRECIOS EN TIENDA</a></li>
 					<li><a href="#contact">CONTACTO</a></li>
-					<li class="classLogin"><a href="<?=$login->loginDireccion();?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+					<li class="classLogin"><a href="acceso.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 				</ul>
 			</div>
 		</div>

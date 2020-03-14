@@ -25,108 +25,40 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
 
-	<script type="text/javascript" src="vistas/js/main.js"></script>
-	<link rel="stylesheet" type="text/css" href="vistas/css/main.css"/>
+	<script type="text/javascript" src="vistas/js/login.js"></script>
+	<link rel="stylesheet" type="text/css" href="vistas/css/login.css"/>
 
-	<style type="text/css">
-		#usuarioMenu{
-			margin: 0;
-			position: absolute;
-			top: 4em;
-			right: 25px;
-			z-index: 3000;
-		}
-		
-		/* cursos imagen */
-		#imagenUsuario{
-			cursor: pointer;
-		}
-
-		.list-group-item{
-			cursor: pointer;	
-		}
-		.icono-menu{
-			margin-right:  0.5em;
-		}
-
-	</style>
-		
-
+ 
 </head>
 <body>
-<!-- Estructura de plantilla -->
-	<!-- BARRA TOP BLACK -->
-	<nav class="navbar navbar-inverse">
-
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>                        
-				</button>
-				<a class="navbar-brand" href="#">COMERCIAL MONELY E.I.R.L.</a>
-				</div>
-				<div class="collapse navbar-collapse" id="myNavbar">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">Ordenes</a></li>
-					<li><a href="#">Guías</a></li>
-					<li><a href="#">Reportes</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li class="classLogin"><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-				</ul>
-
-
-
+<!-- Estructura de login -->
+	<div class="container-fluid">
+		<div class="cajaLogin ">
+			<h2 class="text-center">Cuenta de Usuario</h2>
+			 <form action="/action_page.php">
+			    <div class="form-group">
+			      <label for="email">Email:</label>
+			      <input type="email" class="form-control fondoBlanco" id="email" placeholder="Enter email" name="email">
+			    </div>
+			    <div class="form-group">
+			      <label for="pwd">Password:</label>
+			      <input type="password" class="form-control fondoBlanco" id="pwd" placeholder="Enter password" name="pwd">
+			    </div>
+			    <div class="checkbox">
+			      <label class=""><input type="checkbox" name="remember"> Recuerdame</label>
+			    </div>
+			    <button type="submit" class="btn btn-default">Enviar</button>
+			 </form>
+			<br/>
+		 	<div class="recuperacionLogin">
+		    	<a href="#" class="text-center col-xs-12">Olvidé mi contraseña</a>
+		    	<a href="#" class="text-center col-xs-12">Registrarse</a>
+		    </div>
+		    
 
 		</div>
-	</nav>
-	
-	<!-- CUERPO DEL CONTENIDO --> 
+	</div>
 
-	<div class="container"> 
-        <div class="row content">
-            
-            <!-- CAJA INFOTEXTO -->
-            <div class="col-sm-2">
-                <h1>Construido para Procesos Textiles</h1>
-                <p>Es una plataforma pensada para mejorar procesos de la industria textil, puede implementarse a su compañia mejor por que fue desarrollada con metodologías ágiles. Solicita tu membresia y se parte de nuestro equipo.</p>
-            </div>
-
-            <!-- CAJA LOGIN -->
-            <div class="col-sm-6">
-                <form>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputFile">File input</label>
-                        <input type="file" id="exampleInputFile">
-                        <p class="help-block">Example block-level help text here.</p>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                        <input type="checkbox"> Check me out
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-            </div>
-
-        </div>
-
-    </div>
-	<!-- BARRA DOWN -->
-	<footer class="container-fluid text-center">
-	    <p>Copyright © 2020-2022 Jasson Polo All rights reserved.</p>
-	</footer>
 	
 </body>
 </html>
