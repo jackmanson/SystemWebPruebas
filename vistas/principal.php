@@ -46,7 +46,7 @@
 
 	<div class="jumbotron text-center">
 		<dir class="container">
-			<h1>COMERCIAL MONELY E.I.R.L.</h1> 
+			<h1>COMERCIAL MONELY</h1> 
 			<p>Especialistas en procesos textiles</p> 
 			<form>
 				<div class="input-group">

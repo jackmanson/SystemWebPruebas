@@ -32,6 +32,13 @@ $(document).ready(function(){
       });
     });
 
-    
+    // REDIRECCION ACCESO
+    $(".classLogin").click(function(){
+      function redirect(){
+        window.location.href = "http://localhost/tesisSystemUpn2019/acceso.php";
+        
+      }
+      redirect();
+    });
     
   })

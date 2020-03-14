@@ -27,7 +27,7 @@
 
 	<script type="text/javascript" src="vistas/js/login.js"></script>
 	<link rel="stylesheet" type="text/css" href="vistas/css/login.css"/>
-
+                                                                   
  
 </head>
 <body>
@@ -47,12 +47,12 @@
 			    <div class="checkbox">
 			      <label class=""><input type="checkbox" name="remember"> Recuerdame</label>
 			    </div>
-			    <button type="submit" class="btn btn-default">Enviar</button>
+			    <button type="submit" class="btn btn-primary btn-block">Enviar</button>
 			 </form>
 			<br/>
 		 	<div class="recuperacionLogin">
 		    	<a href="#" class="text-center col-xs-12">Olvidé mi contraseña</a>
-		    	<a href="#" class="text-center col-xs-12">Registrarse</a>
+		    	<a href="vistas/sign_up.php" class="text-center col-xs-12">Registrarse</a>
 		    </div>
 		    
 

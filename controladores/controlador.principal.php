@@ -3,7 +3,7 @@
 
 class ControladorPrincipal{
 
-    public function Principal(){
+    public function principal(){
         include "vistas/principal.php";
     }
 
