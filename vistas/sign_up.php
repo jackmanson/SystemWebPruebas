@@ -41,27 +41,27 @@
 						Registrate
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate="Name is required">
+					<div class="wrap-input100 validate-input" data-validate="Ingresar Nombres">
 						<span class="label-input100">Nombres</span>
-						<input class="input100" type="text" name="name" placeholder="Name...">
+						<input class="input100" type="text" name="name" placeholder="Nombres">
 						<span class="focus-input100"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Name is required">
+					<div class="wrap-input100 validate-input" data-validate="Ingresar Apellido">
 						<span class="label-input100">Apellido Paterno</span>
-						<input class="input100" type="text" name="apellidoPaterno" placeholder="Name...">
+						<input class="input100" type="text" name="apellidoPaterno" placeholder="Apellido Paterno">
 						<span class="focus-input100"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Name is required">
+					<div class="wrap-input100 validate-input" data-validate="Ingresar Apellido">
 						<span class="label-input100">Apellido Materno</span>
-						<input class="input100" type="text" name="apellidoMaterno" placeholder="Name...">
+						<input class="input100" type="text" name="apellidoMaterno" placeholder="Apellido Materno">
 						<span class="focus-input100"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+					<div class="wrap-input100 validate-input" data-validate = "Ingresar un Email: ex@abc.xyz">
 						<span class="label-input100">Email</span>
-						<input class="input100" type="text" name="email" placeholder="Email addess...">
+						<input class="input100" type="text" name="email" placeholder="Email">
 						<span class="focus-input100"></span>
 					</div>
 
