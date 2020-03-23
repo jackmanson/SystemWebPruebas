@@ -1,11 +1,6 @@
 <?php
 
-		require_once "controladores/controlador.login.php";
+	require_once "controladores/controlador.login.php";
+	$login = new ControladorLogin();
+	$login -> login();
 
-		$login = new ControladorLogin();
-		$login -> login();
-
-
-	function llamarRegistro(){
-		
-	}

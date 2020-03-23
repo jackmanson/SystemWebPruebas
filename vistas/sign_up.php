@@ -1,7 +1,8 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V13</title>
+	<title>Registro</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -28,6 +29,12 @@
 	<link rel="stylesheet" type="text/css" href="sign_up/css/util.css">
 	<link rel="stylesheet" type="text/css" href="sign_up/css/main.css">
 <!--===============================================================================================-->
+
+
+<!-- main JS -->
+<script type="text/javascript" src="js/sign_up.js"></script>
+
+
 </head>
 <body style="background-color: #999999;">
 	
@@ -36,56 +43,38 @@
 			<div class="login100-more" style="background-image: url('sign_up/images/bg-01.jpg');"></div>
 
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" action="" method="POST">
 					<span class="login100-form-title p-b-59">
 						Registrate
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate="Ingresar Nombres">
-						<span class="label-input100">Nombres</span>
-						<input class="input100" type="text" name="name" placeholder="Nombres">
-						<span class="focus-input100"></span>
-					</div>
-
-					<div class="wrap-input100 validate-input" data-validate="Ingresar Apellido">
-						<span class="label-input100">Apellido Paterno</span>
-						<input class="input100" type="text" name="apellidoPaterno" placeholder="Apellido Paterno">
-						<span class="focus-input100"></span>
-					</div>
-
-					<div class="wrap-input100 validate-input" data-validate="Ingresar Apellido">
-						<span class="label-input100">Apellido Materno</span>
-						<input class="input100" type="text" name="apellidoMaterno" placeholder="Apellido Materno">
+					<div class="wrap-input100 validate-input" data-validate="Ingresar Nickname">
+						<span class="label-input100">Nickname</span>
+						<input class="input100" type="text" name="nickname" placeholder="Ingresar su Nickname">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Ingresar un Email: ex@abc.xyz">
 						<span class="label-input100">Email</span>
-						<input class="input100" type="text" name="email" placeholder="Email">
+						<input class="input100" type="text" name="email" placeholder="Ingresar su Email">
 						<span class="focus-input100"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Username is required">
-						<span class="label-input100">Username</span>
-						<input class="input100" type="text" name="username" placeholder="Username...">
-						<span class="focus-input100"></span>
-					</div>
-
-					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+					<div class="wrap-input100 validate-input" data-validate = "Ingresar contraseña">
 						<span class="label-input100">Password</span>
-						<input class="input100" type="text" name="pass" placeholder="*************">
+						<input class="input100" type="password" name="pass" placeholder="Ingresar contraseña">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Repeat Password is required">
-						<span class="label-input100">Repeat Password</span>
-						<input class="input100" type="text" name="repeat-pass" placeholder="*************">
+						<span class="label-input100">Repetir Password</span>
+						<input class="input100" type="password" name="repeat-pass" placeholder="Repetir contraseña">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="flex-m w-full p-b-33">
 						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="condiciones">
 							<label class="label-checkbox100" for="ckb1">
 								<span class="txt1">
 									Acepto los

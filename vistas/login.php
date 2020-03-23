@@ -1,3 +1,9 @@
+<?php
+	session_start();
+
+	$_SESSION['varLog'] = "number200";
+
+?>
 <!DOCTYPE html>
 <html>
 <head>

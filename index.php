@@ -5,6 +5,7 @@
 	$principal = new ControladorPrincipal();
 	$principal -> principal();
 
+
 	/*
 	require_once "controladores/controlador.plantilla.php";
 
