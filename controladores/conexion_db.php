@@ -1,12 +1,13 @@
 <?php
 
     // coneccion a la base de datos;
-    $conexion = mysqli_connect("localhost","root","jasselmago1999","monely");
+    $conexion = mysqli_connect("localhost","root","suizo1999","db_monely");
 
     if(mysqli_connect_erno()){
-        echo "Conección fallida";
+        echo "<h1>Conección fallida</h1>";
     }else{
-        echo "Conección exitosa";
+        echo "<h1>Conección exitosa</h1>";
     }
 
+    echo "Vista";
 ?>
