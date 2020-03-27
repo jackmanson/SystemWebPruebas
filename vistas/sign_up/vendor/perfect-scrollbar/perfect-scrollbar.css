@@ -3,9 +3,9 @@
  */
 .ps {
   overflow: hidden !important;
-  overflow-anchor: none;
+  
   -ms-overflow-style: none;
-  touch-action: auto;
+  
   -ms-touch-action: auto;
 }
 
@@ -98,12 +98,6 @@
   width: 11px;
 }
 
-/* MS supports */
-@supports (-ms-overflow-style: none) {
-  .ps {
-    overflow: auto !important;
-  }
-}
 
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   .ps {

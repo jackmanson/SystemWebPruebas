@@ -250,7 +250,7 @@ select,
 summary,
 textarea {
   -ms-touch-action: manipulation;
-      touch-action: manipulation;
+     
 }
 
 table {
@@ -1956,7 +1956,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
-          user-select: none;
+         
   border: 1px solid transparent;
   padding: 0.5rem 0.75rem;
   font-size: 1rem;
@@ -3002,7 +3002,7 @@ tbody.collapse.show {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
-          user-select: none;
+       
   background-color: #ddd;
   background-repeat: no-repeat;
   background-position: center center;

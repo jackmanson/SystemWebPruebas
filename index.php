@@ -4,6 +4,7 @@
 
 	$principal = new ControladorPrincipal();
 	$principal -> principal();
+        
 
 
 	/*
