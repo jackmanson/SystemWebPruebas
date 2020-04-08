@@ -1,7 +1,10 @@
-"use strict"
-
-window.addEventListener("load",function(){
-
+$(document).ready(function(){
+    
+    console.log("Hola desde Jquery");
+    
+    //$( "#datepicker" ).datepicker();
     
 
+    
+    
 });

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<title>myproduction</title>
+	<title>myproduccion &reg;</title>
 	<meta charset="utf-8"/>
+        <meta name="keyswords" description="textil,polos,ropa,algodon,produccion textil,prendas,jersy,pyma,melange"/>
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -11,9 +12,33 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+        <link rel="shortcut icon" type="image/png" href="vistas/img/logo_iso_icon.png"/>
+        
 	<script type="text/javascript" src="vistas/js/principal.js"></script>
 	<link rel="stylesheet" type="text/css" href="vistas/css/principal.css"/>
-	
+        <style>
+            .margenCaja{
+                margin: 10px 0px;
+            }
+            
+             @media (max-width:1199px) and (min-width:992px){
+                .nav li{
+                  font-size: 11px !important;
+                  line-height: 1.4 !important;
+                  letter-spacing: 1px;
+                }
+
+              }
+
+              @media (max-width:991px) and (min-width:568px){
+                .nav li{
+                  font-size: 11px !important;
+                  line-height: 1.4 !important;
+                  letter-spacing: 1px;
+                }
+
+              }
+        </style>	
 		
 
 </head>
@@ -33,24 +58,38 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#about">ACERCA DE NOSOTROS</a></li>
-					<li><a href="#services">PRODUCTOS</a></li>
-					<li><a href="#portfolio">PORTFOLIO</a></li>
-					<li><a href="#pricing">PRECIOS EN TIENDA</a></li>
-					<li><a href="#contact">CONTACTO</a></li>
-					<li class="classLogin"><a href="acceso.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-				</ul>
+                                    
+                                    <?php
+                                        
+                                        $pagePrincipal = ControladorPrincipal::ctrEstiloPrincipal();
+                                        
+                                        $jsonPagePrincipal = json_decode($pagePrincipal["navegador_menu"],true);
+
+                                        //var_dump($jsonPagePrincipal);
+                                        
+                                        foreach ($jsonPagePrincipal as $key => $value) {
+                                            echo '<li><a href="'.$value["url"].'">'.$value["item"].'</a></li>';
+                                        }
+                                                
+                                    ?>
+
+                                    <li class="classLogin"><a href="acceso.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				
+                                </ul>
 			</div>
 		</div>
 	</nav>
 
 	<div class="jumbotron text-center">
 		<dir class="container">
-			<h1>COMERCIAL MONELY</h1> 
+                        <?php
+                            $jsonPagePrincipal = json_decode($pagePrincipal["buscador"],true);
+                        ?>
+			<h1><?= []?>COMERCIAL MONELY</h1> 
 			<p>Especialistas en procesos textiles</p> 
 			<form>
 				<div class="input-group">
-				<input type="email" class="form-control" size="50" placeholder="Deje su Email y le enviaremos novedades." required>
+				<input type="email" class="form-control" size="50" placeholder="Deje su email y le enviaremos novedades." required>
 				<div class="input-group-btn">
 					<button type="button" class="btn btn-danger">Subscribe</button>
 				</div>
@@ -103,38 +142,36 @@
 	<div id="services" class="container-fluid text-center">
 		<div class="container">
 			<h2>PROCESOS DE PRODUCCIÓN</h2>
-			<h4>Etapas relevantes en nuestra cada productiva.</h4>
+			<h4>Etapas relevantes en nuestra cadena productiva.</h4>
 			<br>
 			<div class="row slideanim">
-				<div class="col-sm-4">
+				<div class="col-sm-4 margenCaja">
 					<span class="glyphicon glyphicon-off logo-small"></span>
 					<h4>DISEÑO</h4>
 					<p>Preparamos los artes y fichas.</p>
 				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-4 margenCaja"> 
 					<span class="glyphicon glyphicon-heart logo-small"></span>
 					<h4>CORTE</h4>
 					<p>Preparan las capas y el corte.</p>
 				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-4 margenCaja">
 					<span class="glyphicon glyphicon-lock logo-small"></span>
 					<h4>ESTAMPADO</h4>
-					<p>Nuestras máquinas estampan 50000 predas por día.</p>
+					<p>Nuestras máquinas estampan 15000 predas por día.</p>
 				</div>
-			</div>
-			<br><br>
-			<div class="row slideanim">
-				<div class="col-sm-4">
+
+				<div class="col-sm-4 margenCaja">
 					<span class="glyphicon glyphicon-leaf logo-small"></span>
 					<h4>CONFECCIÓN</h4>
 					<p>Se confeccionan las prendas.</p>
 				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-4 margenCaja">
 					<span class="glyphicon glyphicon-certificate logo-small"></span>
 					<h4>ACABADO</h4>
 					<p>Empaque de avios y accesorios.</p>
 				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-4 margenCaja">
 					<span class="glyphicon glyphicon-wrench logo-small"></span>
 					<h4 style="color:#303030;">CALIDAD</h4>
 					<p>Revisan texturas, colores y detalles de las prendas.</p>
@@ -146,67 +183,67 @@
 
 	<!-- Container (Portfolio Section) -->
 	<div id="portfolio" class="container-fluid text-center bg-grey">
-		<div class="container">
-			<h2>Áreas de Producción</h2><br>
-			<h4>Desarrollo de producto.</h4>
-			<div class="row text-center slideanim">
-				<div class="col-sm-4">
-					<div class="thumbnail">
-						<img src="vistas/img/02_diseñoarea.jpeg" alt="New York" width="400" height="300">
-						<p><strong>Diesño</strong></p>
-						<p>Equipo de Diseño.</p>
-					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="thumbnail">
-						<img src="vistas/img/03_corte.jpeg" alt="San Francisco" width="400" height="300">
-						<p><strong>Corte</strong></p>
-						<p>Preparado de telas.</p>
-					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="thumbnail">
-						<img src="vistas/img/01_estampado.jpeg" alt="Paris" width="400" height="300">
-						<p><strong>Estampado</strong></p>
-						<p>Pulpo de 18 brazos.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<br>
-	
-		<h2>Nuestros clientes comentan.</h2>
-		<div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
-			<!-- Indicators -->
-			<ol class="carousel-indicators">
-			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-			<li data-target="#myCarousel" data-slide-to="1"></li>
-			<li data-target="#myCarousel" data-slide-to="2"></li>
-			</ol>
+            <div class="container">
+                    <h2>Áreas de Producción</h2><br>
+                    <h4>Desarrollo de producto.</h4>
+                    <div class="row text-center slideanim">
+                            <div class="col-sm-4">
+                                    <div class="thumbnail">
+                                            <img src="vistas/img/02_diseñoarea.jpeg" alt="New York" width="400" height="300">
+                                            <p><strong>Diseño</strong></p>
+                                            <p>Equipo de Diseño.</p>
+                                    </div>
+                            </div>
+                            <div class="col-sm-4">
+                                    <div class="thumbnail">
+                                            <img src="vistas/img/03_corte.jpeg" alt="San Francisco" width="400" height="300">
+                                            <p><strong>Corte</strong></p>
+                                            <p>Preparado de telas.</p>
+                                    </div>
+                            </div>
+                            <div class="col-sm-4">
+                                    <div class="thumbnail">
+                                            <img src="vistas/img/01_estampado.jpeg" alt="Paris" width="400" height="300">
+                                            <p><strong>Estampado</strong></p>
+                                            <p>Pulpo de 18 brazos.</p>
+                                    </div>
+                            </div>
+                    </div>
+            </div>
+            <br>
 
-			<!-- Wrapper for slides -->
-			<div class="carousel-inner" role="listbox">
-			<div class="item active">
-				<h4>"This company is the best. I am so happy with the result!"<br><span>Michael Roe, Vice President, Comment Box</span></h4>
-			</div>
-			<div class="item">
-				<h4>"One word... WOW!!"<br><span>John Doe, Salesman, Rep Inc</span></h4>
-			</div>
-			<div class="item">
-				<h4>"Could I... BE any more happy with this company?"<br><span>Chandler Bing, Actor, FriendsAlot</span></h4>
-			</div>
-			</div>
+            <h2>Nuestros clientes comentan.</h2>
+            <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
 
-			<!-- Left and right controls -->
-			<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-			<span class="sr-only">Previous</span>
-			</a>
-			<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
-			</a>
-		</div>
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                            <h4>"This company is the best. I am so happy with the result!"<br><span>Michael Roe, Vice President, Comment Box</span></h4>
+                    </div>
+                    <div class="item">
+                            <h4>"One word... WOW!!"<br><span>John Doe, Salesman, Rep Inc</span></h4>
+                    </div>
+                    <div class="item">
+                            <h4>"Could I... BE any more happy with this company?"<br><span>Chandler Bing, Actor, FriendsAlot</span></h4>
+                    </div>
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
 	</div>
 
 	<!-- Container (Pricing Section) -->
@@ -218,61 +255,61 @@
 			</div>
 			<div class="row slideanim">
 				<div class="col-sm-4 col-xs-12">
-				<div class="panel panel-default text-center">
-					<div class="panel-heading">
-						<h1>Polos</h1>
-					</div>
-					<div class="panel-body">
-						<p><strong>Jersey</strong> </p>
-						<p><strong>Coverturas</strong> </p>
-						<p><strong>Colores naturales</strong> </p>
-						<p><strong>Pasteles</strong> </p>
-						<p><strong>Todas las tallas</strong> Amet</p>
-						</div>
-						<div class="panel-footer">
-						<h4>Desde</h4>
-						<h3>S/. 4.00</h3>
-						<!-- <button class="btn btn-lg">Sign Up</button> -->
-					</div>
-				</div>      
+                                    <div class="panel panel-default text-center">
+                                            <div class="panel-heading">
+                                                    <h1>Polos</h1>
+                                            </div>
+                                            <div class="panel-body">
+                                                    <p><strong>Jersey</strong> </p>
+                                                    <p><strong>Coverturas</strong> </p>
+                                                    <p><strong>Colores naturales</strong> </p>
+                                                    <p><strong>Pasteles</strong> </p>
+                                                    <p><strong>Todas las tallas</strong></p>
+                                                    </div>
+                                                    <div class="panel-footer">
+                                                    <h4>Desde</h4>
+                                                    <h3>S/. 4.00</h3>
+                                                    <!-- <button class="btn btn-lg">Sign Up</button> -->
+                                            </div>
+                                    </div>      
 				</div>     
 				<div class="col-sm-4 col-xs-12">
-				<div class="panel panel-default text-center">
-					<div class="panel-heading">
-						<h1>Leggings</h1>
-					</div>
-					<div class="panel-body">
-						<p><strong>Jersey</strong> </p>
-						<p><strong>Coverturas</strong> </p>
-						<p><strong>Colores naturales</strong> </p>
-						<p><strong>Pasteles</strong> </p>
-						<p><strong>Todas las tallas</strong> Amet</p>
-						</div>
-						<div class="panel-footer">
-						<h4>Desde</h4>
-						<h3>S/. 12.00</h3>
-						<!-- <button class="btn btn-lg">Sign Up</button> -->
-					</div>
-				</div>      
+                                    <div class="panel panel-default text-center">
+                                            <div class="panel-heading">
+                                                    <h1>Leggings</h1>
+                                            </div>
+                                            <div class="panel-body">
+                                                    <p><strong>Jersey</strong> </p>
+                                                    <p><strong>Coverturas</strong> </p>
+                                                    <p><strong>Colores naturales</strong> </p>
+                                                    <p><strong>Pasteles</strong> </p>
+                                                    <p><strong>Todas las tallas</strong></p>
+                                                    </div>
+                                                    <div class="panel-footer">
+                                                    <h4>Desde</h4>
+                                                    <h3>S/. 12.00</h3>
+                                                    <!-- <button class="btn btn-lg">Sign Up</button> -->
+                                            </div>
+                                    </div>      
 				</div>       
 				<div class="col-sm-4 col-xs-12">
-				<div class="panel panel-default text-center">
-					<div class="panel-heading">
-						<h1>Conjuntos</h1>
-					</div>
-					<div class="panel-body">
-						<p><strong>Jersey</strong> </p>
-						<p><strong>Coverturas</strong> </p>
-						<p><strong>Colores naturales</strong> </p>
-						<p><strong>Pasteles</strong> </p>
-						<p><strong>Todas las tallas</strong> Amet</p>
-						</div>
-						<div class="panel-footer">
-						<h4>Desde</h4>
-						<h3>S/. 20.00</h3>
-						<!-- <button class="btn btn-lg">Sign Up</button> -->
-					</div>
-				</div>      
+                                    <div class="panel panel-default text-center">
+                                            <div class="panel-heading">
+                                                    <h1>Conjuntos</h1>
+                                            </div>
+                                            <div class="panel-body">
+                                                    <p><strong>Jersey</strong> </p>
+                                                    <p><strong>Coverturas</strong> </p>
+                                                    <p><strong>Colores naturales</strong> </p>
+                                                    <p><strong>Pasteles</strong> </p>
+                                                    <p><strong>Todas las tallas</strong></p>
+                                                    </div>
+                                                    <div class="panel-footer">
+                                                    <h4>Desde</h4>
+                                                    <h3>S/. 20.00</h3>
+                                                    <!-- <button class="btn btn-lg">Sign Up</button> -->
+                                            </div>
+                                    </div>      
 				</div>    
 			</div>
 		</div>

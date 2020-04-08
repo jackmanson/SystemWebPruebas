@@ -25,3 +25,4 @@ Implementar un sistema informático para producción textil en la empresa Comerc
 * Un 10% de los pedidos no son entregados en la fecha indicada según lo estipulado en la orden de compra; por tanto, las órdenes de producción tienen tiempo límite de ejecución teniendo en cuenta que producción es uno de los procesos que abarca un tiempo mayor con respecto de los otros procesos.
 
 Por ello, es necesario imsplementar un _sistema informático para la producción textil en la empresa Comercial Monely E.I.R.L._ que permita reducir el porcentaje de las ordenes de producción vencidas, mejorar los tiempos y costos de producción; además, que pueda registrar, controlar las tareas, controlar los entregables, agilizar los cuellos de botella teniendo la información actualizada para todas las áreas con tiempos de entrega medibles y controlables en cada actividad. Por lo tanto; ayudará al correcto flujo de las actividades entre las distintas etapas de este proceso.
+
