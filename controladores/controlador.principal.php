@@ -20,6 +20,22 @@ class ControladorPrincipal{
     }
     
     
+    //INSERTAMOS Y REGISTROS DE SUSCRIPTOR POR EL EMAIL --> 1
+    public function ctrPrincipalPortalSuscriptor_1(){
+        
+        $email = "principal";
+        
+        ModeloPrincipal::princiapalSuscripcion($email);
 
+    }
+    
+    
+    //INSERTAMOS Y REGISTROS DE SUSCRIPTOR POR EL EMAIL --> 2
+    public function ctrPrincipalPortalSuscriptor_2($email){
+        
+        $suscripcion = new ModeloPrincipal();
+        $suscripcion->principalSuscripcionInsert($email);
+
+    }
     
 }

@@ -13,7 +13,14 @@
         
         <!-- main JS -->
         <script type="text/javascript" src="vistas/js/sign_up.js"></script>
-
+        
+        <style>
+            .classTerminos{
+            margin-left: 3px;
+            color: #336699;
+            cursor: pointer;
+        }
+        </style>
 
 </head>
 
@@ -29,7 +36,7 @@
                 
                 <h1 class="text-center"><strong>Registrate</strong></h1><br/>
                 
-                <form action="#" method="POST" class="row">
+                <form action="cambiarestedato.php" method="POST" class="row" onsubmit="return validandoLogin()">
                     
                     <div class="col-sm-6 ">
                     
@@ -176,12 +183,43 @@
                         
                     </div>
                     
-                    <div class="checkbox col-sm-12">
-                        <label><input type="checkbox"> <b>Acepto los</b> <a href="#" class="classTerminos">Terminos y Condiciones.</a></label>
+                    <div class="col-sm-12">
+                        <div>
+                            <label id="regCheckLabel"><input type="checkbox" id="regTerminos"> <b>Acepto los</b></label><span class="classTerminos">Terminos y Condiciones.</span>
+                        </div>    
                     </div><br/>
                     
-                    <button type="submit" class="btn btn-default col-sm-2 col-xs-12">Crear cuenta</button>
+                    <!-- Modal de Terminos y condiciones -->
+                    <div class="modal fade" id="misTerminos" role="dialog">
+                        <div class="modal-dialog">
+
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4 class="modal-title">Terminos y Condiciones</h4>
+                            </div>
+                            <div class="modal-body">
+                              <?php 
+                                require_once 'controladores/controlador.sign_up.php';
+                                
+                                $terminos = new ControladorSign_up();
+                                $terminos->terminosCondiciones();
+                              ?>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                          </div> 
+                        </div>
+                    </div>   
+                    
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-default col-sm-2 col-xs-12">Crear cuenta</button>
+                    </div>
+                    
                     <br/>
+                    
                 </form> <br/><br/>
 
             </div>

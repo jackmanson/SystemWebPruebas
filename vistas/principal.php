@@ -14,7 +14,9 @@
 
         <link rel="shortcut icon" type="image/png" href="vistas/img/logo_iso_icon.png"/>
         
-	<script type="text/javascript" src="vistas/js/principal.js"></script>
+	<script type="text/javascript" src="vistas/js/principal.js"></script>  
+        
+        
 	<link rel="stylesheet" type="text/css" href="vistas/css/principal.css"/>
         <style>
             .margenCaja{
@@ -23,8 +25,8 @@
             
              @media (max-width:1199px) and (min-width:992px){
                 .nav li{
-                  font-size: 11px !important;
-                  line-height: 1.4 !important;
+                  font-size: 10px !important;
+                  line-height: 1.3 !important;
                   letter-spacing: 1px;
                 }
 
@@ -32,8 +34,8 @@
 
               @media (max-width:991px) and (min-width:568px){
                 .nav li{
-                  font-size: 11px !important;
-                  line-height: 1.4 !important;
+                  font-size: 10px !important;
+                  line-height: 1.3 !important;
                   letter-spacing: 1px;
                 }
 
@@ -81,37 +83,58 @@
 	</nav>
 
 	<div class="jumbotron text-center">
-		<dir class="container">
+		<div class="container">
                         <?php
+
+                            $pagePrincipal = ControladorPrincipal::ctrEstiloPrincipal();
+
                             $jsonPagePrincipal = json_decode($pagePrincipal["buscador"],true);
+
+                            //var_dump($jsonPagePrincipal);
+
+                            foreach ($jsonPagePrincipal as $key => $value) {
+                                echo '<h1>'.$value["rotulo"].'</h1><p>'.$value["slogan"].'</p>';
+                            }
+
                         ?>
-			<h1><?= []?>COMERCIAL MONELY</h1> 
-			<p>Especialistas en procesos textiles</p> 
-			<form>
+			 
+                    <form method="POST"  action="conexion_provicional.php" onsubmit="return registroSuscripcion()">
 				<div class="input-group">
-				<input type="email" class="form-control" size="50" placeholder="Deje su email y le enviaremos novedades." required>
+                                    <input type="email" name="suscriEmail" class="form-control" size="50" placeholder="Deje su email y le enviaremos novedades." required>
 				<div class="input-group-btn">
-					<button type="button" class="btn btn-danger">Subscribe</button>
+                                    <input type="submit" value="Suscribirse" class="btn btn-danger"/>
 				</div>
 				</div>
-			</form>
+                    </form>
 				
-		</dir>
+		</div>
 
 	</div>
 
 	<!-- Container (About Section) -->
 	<div id="about" class="container">
 		<div class="row">
-			<div class="col-sm-8">
-			<h2>Acerca de la compañia</h2><br>
-			<h4>El Perú tuvo la fortuna de gozar una gran variedad de materiales para la creación sin límites de telares hechos por los mismos peruanos en aquellos tiempos que solo podía ser utilizada por los más altos niveles jerárquicos de cada grupo social de ese tiempo.</h4><br>
-			<p>La empresa fue fundada el 21 de octubre del 2011, registrada dentro de las sociedades mercantiles y comerciales como una empresa individual de responsabilidad limitada, se encuentra dentro del sector venta al por mayor y realiza actividades de comercio exterior como importaciones y exportaciones. La empresa actualmente produce prendas de vestir como leggings, ajuares, kimonos y principalmente polos hechos con algodón y poliéster en su mayoría; pero, también trabajan con telas sintéticas según demanda; por el contrario, son pocas las veces que se produce con telas pesadas como franela o telas donde se aprovecha menos prendas por kilogramo. La esencia de esta empresa es que vende en su mayoría polos, ya sea para bebes, niños o jóvenes; no obstante, evita producir prendas donde el costo sea elevado en su producción como: dibujos bordados de gran tamaño, prendas con lavado y acabados muy especializados, estampados con pinturas de muy altísimo costo, entre otros más; por consecuencia, que muchos de los clientes no quieren afrontar precios elevados y en tiempos prolongados. Su mercado principal es el ámbito nacional donde distribuye toda su producción ya sea en provincia o en la capital; sin embargo, se exporta ocasionalmente a chile. Las estaciones donde hay más órdenes de compra se presenta en casi comienzos de otoño y finales de invierno; sin embargo, el mes más bajo del año es en enero. Actualmente cuenta con una cartera de clientes como Tottus, Saga Falabella, Ripley, Ripley chile, Oechsle, Maratton, Federación Peruana de Futbol, Paris, Umbro, Plaza Vea, entre otros que han generado importantes relaciones en el país.</p>
-			<br><!--<button class="btn btn-default btn-lg">Get in Touch</button>-->
-			</div>
-			<div class="col-sm-4">
-			<span class="glyphicon glyphicon-signal logo"></span>
-			</div>
+                    <div class="col-sm-8">
+                        
+                    <?php
+
+                        $pagePrincipal = ControladorPrincipal::ctrEstiloPrincipal();
+
+                        $jsonPagePrincipal = json_decode($pagePrincipal["about_empresa"],true);
+
+                        foreach ($jsonPagePrincipal as $key => $value) {
+                            echo '<h2>'.$value["titulo"].'><br>
+                                    <h4>'.$value["reseña_1"].'</h4><br>
+                                    <p>'.$value["reseña_2"].'</p>';
+                        }
+
+                    ?>
+                    
+                    <br><!--<button class="btn btn-default btn-lg">Get in Touch</button>-->
+                    </div>
+                    <div class="col-sm-4">
+                    <span class="glyphicon glyphicon-signal logo"></span>
+                    </div>
 
 		</div>
 	</div>
@@ -125,13 +148,21 @@
 			<span class="glyphicon glyphicon-globe logo slideanim"></span>
 			</div>
 			<div class="col-sm-8">
-			<h2>Nuestros Valores</h2><br>
-			<h4>
-				<strong>MISIÓN:</strong> Nuestra misión es la satisfacción del cliente final mejorando constantemente la calidad y dandole lo que necesita.
-			</h4><br>
-			<h4>
-				<strong>VISIÓN:</strong> Nuestra visión es producir textiles que den satisfacción a nuevos clientes que reconoscan el producto y quieran comprar.
-			</h4>
+                            
+                        <?php
+
+                            $pagePrincipal = ControladorPrincipal::ctrEstiloPrincipal();
+
+                            $jsonPagePrincipal = json_decode($pagePrincipal["valores_empresa"],true);
+
+                            foreach ($jsonPagePrincipal as $key => $value) {
+                                echo '<h2>'.$value["titulo"].'</h2><br>
+                                    <h4><strong>'.$value["tituloMision"].'</strong> '.$value["reseñaMision"].'</h4><br>
+                                    <h4><strong>'.$value["tituloVision"].'</strong> '.$value["reseñaVision"].'</h4>';
+                            }
+
+                        ?>
+
 			</div>
 		</div>
 		</div>
@@ -160,7 +191,8 @@
 					<h4>ESTAMPADO</h4>
 					<p>Nuestras máquinas estampan 15000 predas por día.</p>
 				</div>
-
+                        </div>
+                        <div>
 				<div class="col-sm-4 margenCaja">
 					<span class="glyphicon glyphicon-leaf logo-small"></span>
 					<h4>CONFECCIÓN</h4>
@@ -187,27 +219,23 @@
                     <h2>Áreas de Producción</h2><br>
                     <h4>Desarrollo de producto.</h4>
                     <div class="row text-center slideanim">
-                            <div class="col-sm-4">
-                                    <div class="thumbnail">
-                                            <img src="vistas/img/02_diseñoarea.jpeg" alt="New York" width="400" height="300">
-                                            <p><strong>Diseño</strong></p>
-                                            <p>Equipo de Diseño.</p>
-                                    </div>
-                            </div>
-                            <div class="col-sm-4">
-                                    <div class="thumbnail">
-                                            <img src="vistas/img/03_corte.jpeg" alt="San Francisco" width="400" height="300">
-                                            <p><strong>Corte</strong></p>
-                                            <p>Preparado de telas.</p>
-                                    </div>
-                            </div>
-                            <div class="col-sm-4">
-                                    <div class="thumbnail">
-                                            <img src="vistas/img/01_estampado.jpeg" alt="Paris" width="400" height="300">
-                                            <p><strong>Estampado</strong></p>
-                                            <p>Pulpo de 18 brazos.</p>
-                                    </div>
-                            </div>
+                        <?php
+
+                            $pagePrincipal = ControladorPrincipal::ctrEstiloPrincipal();
+
+                            $jsonPagePrincipal = json_decode($pagePrincipal["areas_produccion"],true);
+
+                            foreach ($jsonPagePrincipal as $key => $value) {
+                                echo '<div class="col-sm-4">
+                                            <div class="thumbnail">
+                                                    <img src="'.$value["srcImagen"].'" alt="'.$value["etiqAlt"].'" width="400" height="300">
+                                                    <p><strong>'.$value["subTitulo"].'</strong></p>
+                                                    <p>'.$value["reseña"].'</p>
+                                            </div>
+                                    </div>';
+                            }
+
+                        ?>
                     </div>
             </div>
             <br>
@@ -254,63 +282,38 @@
 				<h4>Buenos precios en polos y prendas de algodón.</h4>
 			</div>
 			<div class="row slideanim">
-				<div class="col-sm-4 col-xs-12">
-                                    <div class="panel panel-default text-center">
-                                            <div class="panel-heading">
-                                                    <h1>Polos</h1>
-                                            </div>
-                                            <div class="panel-body">
-                                                    <p><strong>Jersey</strong> </p>
-                                                    <p><strong>Coverturas</strong> </p>
-                                                    <p><strong>Colores naturales</strong> </p>
-                                                    <p><strong>Pasteles</strong> </p>
-                                                    <p><strong>Todas las tallas</strong></p>
+                            
+                            <?php
+
+                                $pagePrincipal = ControladorPrincipal::ctrEstiloPrincipal();
+
+                                $jsonPagePrincipal = json_decode($pagePrincipal["oferta_tienda"],true);
+
+                                foreach ($jsonPagePrincipal as $key => $value) {
+                                    echo '<div class="col-sm-4 col-xs-12">
+                                            <div class="panel panel-default text-center">
+                                                    <div class="panel-heading">
+                                                            <h1>'.$value["titulo"].'</h1>
                                                     </div>
-                                                    <div class="panel-footer">
-                                                    <h4>Desde</h4>
-                                                    <h3>S/. 4.00</h3>
-                                                    <!-- <button class="btn btn-lg">Sign Up</button> -->
-                                            </div>
-                                    </div>      
-				</div>     
-				<div class="col-sm-4 col-xs-12">
-                                    <div class="panel panel-default text-center">
-                                            <div class="panel-heading">
-                                                    <h1>Leggings</h1>
-                                            </div>
-                                            <div class="panel-body">
-                                                    <p><strong>Jersey</strong> </p>
-                                                    <p><strong>Coverturas</strong> </p>
-                                                    <p><strong>Colores naturales</strong> </p>
-                                                    <p><strong>Pasteles</strong> </p>
-                                                    <p><strong>Todas las tallas</strong></p>
+                                                    <div class="panel-body">
+                                                            <p><strong>'.$value["item_1"].'</strong> </p>
+                                                            <p><strong>'.$value["item_2"].'</strong> </p>
+                                                            <p><strong>'.$value["item_3"].'</strong> </p>
+                                                            <p><strong>'.$value["item_4"].'</strong> </p>
+                                                            <p><strong>'.$value["item_5"].'</strong></p>
+                                                            </div>
+                                                            <div class="panel-footer">
+                                                            <h4>'.$value["item_6"].'</h4>
+                                                            <h3>'.$value["item_7"].'</h3>
+                                                            <!-- <button class="btn btn-lg">Sign Up</button> -->
                                                     </div>
-                                                    <div class="panel-footer">
-                                                    <h4>Desde</h4>
-                                                    <h3>S/. 12.00</h3>
-                                                    <!-- <button class="btn btn-lg">Sign Up</button> -->
-                                            </div>
-                                    </div>      
-				</div>       
-				<div class="col-sm-4 col-xs-12">
-                                    <div class="panel panel-default text-center">
-                                            <div class="panel-heading">
-                                                    <h1>Conjuntos</h1>
-                                            </div>
-                                            <div class="panel-body">
-                                                    <p><strong>Jersey</strong> </p>
-                                                    <p><strong>Coverturas</strong> </p>
-                                                    <p><strong>Colores naturales</strong> </p>
-                                                    <p><strong>Pasteles</strong> </p>
-                                                    <p><strong>Todas las tallas</strong></p>
-                                                    </div>
-                                                    <div class="panel-footer">
-                                                    <h4>Desde</h4>
-                                                    <h3>S/. 20.00</h3>
-                                                    <!-- <button class="btn btn-lg">Sign Up</button> -->
-                                            </div>
-                                    </div>      
-				</div>    
+                                            </div>      
+                                    </div>';
+                                }
+
+                            ?>
+				     
+				   
 			</div>
 		</div>
 		
@@ -321,36 +324,38 @@
 		<div class="container">
 			<h2 class="text-center">CONTACT</h2>
 			<div class="row">
-				<div class="col-sm-5">
+                            <div class="col-sm-5">
 				<p>Contactenos y le responderemos lo más pronto posible, gracias.</p>
 				<p><span class="glyphicon glyphicon-map-marker"></span> Lima, Perú</p>
 				<p><span class="glyphicon glyphicon-phone"></span> +51 947 274 472</p>
 				<p><span class="glyphicon glyphicon-envelope"></span> ventas@comercialmonely.com</p>
-				</div>
-				<div class="col-sm-7 slideanim">
-				<div class="row">
-					<div class="col-sm-6 form-group">
-					<input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
-					</div>
-					<div class="col-sm-6 form-group">
-					<input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
-					</div>
-				</div>
-				<textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
-				<div class="row">
-					<div class="col-sm-12 form-group">
-					<button class="btn btn-default pull-right" type="submit">Enviar</button>
-					</div>
-				</div>
-				</div>
+                            </div>
+                            <div class="col-sm-7 slideanim">
+                                <form action="index.php" method="POST">
+                                    <div class="row">
+                                        <div class="col-sm-6 form-group">
+                                            <input class="form-control" id="name" name="name" placeholder="Nombre" type="text" required>
+                                        </div>
+                                        <div class="col-sm-6 form-group">
+                                            <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                                        </div>
+                                    </div>
+                                    <textarea class="form-control" id="comments" name="comments" placeholder="Comentario" rows="5"></textarea><br>
+                                    <div class="row">
+                                        <div class="col-sm-12 form-group">
+                                            <button class="btn btn-default pull-right" type="submit">Enviar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
 			</div>
 			
 		</div>
 	</div>
 
 	<!-- Image of location/map -->
-	<!-- <img src="/w3images/map.jpg" class="w3-image w3-greyscale-min" style="width:100%"> -->
-	<iframe style="width:100%" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.5831325821027!2d-76.99265604904467!3d-12.072177545620042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c639d444fdbf%3A0xea7c400e09e67f8!2sCalle%20Mariscal%20Andres%20de%20Sta.%20Cruz%20268%2C%20San%20Luis%2015022!5e0!3m2!1ses-419!2spe!4v1583972884525!5m2!1ses-419!2spe" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+	<!-- <img src="map.jpg" class="w3-image w3-greyscale-min" style="width:100%"> -->
+    	<iframe style="width:100%" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.5831325821027!2d-76.99265604904934!3d-12.072177545620018!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c639d444fdbf%3A0xea7c400e09e67f8!2sCalle%20Mariscal%20Andres%20de%20Sta.%20Cruz%20268%2C%20San%20Luis%2015022!5e0!3m2!1ses-419!2spe!4v1588555338218!5m2!1ses-419!2spe" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 
 	<footer class="container-fluid text-center">
 		<a href="#myPage" title="To Top">
@@ -363,3 +368,4 @@
 	
 </body>
 </html>
+

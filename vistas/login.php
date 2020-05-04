@@ -21,14 +21,14 @@
                 
                 <h2 class="text-center">Cuenta de Usuario</h2>
                 
-                <form action="/action_page.php">
+                <form method="post" action="action_page.php" onsubmit="loginvalidandoLogin()">
                     <div class="form-group">
                       <label for="email">Email:</label>
-                      <input type="email" class="form-control fondoBlanco" id="email" placeholder="Enter email" name="email">
+                      <input type="email" class="form-control fondoBlanco miEmail" id="email" placeholder="Enter email" name="email">
                     </div>
                     <div class="form-group">
                       <label for="pwd">Password:</label>
-                      <input type="password" class="form-control fondoBlanco" id="pwd" placeholder="Enter password" name="pwd">
+                      <input type="password" class="form-control fondoBlanco miPass" id="pwd" placeholder="Enter password" name="pwd">
                     </div>
                     <div class="checkbox">
                       <label class=""><input type="checkbox" name="remember"> Recuerdame</label>

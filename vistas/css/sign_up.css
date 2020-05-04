@@ -19,3 +19,9 @@ body{
 h2{
     margin: 50px;
 }
+
+.classTerminos{
+    margin-left: 3px;
+    color: #336699;
+    cursor: pointer;
+}

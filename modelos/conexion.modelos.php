@@ -15,6 +15,7 @@ class Conexion{
         return $link;
     }
     
+    
     // CONECCION A LA BASE DE DATOS DB_MONELY_PORTAL CON PDO (PHP DATA OBJECT)
     public function conectarPortal(){
         
@@ -27,5 +28,25 @@ class Conexion{
         
         return $link;
     }
+    
+    
+    // PARA CONECCIONES DE PHP --> MySQLi Procedural
+    public function conectarPortalProcedural(){
+        
+        $servername = "junglafaricom.ipagemysql.com";
+        $username = "rocky2";
+        $password = "Lluvia23_$99";
+        $data = "db_monely_portal";
+
+        // Create connection --MySQLi Procedural
+        $con = mysqli_connect($servername,$username,$password,$data);
+        
+        
+
+        return $con;
+    }
+
+    
+    
     
 }

@@ -27,21 +27,21 @@
 
  */     
 
-
+/*
     // PARA CONECCIONES DE PHP --> MySQLi Procedural
     $servername = "junglafaricom.ipagemysql.com";
-    $username = "rocky3";
-    $password = "Manhatan99_$2";
-    $data = "db_monely";
+    $username = "rocky2";
+    $password = "Lluvia23_$99";
+    $data = "db_monely_portal";
     
     // Create connection --MySQLi Procedural
-    $con = mysqli_connect($servername, $username, $password,$data);
+    $con = mysqli_connect($servername,$username,$password,$data);
 
     // Check connection
     if (!$con) {
         die("<h1>Conección Fallida:</h1>" . mysqli_connect_error());
     }
-    echo "<h1>Conectado Exitosamente.</h1>";
+    //echo "<h1>Conectado Exitosamente.</h1>";
     
     
     // consulta para configurar la condificacion de caracteres
@@ -57,4 +57,39 @@
         echo "<h2>".$nota['id_area_trabajo']." - ".$nota['nombre_area_trabajo']."</h2>";
         
     }
+*/
 
+   // SUSCRIPCION PROVICIONAL A DB DE SUSCRIPCION --> MySQLi Procedural
+    $email = $_POST['suscriEmail'];
+
+
+    $servername = "junglafaricom.ipagemysql.com";
+    $username = "rocky2";
+    $password = "Lluvia23_$99";
+    $data = "db_monely_portal";
+    
+    // Create connection --MySQLi Procedural
+    $con = mysqli_connect($servername,$username,$password,$data);
+
+    // Check connection
+    if (!$con) {
+        die("<h1>Conección Fallida:</h1>" . mysqli_connect_error());
+    }
+    //echo "<h1>Conectado Exitosamente.</h1>";
+    
+    
+    // consulta para configurar la condificacion de caracteres
+    mysqli_query($con, "SET NAMES 'utf8'");
+    
+    $sql = "INSERT INTO suscripcion VALUES (null,$email)";
+    
+    $insert = mysqli_query($con,$sql);
+    
+    if($insert){
+        echo "<script>alert('Datos enviados correctamente.');</script>";
+    }else{
+        echo '<script>alert("Error: $mysqli_error($insert)");</script>';
+    }
+
+    
+               

@@ -7,6 +7,10 @@ class ControladorSign_up{
         include "vistas/sign_up.php";
 
     }
+    
+    public function terminosCondiciones(){
+        include "vistas/modulos/terminos.condiciones.php";
+    }
 
     
 }

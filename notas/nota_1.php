@@ -118,7 +118,7 @@
 	"item_5": "Todas las tallas",
 	"item_6": "Desde",
 	"item_7": "S/. 4.00"
-} {
+}, {
 	"titulo": "Leggings",
 	"item_1": "Jersey",
 	"item_2": "Coverturas",
@@ -127,7 +127,7 @@
 	"item_5": "Todas las tallas",
 	"item_6": "Desde",
 	"item_7": "S/. 12.00"
-} {
+}, {
 	"titulo": "Conjuntos",
 	"item_1": "Jersey",
 	"item_2": "Coverturas",
