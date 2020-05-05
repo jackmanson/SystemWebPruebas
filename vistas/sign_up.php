@@ -41,29 +41,38 @@
                     <div class="col-sm-6 ">
                     
                         <div class="form-group">
-                            <label for="nombres">Nombres:</label>
-                            <input type="text" name="nombres" class="form-control" id="nombres" placeholder="Ingresar sus nombres">
+                            <div>
+                                <label for="nombres">Nombres:</label>
+                                <input type="text" name="nombres" class="form-control" id="nombres" placeholder="Ingresar sus nombres"> 
+                            </div>
+
                         </div>
                         
                         <div class="form-group">
-                            <label for="apellidoPaterno">Apellido Paterno:</label>
-                            <input type="text" name="apellidoPaterno" class="form-control" id="apellidoPaterno" placeholder="Ingresar su apellido paterno">
+                            <div>
+                                <label for="apellidoPaterno">Apellido Paterno:</label>
+                                <input type="text" name="apellidoPaterno" class="form-control" id="apellidoPaterno" placeholder="Ingresar su apellido paterno">    
+                            </div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="apellidoMaterno">Apellido Materno:</label>
-                            <input type="text" name="apellidoMaterno" class="form-control" id="apellidoMaterno" placeholder="Ingresar su apellido materno">
+                            <div>
+                                <label for="apellidoMaterno">Apellido Materno:</label>
+                                <input type="text" name="apellidoMaterno" class="form-control" id="apellidoMaterno" placeholder="Ingresar su apellido materno">
+                            </div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="tipoDocumento">Tipo de documento:</label>
-                            <select name="tipoDocumento" class="form-control" id="tipoDocumento">
-                                <option value="" disabled>Seleccione</option>
-                                <option value="documentoDni" selected>DNI</option>
-                                <option value="documentoPasaporte">Pasaporte</option>
-                                <option value="documentoExtranjeria">Documento de Extranjeria</option>
-                                <option value="partidaNacimiento">Partida de nacimiento</option>
-                            </select> 
+                            <div>
+                                <label for="tipoDocumento">Tipo de documento:</label>
+                                <select name="tipoDocumento" class="form-control" id="tipoDocumento">
+                                    <option value="" selected>Seleccione</option> <!--disabled-->
+                                    <option value="documentoDni">DNI</option> <!--selected-->
+                                    <option value="documentoPasaporte">Pasaporte</option>
+                                    <option value="documentoExtranjeria">Documento de Extranjeria</option>
+                                    <option value="partidaNacimiento">Partida de nacimiento</option>
+                                </select> 
+                            </div>
                         </div>
                         
                         <div class="form-group">
@@ -74,8 +83,8 @@
                         <div class="form-group">
                             <label for="nacionalidad">Nacionalidad:</label>
                             <select  name="nacionalidad" class="form-control" id="nacionalidad">
-                                <option value="" disabled>Seleccione</option>
-                                <option value="peruano" selected>Peruana</option>
+                                <option value="" selected>Seleccione</option>
+                                <option value="peruano">Peruana</option>
                                 <option value="venezolano">Venezolano</option>
                                 <option value="brasileño">Brasileño</option>
                                 <option value="argentino">Argentino</option>
@@ -85,8 +94,8 @@
                         <div class="form-group">
                             <label for="estadoCivil">Estado civil:</label>
                             <select name="estadoCivil" class="form-control" id="estadoCivil">
-                                <option value="" disabled>Seleccione</option>
-                                <option value="peruano" selected>Solero</option>
+                                <option value="" selected>Seleccione</option>
+                                <option value="peruano">Solero</option>
                                 <option value="venezolano">Venezolano</option>
                                 <option value="brasileño">Brasileño</option>
                                 <option value="argentino">Argentino</option>
@@ -105,8 +114,8 @@
                         <div class="form-group">
                             <label for="distrito">Distrito:</label>
                             <select name="distrito" class="form-control" id="distrito">
-                                <option value="" disabled>Seleccione</option>
-                                <option value="lima" selected>Lima</option>
+                                <option value="" selected>Seleccione</option>
+                                <option value="lima">Lima</option>
                                 <option value="venezolano">Venezolano</option>
                                 <option value="brasileño">Brasileño</option>
                                 <option value="argentino">Argentino</option>
@@ -116,8 +125,8 @@
                         <div class="form-group">
                             <label for="provincia">Provincia:</label>
                             <select name="provincia" class="form-control" id="provincia">
-                                <option value="" disabled>Seleccione</option>
-                                <option value="lima" selected>Lima</option>
+                                <option value="" selected>Seleccione</option>
+                                <option value="lima">Lima</option>
                                 <option value="venezolano">Venezolano</option>
                                 <option value="brasileño">Brasileño</option>
                                 <option value="argentino">Argentino</option>
@@ -127,8 +136,8 @@
                         <div class="form-group">
                             <label for="departamento">Departamento:</label>
                             <select name="departamento" class="form-control" id="departamento">
-                                <option value="" disabled>Seleccione</option>
-                                <option value="lima" selected>Lima</option>
+                                <option value="" selected>Seleccione</option>
+                                <option value="lima">Lima</option>
                                 <option value="venezolano">Venezolano</option>
                                 <option value="brasileño">Brasileño</option>
                                 <option value="argentino">Argentino</option>
@@ -215,7 +224,7 @@
                     </div>   
                     
                     <div class="col-sm-12">
-                        <button type="submit" class="btn btn-default col-sm-2 col-xs-12">Crear cuenta</button>
+                        <button type="submit" id="btnCrearCuenta" class="btn btn-default col-sm-2 col-xs-12">Crear cuenta</button>
                     </div>
                     
                     <br/>
