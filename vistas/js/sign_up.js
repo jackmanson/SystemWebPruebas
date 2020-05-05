@@ -23,7 +23,7 @@ $('document').ready(function(){
         $(".atenCiv").hide();
         
         $(".atenTerminos").hide();
-        console.log("Eliminando ventadas 9");
+        console.log("Eliminando ventadas 19");
     });
     
 });
@@ -125,7 +125,7 @@ $('document').ready(function(){
         // DIRECCION
         var direccion = $("#direccion").val();
         if(direccion !== ""){
-            var expresion = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9]*$/;
+            var expresion = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9.#º ]*$/;
             if(!expresion.test(direccion)){
                 $("#direccion").parent().before('<div class="alert alert-danger alertCiv" id=""><strong>DIRECCIÓN ERROR:</strong> Existe un error en el campo!</div>');
                 return false;
@@ -135,10 +135,118 @@ $('document').ready(function(){
             return false;
         }
         
+        // DISTRITO
+        var distrito = $("#distrito").val();
+        if(distrito !== ""){
+            var expresion = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ]*$/;
+            if(!expresion.test(distrito)){
+                $("#distrito").parent().before('<div class="alert alert-danger alertCiv" id=""><strong>DISTRITO ERROR:</strong> Existe un error en el campo!</div>');
+                return false;
+            }
+        }else{
+            $("#distrito").parent().before('<div class="alert alert-warning atenCiv" id=""><strong>ATENCIÓN:</strong> Campo distrito es obligatorio!</div>');
+            return false;
+        }
         
+        // PROVINCIA
+        var provincia = $("#provincia").val();
+        if(provincia !== ""){
+            var expresion = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ]*$/;
+            if(!expresion.test(provincia)){
+                $("#provincia").parent().before('<div class="alert alert-danger alertCiv" id=""><strong>PROVINCIA ERROR:</strong> Existe un error en el campo!</div>');
+                return false;
+            }
+        }else{
+            $("#provincia").parent().before('<div class="alert alert-warning atenCiv" id=""><strong>ATENCIÓN:</strong> Campo provincia es obligatorio!</div>');
+            return false;
+        }
         
+        // DEPARTAMENTO
+        var departamento = $("#departamento").val();
+        if(departamento !== ""){
+            var expresion = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ]*$/;
+            if(!expresion.test(departamento)){
+                $("#departamento").parent().before('<div class="alert alert-danger alertCiv" id=""><strong>DEPARTAMENTO ERROR:</strong> Existe un error en el campo!</div>');
+                return false;
+            }
+        }else{
+            $("#departamento").parent().before('<div class="alert alert-warning atenCiv" id=""><strong>ATENCIÓN:</strong> Campo departamento es obligatorio!</div>');
+            return false;
+        }
         
+        // FALTA VALIDAR LA FECHA
         
+        // VALIDAR NUMERO DE HIJOS
+        var cantHijos = $("#cantHijos").val();
+        if(cantHijos !== ""){
+            var expresion = /^[0-9]*$/;
+            if(!expresion.test(cantHijos)){
+                $("#cantHijos").parent().before('<div class="alert alert-danger alertApePat" id=""><strong>NÚMERO DE HIJOS ERROR:</strong> No se permiten caracteres ni texto solo números!</div>');
+                return false;
+            }
+        }else{
+            $("#cantHijos").parent().before('<div class="alert alert-warning atenApePat" id=""><strong>ATENCIÓN:</strong> Campo número de hijos es obligatorio!</div>');
+            return false;
+        }
+        
+        // FALTA VALIDAR LA FOTOGRAFIA
+        
+        // VALIDAR NICK
+        var nick = $("#nick").val();
+        if(nick !== ""){
+            var expresion = /^[a-zA-Z0-9-]*$/;
+            if(!expresion.test(nick)){
+                $("#nick").parent().before('<div class="alert alert-danger alertNom" id=""><strong>NICK ERROR:</strong> No se permiten caracteres especiales ni números!</div>');
+                return false; 
+            }
+        }else{
+            $("#nick").parent().before('<div class="alert alert-warning atenNom" id=""><strong>ATENCIÓN:</strong> Campo nick es obligatorio!</div>');
+            return false;
+        }
+        
+        // VALIDAR EMAIL
+        var email = $("#email").val();
+        if(email !== ""){
+            var expresion = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+            if(!expresion.test(email)){
+                $("#email").parent().before('<div class="alert alert-danger alertNom" id=""><strong>EMAIL ERROR:</strong> Existe un error en el campo!</div>');
+                return false; 
+            }
+        }else{
+            $("#email").parent().before('<div class="alert alert-warning atenNom" id=""><strong>ATENCIÓN:</strong> Campo email es obligatorio!</div>');
+            return false;
+        }
+        
+        // VALIDAR PASSWORD
+        var pwd = $("#pwd").val();
+        if(pwd !== ""){ 
+            var expresion = /^[a-zA-Z0-9]*$/;
+            if(!expresion.test(pwd)){
+                $("#pwd").parent().before('<div class="alert alert-danger alertNom" id=""><strong>PASSWORD ERROR:</strong> No se permiten caracteres especiales!</div>');
+                return false; 
+            }
+        }else{
+            $("#pwd").parent().before('<div class="alert alert-warning atenNom" id=""><strong>ATENCIÓN:</strong> Campo password esta vacio!</div>');
+            return false;
+        }
+        
+        // VALIDAR RE-PASSWORD 
+        var rePwd = $("#rePwd").val();
+        if(rePwd !== ""){
+            var expresion = /^[a-zA-Z0-9]*$/;
+            if(!expresion.test(rePwd)){
+                $("#rePwd").parent().before('<div class="alert alert-danger alertNom" id=""><strong>PASSWORD ERROR:</strong> No se permiten caracteres especiales!</div>');
+                return false; 
+            }else if (pwd !== rePwd) {
+                $("#rePwd").parent().before('<div class="alert alert-danger alertNom" id=""><strong>ERROR:</strong> Su contraseña no es igual a la escrita anteriormente!</div>');
+                return false; 
+            }
+        }else{
+            $("#rePwd").parent().before('<div class="alert alert-warning atenNom" id=""><strong>ATENCIÓN:</strong> Campo password esta vacio!</div>');
+            return false;
+        }
+        
+
     
         // VALIDAR TERMINOS Y CONDICIONES 
         var terminos = $("#regTerminos:checked").val();
