@@ -23,7 +23,6 @@ $('document').ready(function(){
         $(".atenCiv").hide();
         
         $(".atenTerminos").hide();
-        console.log("Eliminando ventadas 19");
     });
     
 });
@@ -34,7 +33,7 @@ $('document').ready(function(){
         // VALIDAR NOMBRE
         var nombre = $("#nombres").val();
         if(nombre !== ""){
-            var expresion = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ]*$/;
+            var expresion = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$/;
             if(!expresion.test(nombre)){
                 $("#nombres").parent().before('<div class="alert alert-danger alertNom" id=""><strong>NOMBRES ERROR:</strong> No se permiten caracteres ni números especiales!</div>');
                 return false; 

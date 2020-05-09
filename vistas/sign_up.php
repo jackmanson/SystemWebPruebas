@@ -2,8 +2,6 @@
 <html lang="es">
 <head>
 <?php
-    require_once "controladores/controlador.head.php";
-
     $miHead = new ControladorHead();
     $miHead -> head();
 ?>
@@ -26,6 +24,14 @@
 
 <body>
     
+    <!-- CABEZOTE --> 
+    
+<?php
+    $micabezoteSignUp = new ControladorSign_up();
+    $micabezoteSignUp -> cabezoteSignUp();
+?>
+    
+    
     <!-- FORMULARIO DE REGISTRO -->
 	
     <div class="container-fluid">
@@ -36,7 +42,7 @@
                 
                 <h1 class="text-center"><strong>Registrate</strong></h1><br/>
                 
-                <form action="cambiarestedato.php" method="POST" class="row" onsubmit="return validandoLogin()">
+                <form method="POST" class="row" onsubmit="validandoLogin()">
                     
                     <div class="col-sm-6 ">
                     
@@ -172,7 +178,7 @@
                         
                         <div class="form-group">
                             <label for="email">Email address:</label>
-                            <input type="text" class="form-control" id="email" placeholder="Ingresar su email">
+                            <input type="text" class="form-control" name="email" id="email" placeholder="Ingresar su email">
                         </div>
 
                     </div>
@@ -181,12 +187,12 @@
 
                         <div class="form-group">
                             <label for="pwd">Password:</label>
-                            <input type="password" class="form-control" id="pwd">
+                            <input type="password" class="form-control" name="pwd" id="pwd" minlength="8" maxlength="15"/>
                         </div>
                         
                         <div class="form-group">
                             <label for="rePwd">Repetir Password:</label>
-                            <input type="password" class="form-control" id="rePwd">
+                            <input type="password" name="rePwd" class="form-control" id="rePwd" minlength="8" maxlength="15"/>
                         </div>
                         
                         
@@ -194,7 +200,7 @@
                     
                     <div class="col-sm-12">
                         <div>
-                            <label id="regCheckLabel"><input type="checkbox" id="regTerminos"> <b>Acepto los</b></label><span class="classTerminos">Terminos y Condiciones.</span>
+                            <label id="regCheckLabel"><input type="checkbox" name="regTerminos" id="regTerminos" value="acepto"> <b>Acepto los</b></label><span class="classTerminos">Terminos y Condiciones.</span>
                         </div>    
                     </div><br/>
                     
@@ -209,9 +215,7 @@
                               <h4 class="modal-title">Terminos y Condiciones</h4>
                             </div>
                             <div class="modal-body">
-                              <?php 
-                                require_once 'controladores/controlador.sign_up.php';
-                                
+                              <?php                                 
                                 $terminos = new ControladorSign_up();
                                 $terminos->terminosCondiciones();
                               ?>
