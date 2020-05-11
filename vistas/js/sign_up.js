@@ -25,7 +25,14 @@ $('document').ready(function(){
         $(".atenTerminos").hide();
     });
     
+    
 });
+
+function inputHidden(){
+    return 1;
+}
+
+inputHidden();
 
 // VALIDANDO REGISTRO 
     function validandoLogin(){

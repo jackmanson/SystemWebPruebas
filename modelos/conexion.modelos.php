@@ -16,6 +16,28 @@ class Conexion{
     }
     
     
+    // PARA CONECCIONES DE PHP --> MySQLi Procedural
+    public function conectarProcedural(){
+        
+        $servername = "junglafaricom.ipagemysql.com";
+        $username = "rocky3";
+        $password = "Manhatan99_$2";
+        $data = "db_monely";
+
+        // Create connection --MySQLi Procedural
+        $con = mysqli_connect($servername,$username,$password,$data);
+        
+        // Check connection
+        //if (!$con) {
+        //    die("<h1>Conección Fallida de conexion.modelos.php:</h1>" . mysqli_connect_error());
+        //}
+
+        return $con;
+    }
+    
+    
+    
+    
     // CONECCION A LA BASE DE DATOS DB_MONELY_PORTAL CON PDO (PHP DATA OBJECT)
     public function conectarPortal(){
         

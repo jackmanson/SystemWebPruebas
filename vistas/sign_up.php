@@ -32,7 +32,7 @@
 ?>
     
     
-    <!-- FORMULARIO DE REGISTRO -->
+    <!-- FORMULARIO DE REGISTRO 1 -->
 	
     <div class="container-fluid">
         
@@ -73,58 +73,71 @@
                                 <label for="tipoDocumento">Tipo de documento:</label>
                                 <select name="tipoDocumento" class="form-control" id="tipoDocumento">
                                     <option value="" selected>Seleccione</option> <!--disabled-->
-                                    <option value="documentoDni">DNI</option> <!--selected-->
-                                    <option value="documentoPasaporte">Pasaporte</option>
-                                    <option value="documentoExtranjeria">Documento de Extranjeria</option>
-                                    <option value="partidaNacimiento">Partida de nacimiento</option>
+                                    
+                                <?php
+
+                                    $dataTD = ControladorSign_up::ctrRegistroTD();
+
+                                    while($varDato = mysqli_fetch_assoc($dataTD)){
+                                        echo '<option value="'.$varDato['id_tipo_documento'].'">'.$varDato['nombre_tipo_documento'].'</option>';
+                                    }
+                                ?>
+                                    
                                 </select> 
                             </div>
                         </div>
                         
                         <div class="form-group">
                             <label for="numeroDocumento">Número de docuemnto:</label>
-                            <input type="text" name="numeroDocumento" class="form-control" id="numeroDocumento" placeholder="Ingresar el número de documento">
+                            <input type="text" name="numeroDocumento" class="form-control" id="numeroDocumento" minlength="8" placeholder="Ingresar el número de documento">
                         </div>
                         
                         <div class="form-group">
                             <label for="nacionalidad">Nacionalidad:</label>
                             <select  name="nacionalidad" class="form-control" id="nacionalidad">
-                                <option value="" selected>Seleccione</option>
-                                <option value="peruano">Peruana</option>
-                                <option value="venezolano">Venezolano</option>
-                                <option value="brasileño">Brasileño</option>
-                                <option value="argentino">Argentino</option>
+                                <option value="" selected>Seleccione</option> <!--disabled-->
+                                <?php
+
+                                    $dataN = ControladorSign_up::ctrRegistroN();
+
+                                    while($varDato = mysqli_fetch_assoc($dataN)){
+                                        echo '<option value="'.$varDato['id_pais'].'">'.$varDato['nacionalidad'].'</option>';
+                                    }
+                                ?>
                             </select> 
                         </div>
                         
                         <div class="form-group">
                             <label for="estadoCivil">Estado civil:</label>
                             <select name="estadoCivil" class="form-control" id="estadoCivil">
-                                <option value="" selected>Seleccione</option>
-                                <option value="peruano">Solero</option>
-                                <option value="venezolano">Venezolano</option>
-                                <option value="brasileño">Brasileño</option>
-                                <option value="argentino">Argentino</option>
+                                <option value="" selected>Seleccione</option> <!--disabled-->
+                                <?php
+
+                                    $dataEC = ControladorSign_up::ctrRegistroEC();
+
+                                    while($varDato = mysqli_fetch_assoc($dataEC)){
+                                        echo '<option value="'.$varDato['id_estado_civil'].'">'.$varDato['estado'].'</option>';
+                                    }
+                                ?>
                             </select> 
                         </div>
                         
                     </div>
                     
                     <div class="col-sm-6">
-
+                        
                         <div class="form-group">
-                            <label for="direccion">Dirección:</label>
-                            <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresar su dirección">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="distrito">Distrito:</label>
-                            <select name="distrito" class="form-control" id="distrito">
+                            <label for="departamento">Departamento:</label>
+                            <select name="departamento" class="form-control" id="departamento">
                                 <option value="" selected>Seleccione</option>
-                                <option value="lima">Lima</option>
-                                <option value="venezolano">Venezolano</option>
-                                <option value="brasileño">Brasileño</option>
-                                <option value="argentino">Argentino</option>
+                                <?php
+
+                                    $dataDP = ControladorSign_up::ctrRegistroDP();
+                                    
+                                    while($varDato = mysqli_fetch_assoc($dataDP)){
+                                        echo '<option value="'.$varDato['id_departamento'].'">'.$varDato['nombre_departamento'].'</option>';
+                                    }
+                                ?>
                             </select> 
                         </div>
                         
@@ -132,22 +145,35 @@
                             <label for="provincia">Provincia:</label>
                             <select name="provincia" class="form-control" id="provincia">
                                 <option value="" selected>Seleccione</option>
-                                <option value="lima">Lima</option>
-                                <option value="venezolano">Venezolano</option>
-                                <option value="brasileño">Brasileño</option>
-                                <option value="argentino">Argentino</option>
+                                <?php
+
+                                    $dataP = ControladorSign_up::ctrRegistroP();
+
+                                    while($varDato = mysqli_fetch_assoc($dataP)){
+                                        echo '<option value="'.$varDato['id_provincia'].'">'.$varDato['nombre_provincia'].'</option>';
+                                    }
+                                ?>
                             </select> 
                         </div>
                         
                         <div class="form-group">
-                            <label for="departamento">Departamento:</label>
-                            <select name="departamento" class="form-control" id="departamento">
+                            <label for="distrito">Distrito:</label>
+                            <select name="distrito" class="form-control" id="distrito">
                                 <option value="" selected>Seleccione</option>
-                                <option value="lima">Lima</option>
-                                <option value="venezolano">Venezolano</option>
-                                <option value="brasileño">Brasileño</option>
-                                <option value="argentino">Argentino</option>
+                                <?php
+
+                                    $dataD = ControladorSign_up::ctrRegistroD();
+
+                                    while($varDato = mysqli_fetch_assoc($dataD)){
+                                        echo '<option value="'.$varDato['id_distrito'].'">'.$varDato['nombre_distrito'].'</option>';
+                                    }
+                                ?>
                             </select> 
+                        </div>
+
+                        <div class="form-group">
+                            <label for="direccion">Dirección:</label>
+                            <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresar su dirección">
                         </div>
                         
                         <div class="form-group">
@@ -226,6 +252,10 @@
                           </div> 
                         </div>
                     </div>   
+
+                    <div class="col-sm-12">
+                        <input type="hidden" id="myHiden" name="myHidden" value="inputHidden()"/>
+                    </div>
                     
                     <div class="col-sm-12">
                         <button type="submit" id="btnCrearCuenta" class="btn btn-default col-sm-2 col-xs-12">Crear cuenta</button>
@@ -241,7 +271,10 @@
         
     </div>
     
-
+<?php
+    $footer = new ControladorSign_up();
+    $footer -> footer();
+?>
     
 </body>
 </html>

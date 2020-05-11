@@ -60,13 +60,13 @@
 */
 
    // SUSCRIPCION PROVICIONAL A DB DE SUSCRIPCION --> MySQLi Procedural
-    $email = $_POST['suscriEmail'];
+    //$email = $_POST['suscriEmail'];
 
 
     $servername = "junglafaricom.ipagemysql.com";
-    $username = "rocky2";
-    $password = "Lluvia23_$99";
-    $data = "db_monely_portal";
+    $username = "rocky3";
+    $password = "Manhatan99_$2";
+    $data = "db_monely";
     
     // Create connection --MySQLi Procedural
     $con = mysqli_connect($servername,$username,$password,$data);
@@ -81,7 +81,8 @@
     // consulta para configurar la condificacion de caracteres
     mysqli_query($con, "SET NAMES 'utf8'");
     
-    $sql = "INSERT INTO suscripcion VALUES (null,$email)";
+    $tabla = "tipo_documento";
+    $sql = "SELECT * FROM $tabla";
     
     $insert = mysqli_query($con,$sql);
     
