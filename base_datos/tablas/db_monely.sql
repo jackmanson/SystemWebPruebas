@@ -110,7 +110,6 @@ CREATE TABLE IF NOT EXISTS `db_monely`.`personas` (
   `nombres` VARCHAR(45) NULL,
   `apellido_paterno` VARCHAR(45) NULL,
   `apellido_materno` VARCHAR(45) NULL,
-  `dni` VARCHAR(10) NULL,
   `foto` VARCHAR(100) NULL,
   `direccion` VARCHAR(100) NULL,
   `numero_hijos` INT NULL,

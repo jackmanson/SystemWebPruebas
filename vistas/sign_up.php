@@ -40,7 +40,7 @@
             
             <div class="formularioRegistro"><br/>
                 
-                <h1 class="text-center"><strong>Registrate</strong></h1><br/>
+                <h1 class="text-center"><strong>Datos Necesarios</strong></h1><br/>
                 
                 <form method="POST" class="row" onsubmit="validandoLogin()">
                     
@@ -120,6 +120,28 @@
                                     }
                                 ?>
                             </select> 
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tipoTelefono">Tipo de Teléfono:</label>
+                            <select name="tipoTelefono" class="form-control" id="tipoTelefono">
+                                <option value="" selected>Seleccione</option> <!--disabled-->
+                                <?php
+
+                                    $dataEC = ControladorSign_up::ctrRegistroTT();
+
+                                    while($varDato = mysqli_fetch_assoc($dataEC)){
+                                        echo '<option value="'.$varDato['id_tipo_telefono'].'">'.$varDato['nombre_tipo_telefono'].'</option>';
+                                    }
+                                ?>
+                            </select> 
+                        </div>
+                        
+                        <div class="form-group">
+                            <div>
+                                <label for="numeroTipoTelefono">Número de teléfono:</label>
+                                <input type="text" name="numeroTipoTelefono" class="form-control" id="numeroTipoTelefono" placeholder="Ingresar número de teléfono">
+                            </div>
                         </div>
                         
                     </div>

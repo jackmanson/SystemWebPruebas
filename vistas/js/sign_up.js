@@ -25,6 +25,22 @@ $('document').ready(function(){
         $(".atenTerminos").hide();
     });
     
+    var departamento = $("departamento").val();
+    
+    if(departamento <= 25){
+        $.ajax({
+            type: 'POST',
+            url: '../../ajax/sign_up.ajax.php',
+            success: function(){
+                
+            },
+            error: function(){
+                alert("A ocurrido un error!");
+            }
+        });
+    }
+
+    
     
 });
 
@@ -79,7 +95,7 @@ inputHidden();
         // VALIDAR TIPO DE DOCUMENTO
         var tipoDocumento = $("#tipoDocumento").val();
         if(tipoDocumento !== ""){
-            var expresion = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ]*$/;
+            var expresion = /^[0-9]*$/;
             if(!expresion.test(tipoDocumento)){
                 $("#tipoDocumento").parent().before('<div class="alert alert-danger alertTipoDoc" id=""><strong>TIPO DE DOCUMENTO ERROR:</strong> Existe un error en el campo!</div>');
                 return false;
@@ -105,7 +121,7 @@ inputHidden();
         // VALIDAR NACIONALIDAD
         var nacionalidad = $("#nacionalidad").val();
         if(nacionalidad !== ""){
-            var expresion = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ]*$/;
+            var expresion = /^[0-9]*$/;
             if(!expresion.test(nacionalidad)){
                 $("#nacionalidad").parent().before('<div class="alert alert-danger alertNac" id=""><strong>NACIONALIDAD ERROR:</strong> Existe un error en el campo!</div>');
                 return false;
@@ -118,13 +134,39 @@ inputHidden();
         // ESTADO CIVIL
         var estadoCivil = $("#estadoCivil").val();
         if(estadoCivil !== ""){
-            var expresion = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ]*$/;
+            var expresion = /^[0-9]*$/;
             if(!expresion.test(estadoCivil)){
                 $("#estadoCivil").parent().before('<div class="alert alert-danger alertCiv" id=""><strong>ESTADO CIVIL ERROR:</strong> Existe un error en el campo!</div>');
                 return false;
             }
         }else{
             $("#estadoCivil").parent().before('<div class="alert alert-warning atenCiv" id=""><strong>ATENCIÓN:</strong> Campo estado civil es obligatorio!</div>');
+            return false;
+        }
+        
+        // TIPO DE TELEFONO
+        var tipoTelefono = $("#tipoTelefono").val();
+        if(tipoTelefono !== ""){
+            var expresion = /^[0-9]*$/;
+            if(!expresion.test(tipoTelefono)){
+                $("#estadoCivil").parent().before('<div class="alert alert-danger alertCiv" id=""><strong>ESTADO CIVIL ERROR:</strong> Existe un error en el campo!</div>');
+                return false;
+            }
+        }else{
+            $("#estadoCivil").parent().before('<div class="alert alert-warning atenCiv" id=""><strong>ATENCIÓN:</strong> El Campo es obligatorio!</div>');
+            return false;
+        }
+        
+        // NUMERO DE TELEFONO
+        var numeroTipoTelefono = $("#numeroTipoTelefono").val();
+        if(numeroTipoTelefono !== ""){
+            var expresion = /^[0-9]*$/;
+            if(!expresion.test(numeroTipoTelefono)){
+                $("#estadoCivil").parent().before('<div class="alert alert-danger alertCiv" id=""><strong>ESTADO CIVIL ERROR:</strong> Existe un error en el campo!</div>');
+                return false;
+            }
+        }else{
+            $("#estadoCivil").parent().before('<div class="alert alert-warning atenCiv" id=""><strong>ATENCIÓN:</strong> El Campo es obligatorio!</div>');
             return false;
         }
         
@@ -144,7 +186,7 @@ inputHidden();
         // DISTRITO
         var distrito = $("#distrito").val();
         if(distrito !== ""){
-            var expresion = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ]*$/;
+            var expresion = /^[0-9]*$/;
             if(!expresion.test(distrito)){
                 $("#distrito").parent().before('<div class="alert alert-danger alertCiv" id=""><strong>DISTRITO ERROR:</strong> Existe un error en el campo!</div>');
                 return false;
@@ -157,7 +199,7 @@ inputHidden();
         // PROVINCIA
         var provincia = $("#provincia").val();
         if(provincia !== ""){
-            var expresion = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ]*$/;
+            var expresion = /^[0-9]*$/;
             if(!expresion.test(provincia)){
                 $("#provincia").parent().before('<div class="alert alert-danger alertCiv" id=""><strong>PROVINCIA ERROR:</strong> Existe un error en el campo!</div>');
                 return false;
@@ -170,7 +212,7 @@ inputHidden();
         // DEPARTAMENTO
         var departamento = $("#departamento").val();
         if(departamento !== ""){
-            var expresion = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ]*$/;
+            var expresion = /^[0-9]*$/;
             if(!expresion.test(departamento)){
                 $("#departamento").parent().before('<div class="alert alert-danger alertCiv" id=""><strong>DEPARTAMENTO ERROR:</strong> Existe un error en el campo!</div>');
                 return false;
@@ -196,11 +238,13 @@ inputHidden();
         }
         
         // FALTA VALIDAR LA FOTOGRAFIA
+        var fechaNacimiento = $("fechaNacimiento").val();
+        console.log(fechaNacimiento);
         
         // VALIDAR NICK
         var nick = $("#nick").val();
         if(nick !== ""){
-            var expresion = /^[a-zA-Z0-9-]*$/;
+            var expresion = /^[a-zA-Z0-9-_]*$/;
             if(!expresion.test(nick)){
                 $("#nick").parent().before('<div class="alert alert-danger alertNom" id=""><strong>NICK ERROR:</strong> No se permiten caracteres especiales ni números!</div>');
                 return false; 
