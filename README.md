@@ -1,7 +1,6 @@
 _Desarrollo de Aplicación Web para proceso de producción_
 # IMPLEMENTACIÓN DE SISTEMA INFORMÁTICO PARA PRODUCCIÓN TEXTIL EN LA EMPRESA “COMERCIAL MONELY E.I.R.L.” PARA EL AÑO 2020 LIMA - PERU 2020
 ## Tesis para optar el título profesional de Ingeniero Sistemas Computacionales
-### AUTOR: BR. POLO GUANILO, JASSON ARQUIMEDES
 #### UNIVERSIDAD PRIVADA DEL NORTE
 
 ##### Desarrollo del Sistema: Versión v1.0.0
