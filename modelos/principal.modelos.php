@@ -19,32 +19,32 @@ class ModeloPrincipal{
 	}
         
         // Insertar datos  --> revisar si borrar
-        static public function princiapalSuscripcion($email){
- 
-            $stmt = Conexion::conectarPortal()->prepare("INSERT INTO suscripcion VALUES (null,$email)");
+    //     static public function princiapalSuscripcion($email){
 
-            $stmt -> execute(); // esto ejecuta la funcion
+    //         $stmt = Conexion::conectarPortal()->prepare("INSERT INTO suscripcion VALUES (null,$email)");
 
-            $stmt -> close();
-	}
+    //         $stmt -> execute(); // esto ejecuta la funcion
+
+    //         $stmt -> close();
+	// }
         
-        // Insertar datos --> revisar si borrar
-        static public function principalSuscripcionInsert($email){
+        // // Insertar datos --> revisar si borrar
+        // static public function principalSuscripcionInsert($email){
 
-            $query = Conexion::conectarPortalProcedural();
+        //     $query = Conexion::conectarPortalProcedural();
             
-            $con = mysqli_query($query, "SET NAMES 'utf8'");
-            $sql = "INSERT INTO suscripcion VALUES (null,$email)";
+        //     $con = mysqli_query($query, "SET NAMES 'utf8'");
+        //     $sql = "INSERT INTO suscripcion VALUES (null,$email)";
             
-            $insert = mysqli_query($con,$sql);
+        //     $insert = mysqli_query($con,$sql);
             
-            if($insert){
-                echo "<script>alert('Datos enviados correctamente.');</script>";
-            }else{
-                echo '<script>alert("Error: $mysqli_error($insert)");</script>';
-            }
+        //     if($insert){
+        //         echo "<script>alert('Datos enviados correctamente.');</script>";
+        //     }else{
+        //         echo '<script>alert("Error: $mysqli_error($insert)");</script>';
+        //     }
     
-        }
+        // }
         
         
         
