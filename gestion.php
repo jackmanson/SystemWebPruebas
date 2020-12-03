@@ -8,4 +8,6 @@
     $login = new ControladorProcesos();
     $login -> procesos();
 
-
+// Esto es para corregir que reconosca la sintaxis de php
+// "php.executablePath": "C:/xampp/php/php.exe",
+// "php.validate.executablePath": "C:/xampp/php/php.exe"
