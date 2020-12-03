@@ -97,15 +97,18 @@
                             }
 
                         ?>
-			 
-                    <form method="POST"  action="conexion_provicional.php" onsubmit="return registroSuscripcion()">
+			
+            <?php /* require_once "vistas/modulos/principal.suscription.php"; */ 
+                include "vistas/modulos/principal.suscription.php";
+            ?> 
+            <form method="POST"  onsubmit="return validandoSuscription()">
 				<div class="input-group">
-                                    <input type="email" name="suscriEmail" class="form-control" size="50" placeholder="Deje su email y le enviaremos novedades." required>
+                    <input type="email" name="suscriEmail" id="email" class="form-control" size="50" placeholder="Deja tu email y te enviaremos novedades." required>
 				<div class="input-group-btn">
-                                    <input type="submit" value="Suscribirse" class="btn btn-danger"/>
+                    <input type="submit" value="Suscribirse" class="btn btn-danger"/>
 				</div>
 				</div>
-                    </form>
+            </form>
 				
 		</div>
 
@@ -123,7 +126,7 @@
                         $jsonPagePrincipal = json_decode($pagePrincipal["about_empresa"],true);
 
                         foreach ($jsonPagePrincipal as $key => $value) {
-                            echo '<h2>'.$value["titulo"].'><br>
+                            echo '<h2>'.$value["titulo"].'<br>
                                     <h4>'.$value["reseña_1"].'</h4><br>
                                     <p>'.$value["reseña_2"].'</p>';
                         }

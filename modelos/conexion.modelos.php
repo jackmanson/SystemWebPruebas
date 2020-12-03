@@ -5,9 +5,9 @@ class Conexion{
     // CONECCION A LA BASE DE DATOS DB_MONELY CON PDO (PHP DATA OBJECT)
     public function conectar(){
         
-        $link = new PDO("mysql:host=junglafaricom.ipagemysql.com;dbname=db_monely",
-                        "rocky3",
-                        "Manhatan99_$2",
+        $link = new PDO("mysql:host=localhost;dbname=db_monely",
+                        "root",
+                        "",
                         array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                               PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
                         );
@@ -19,9 +19,9 @@ class Conexion{
     // PARA CONECCIONES DE PHP --> MySQLi Procedural
     public function conectarProcedural(){
         
-        $servername = "junglafaricom.ipagemysql.com";
-        $username = "rocky3";
-        $password = "Manhatan99_$2";
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
         $data = "db_monely";
 
         // Create connection --MySQLi Procedural
@@ -41,9 +41,9 @@ class Conexion{
     // CONECCION A LA BASE DE DATOS DB_MONELY_PORTAL CON PDO (PHP DATA OBJECT)
     public function conectarPortal(){
         
-        $link = new PDO("mysql:host=junglafaricom.ipagemysql.com;dbname=db_monely_portal",
-                        "rocky2",
-                        "Lluvia23_$99",
+        $link = new PDO("mysql:host=localhost;dbname=db_monely_portal",
+                        "root",
+                        "",
                         array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                               PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
                         );
@@ -55,9 +55,9 @@ class Conexion{
     // PARA CONECCIONES DE PHP --> MySQLi Procedural
     public function conectarPortalProcedural(){
         
-        $servername = "junglafaricom.ipagemysql.com";
-        $username = "rocky2";
-        $password = "Lluvia23_$99";
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
         $data = "db_monely_portal";
 
         // Create connection --MySQLi Procedural
