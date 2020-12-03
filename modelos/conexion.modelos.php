@@ -39,34 +39,35 @@ class Conexion{
     
     
     // CONECCION A LA BASE DE DATOS DB_MONELY_PORTAL CON PDO (PHP DATA OBJECT)
-    // public function conectarPortal(){
+    public function conectarPortal(){
         
-    //     $link = new PDO("mysql:host=localhost;dbname=db_monely_portal",
-    //                     "rocky2",
-    //                     "Lluvia23_$99",
-    //                     array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    //                           PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
-    //                     );
+        $link = new PDO("mysql:host=localhost;dbname=db_monely_portal",
+                        "root",
+                        "",
+                        array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                              PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
+                        );
         
-    //     return $link;
-    // }
+        return $link;
+    }
     
     
     // // PARA CONECCIONES DE PHP --> MySQLi Procedural
-    // public function conectarPortalProcedural(){
-        
-    //     $servername = "localhost";
-    //     $username = "rocky2";
-    //     $password = "Lluvia23_$99";
-    //     $data = "db_monely_portal";
+    public function conectarPortalProcedural(){
 
-    //     // Create connection --MySQLi Procedural
-    //     $con = mysqli_connect($servername,$username,$password,$data);
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $data = "db_monely_portal";
+
+
+        // Create connection --MySQLi Procedural
+        $con = mysqli_connect($servername,$username,$password,$data);
         
         
 
-    //     return $con;
-    // }
+        return $con;
+    }
 
     
     

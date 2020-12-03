@@ -1,5 +1,5 @@
 	<footer class="container-fluid text-center">
-		<p>Derechos reservados por Jasson Polo  <a href="#" title="Visit w3schools">www.myproduccion.com</a></p>
+		<p>Derechos reservados por Jasson Polo  <!-- <a href="#" title="Visit w3schools">www.myproduccion.com</a> --></p>
 	</footer>
 
 

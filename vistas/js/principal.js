@@ -41,6 +41,21 @@ $(document).ready(function(){
       redirect();
     });
     
-    
+    function validandoSuscription(){
+
+      // VALIDAR EMAIL
+      var email = $("#email").val();
+      if(email !== ""){
+          var expresion = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+          if(!expresion.test(email)){
+              $("#email").parent().before('<div class="alert alert-danger alertNom" id=""><strong>EMAIL ERROR:</strong> Existe un error en el campo!</div>');
+              return false; 
+          }
+      }else{
+          $("#email").parent().before('<div class="alert alert-warning atenNom" id=""><strong>ATENCIÓN:</strong> Campo email es obligatorio!</div>');
+          return false;
+      }
+
+    }
     
   });
