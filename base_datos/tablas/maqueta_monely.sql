@@ -36,7 +36,7 @@ CREATE TABLE `tipo_telefono`(
 	`nombre_tipo_telefono` VARCHAR -- fijo- movil - nextel - etc.
 );
 
-
+ 
 -- TABLA INTERMEDIA PERSONAS Y TIPO TELEFONO
 CREATE TABLE `personas_tipoTelefono`(
 	fk_id_persona_2
