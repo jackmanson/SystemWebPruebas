@@ -236,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `db_monely`.`clientes` (
   `fk_id_departamento_5` INT NULL,
   `fk_id_provincia_5` INT NULL,
   `fk_id_distrito_5` INT NULL,
-  `fk_id_calle_4` INT NULL,
+  `fk_id_calle_4` VARCHAR(60) NULL,
   `fk_id_usuario_registra_2` INT NULL,
   `fk_id_estado_actividad_5` INT NULL,
   `fecha_registro_cliente` DATETIME NULL,
