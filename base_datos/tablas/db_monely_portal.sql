@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `db_monely_portal`.`principal` (
   `oferta_tienda` TEXT(300) NULL,
   `contacto` TEXT(300) NULL,
   `fecha_actualizacion` TIMESTAMP,
-  PRIMARY KEY (`id_contacto`))
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
