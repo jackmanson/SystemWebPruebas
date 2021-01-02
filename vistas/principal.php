@@ -15,7 +15,9 @@
         <link rel="shortcut icon" type="image/png" href="vistas/img/logo_iso_icon.png"/>
         
 	<script type="text/javascript" src="vistas/js/principal.js"></script>  
-        
+
+    <!-- SWEET ALERT CDN -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>    
         
 	<link rel="stylesheet" type="text/css" href="vistas/css/principal.css"/>
         <style>
@@ -98,17 +100,19 @@
 
                         ?>
 			
-            <?php /* require_once "vistas/modulos/principal.suscription.php"; */ 
-                include "vistas/modulos/principal.suscription.php";
-            ?> 
-            <form method="POST"  onsubmit="return validandoSuscription()">
+
+            <form method="POST"  onsubmit="validandoSuscription();">
 				<div class="input-group">
-                    <input type="email" name="suscriEmail" id="email" class="form-control" size="50" placeholder="Deja tu email y te enviaremos novedades." required>
+                    <input type="text" name="suscriEmail" id="email" class="form-control" size="50" placeholder="Deja tu email y te enviaremos novedades." required>
 				<div class="input-group-btn">
                     <input type="submit" value="Suscribirse" class="btn btn-danger"/>
 				</div>
 				</div>
             </form>
+
+            <?php /* require_once "vistas/modulos/principal.suscription.php"; */ 
+                include "vistas/modulos/principal.suscription.php";
+            ?> 
 				
 		</div>
 

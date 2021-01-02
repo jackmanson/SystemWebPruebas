@@ -34,15 +34,16 @@ class ModeloPrincipal{
 
         $query = Conexion::conectarPortalProcedural();
         
-        $con = mysqli_query($query, "SET NAMES 'utf8'");
-        $sql = "INSERT INTO suscripcion VALUES (null,$email)";
+        mysqli_query($query, "SET NAMES 'utf8'");
+
+        $sql = "INSERT INTO suscripcion VALUES (1,$email)";
         
-        $insert = mysqli_query($con,$sql);
+        $insert = mysqli_query($query,$sql);
         
         if($insert){
-            echo "<script>alert('Datos enviados correctamente.');</script>";
+            echo "<script>alert('Datos enviados correctamente. Desde principal.modelos.php');</script>";
         }else{
-            echo '<script>alert("Error: $mysqli_error($insert)");</script>';
+            echo '<script>alert("Error: $mysqli_error($insert." Desde archivo principal.modelos.php)");</script>';
         }
 
     }

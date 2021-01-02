@@ -9,7 +9,7 @@
     $suscription -> ctrPrincipalPortalSuscriptor_2($email);
 
     if($suscription){
-        echo "<script>alert('Datos enviados correctamente.');</script>";
+        echo "<script>alert('Datos enviados correctamente. Desde Modelos principal.suscriptaion.php $email');</script>";
     }
 
 ?>
