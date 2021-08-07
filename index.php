@@ -5,7 +5,7 @@
     require_once "modelos/principal.modelos.php";
 
 
-	$principal = new ControladorPrincipal();
-	$principal -> principal();
+	$redireccionPageIndex = new ControladorPrincipal();
+	$redireccionPageIndex -> principal();
         
 

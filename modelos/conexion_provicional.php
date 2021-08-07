@@ -63,9 +63,9 @@
     //$email = $_POST['suscriEmail'];
 
     // CONEXION
-    $servername = "junglafaricom.ipagemysql.com";
-    $username = "rocky3";
-    $password = "Manhatan99_$2";
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
     $data = "db_monely";
     
     // Create connection --MySQLi Procedural

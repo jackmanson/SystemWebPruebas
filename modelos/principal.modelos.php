@@ -17,38 +17,30 @@ class ModeloPrincipal{
 
         $stmt -> close();
 	}
-        
-        // Insertar datos  --> revisar si borrar
 
-    static public function principalSuscripcion($email){
+        
+    // Insertar datos PDO Principal Portal --> 
+    static public function principalSuscripcionInsert($mail){
  
-        $stmt = Conexion::conectarPortal()->prepare("INSERT INTO suscripcion VALUES (null,$email)");
+        $correo = $mail;
 
-        $stmt -> execute(); // esto ejecuta la funcion
-
-        $stmt -> close();
-	}
-        
-    // Insertar datos --> revisar si borrar
-    static public function principalSuscripcionInsert($email){
-
-        $query = Conexion::conectarPortalProcedural();
-        
-        mysqli_query($query, "SET NAMES 'utf8'");
-
-        $sql = "INSERT INTO suscripcion VALUES (1,$email)";
-        
-        $insert = mysqli_query($query,$sql);
-        
-        if($insert){
-            echo "<script>alert('Datos enviados correctamente. Desde principal.modelos.php');</script>";
-        }else{
-            echo '<script>alert("Error: $mysqli_error($insert." Desde archivo principal.modelos.php)");</script>';
-        }
+        try{
+            $conect = Conexion::conectarPortal();
+            $conect->exec("SET CHARACTER SET utf8");
+            $sql = "INSERT INTO suscripcion (id_suscripcion,email,fecha_suscripcion) VALUES (null,:miMail,null)"; 
+            $resultado = $conect->prepare($sql);
+            $resultado->execute(array(":miMail"=>$correo));
+            // echo 'Conecion ok modelo Insert.';
+            $resultado -> closeCursor();
+        }catch(Exception $e){
+            die('Error: '.$e->GetMessage());
+        }finally{
+            $conect = null;
+        } 
 
     }
+
         
-        
-        
+    
         
 }

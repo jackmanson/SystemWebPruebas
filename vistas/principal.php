@@ -101,17 +101,17 @@
                         ?>
 			
 
-            <form method="POST"  onsubmit="validandoSuscription();">
+            <form method="POST"  onsubmit="validandoSuscription();" action="vistas/modulos/principal.suscription.php">
 				<div class="input-group">
                     <input type="text" name="suscriEmail" id="email" class="form-control" size="50" placeholder="Deja tu email y te enviaremos novedades." required>
-				<div class="input-group-btn">
-                    <input type="submit" value="Suscribirse" class="btn btn-danger"/>
-				</div>
+                    <div class="input-group-btn">
+                        <input type="submit" value="Suscribirse" class="btn btn-danger"/>
+                    </div>
 				</div>
             </form>
 
             <?php /* require_once "vistas/modulos/principal.suscription.php"; */ 
-                include "vistas/modulos/principal.suscription.php";
+                // include "vistas/modulos/principal.suscription.php";
             ?> 
 				
 		</div>
@@ -331,30 +331,30 @@
 		<div class="container">
 			<h2 class="text-center">CONTACT</h2>
 			<div class="row">
-                            <div class="col-sm-5">
-				<p>Contactenos y le responderemos lo más pronto posible, gracias.</p>
-				<p><span class="glyphicon glyphicon-map-marker"></span> Lima, Perú</p>
-				<p><span class="glyphicon glyphicon-phone"></span> +51 947 274 472</p>
-				<p><span class="glyphicon glyphicon-envelope"></span> ventas@comercialmonely.com</p>
+                <div class="col-sm-5">
+                    <p>Contactenos y le responderemos lo más pronto posible, gracias.</p>
+                    <p><span class="glyphicon glyphicon-map-marker"></span> Lima, Perú</p>
+                    <p><span class="glyphicon glyphicon-phone"></span> +51 947 274 472</p>
+                    <p><span class="glyphicon glyphicon-envelope"></span> ventas@comercialmonely.com</p>
+                </div>
+                <div class="col-sm-7 slideanim">
+                    <form action="index.php" method="POST" action="vistas/modulos/contacto.principal.phpaa">
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <input class="form-control" id="name" name="name" placeholder="Nombre" type="text" required>
                             </div>
-                            <div class="col-sm-7 slideanim">
-                                <form action="index.php" method="POST">
-                                    <div class="row">
-                                        <div class="col-sm-6 form-group">
-                                            <input class="form-control" id="name" name="name" placeholder="Nombre" type="text" required>
-                                        </div>
-                                        <div class="col-sm-6 form-group">
-                                            <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
-                                        </div>
-                                    </div>
-                                    <textarea class="form-control" id="comments" name="comments" placeholder="Comentario" rows="5"></textarea><br>
-                                    <div class="row">
-                                        <div class="col-sm-12 form-group">
-                                            <button class="btn btn-default pull-right" type="submit">Enviar</button>
-                                        </div>
-                                    </div>
-                                </form>
+                            <div class="col-sm-6 form-group">
+                                <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
                             </div>
+                        </div>
+                        <textarea class="form-control" id="comments" name="comments" placeholder="Comentario" rows="5"></textarea><br>
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <button class="btn btn-default pull-right" type="submit">Enviar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 			</div>
 			
 		</div>

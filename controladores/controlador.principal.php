@@ -20,20 +20,22 @@ class ControladorPrincipal{
     }
     
     
-    //INSERTAMOS Y REGISTROS DE SUSCRIPTOR POR EL EMAIL --> 1
-    public function ctrPrincipalPortalSuscriptor_1($email){
-        
-        ModeloPrincipal::princiapalSuscripcion($email);
-
-    }
-    
-    
-    //INSERTAMOS Y REGISTROS DE SUSCRIPTOR POR EL EMAIL --> 2
-    public function ctrPrincipalPortalSuscriptor_2($email){
-        
+    //INSERTAMOS Y REGISTROS DE SUSCRIPTOR POR EL EMAIL
+    public function ctrPrincipalPortalSuscriptor($email){
+        // TODO: Casilla registro de corrro
         $suscripcion = new ModeloPrincipal();
         $suscripcion->principalSuscripcionInsert($email);
 
+    }
+        
+
+    //CONTACTAR Y REGISTROS DE COMENTARIOS
+    public function ctrPrincipalPortalContactar($correo,$email,$comments){
+        // TODO: principal formulario de contacto
+        $contactar = new ModeloPrincipal();
+        $contactar->PrincipalPortalContactar($correo,$email,$comments);
+        echo $correo;
+        return $contactar;
     }
     
 }
