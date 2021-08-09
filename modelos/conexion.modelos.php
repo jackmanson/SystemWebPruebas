@@ -48,6 +48,7 @@ class Conexion{
             // echo 'Conecion ok conection.'."<br/>";
             return $con;
         }catch(Exception $e){
+            //TODO: Revisar como mejorar con un mensaje cuando se repite un mismo mail
             die('Error: '.$e->GetMessage());
         }finally{
             $con = null;

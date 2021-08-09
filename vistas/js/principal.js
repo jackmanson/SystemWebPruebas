@@ -32,31 +32,31 @@ $(document).ready(function(){
       });
     });
 
-    // REDIRECCION ACCESO
-    $(".classLogin").click(function(){
-      function redirect(){
-        window.location.href = "http://localhost/tesisSystemUpn2019/acceso.php";
+    // // REDIRECCION ACCESO
+    // $(".classLogin").click(function(){
+    //   function redirect(){
+    //     window.location.href = "http://localhost/tesisSystemUpn2019/acceso.php";
         
-      }
-      redirect();
-    });
+    //   }
+    //   redirect();
+    // });
     
-    function validandoSuscription(){
-
-      // VALIDAR EMAIL
-      var email = $("#email").val();
-      if(email !== ""){
-          var expresion = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
-          if(!expresion.test(email)){
-              $("#email").parent().before('<div class="alert alert-danger alertNom" id=""><strong>EMAIL ERROR:</strong> Existe un error en el campo!</div>');
-              return false; 
-          }
-      }else{
-          $("#email").parent().before('<div class="alert alert-warning atenNom" id=""><strong>ATENCIÓN:</strong> Campo email es obligatorio!</div>');
-          return false;
-      }
-
-    }
-    
-    
+    // function validandoSuscription(){
+    //   alert('hola');
+    //   // VALIDAR EMAIL
+    //   var email = $("#email").val();
+    //   if(email !== ""){
+    //       var expresion = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+    //       if(!expresion.test(email)){
+    //           $("#email").parent().before('<div class="alert alert-warning" role="alert"><strong>EMAIL ERROR:</strong> Existe un error en el campo!</div>');
+    //           return false; 
+    //       }
+    //   }else{
+    //       $("#email").parent().before('<div class="alert alert-danger" role="alert"><strong>ATENCIÓN:</strong> Campo email es obligatorio!</div>');
+    //       return false;
+    //   }
+  
+    // }
+    // console.log('listo');
   });
+  

@@ -9,13 +9,8 @@
     $comments = $_POST['comments'];
 
     $contactar = new ControladorPrincipal();
-    $contactar -> ctrPrincipalPortalContactar($correo,$email,$comments);
+    $contactar -> ctrPrincipalPortalContactar($name,$email,$comments);
 
-    // if($contactar){
-    //     echo "<script>alert('Datos enviados correctamente. Desde Modelos principal.suscriptaion.php');</script>";
-    // }else{
-    //     echo "<script>alert('No se conecto.');</script>";
-    // }
-        echo "$correo,$email,$comments";
-    // header("location: ../../index.php");
+
+    header("location: ../../index.php");
 ?>

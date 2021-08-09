@@ -23,6 +23,7 @@ class ControladorPrincipal{
     //INSERTAMOS Y REGISTROS DE SUSCRIPTOR POR EL EMAIL
     public function ctrPrincipalPortalSuscriptor($email){
         // TODO: Casilla registro de corrro
+        //TODO: Falta corregir redireccion cuando la base de datos rechaza el intento de registrar un email que ya existe.
         $suscripcion = new ModeloPrincipal();
         $suscripcion->principalSuscripcionInsert($email);
 
@@ -30,12 +31,11 @@ class ControladorPrincipal{
         
 
     //CONTACTAR Y REGISTROS DE COMENTARIOS
-    public function ctrPrincipalPortalContactar($correo,$email,$comments){
+    public function ctrPrincipalPortalContactar($name,$email,$comments){
         // TODO: principal formulario de contacto
         $contactar = new ModeloPrincipal();
-        $contactar->PrincipalPortalContactar($correo,$email,$comments);
-        echo $correo;
-        return $contactar;
+        $contactar->PrincipalPortalContactar($name,$email,$comments);
+        
     }
     
 }

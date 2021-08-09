@@ -12,13 +12,13 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-        <link rel="shortcut icon" type="image/png" href="vistas/img/logo_iso_icon.png"/>
-        
-	<script type="text/javascript" src="vistas/js/principal.js"></script>  
+    <link rel="shortcut icon" type="image/png" href="vistas/img/logo_iso_icon.png"/>
 
     <!-- SWEET ALERT CDN -->
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>    
-        
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    <script type='text/javascript' src="vistas/js/principal.js"></script>  
+    
 	<link rel="stylesheet" type="text/css" href="vistas/css/principal.css"/>
         <style>
             .margenCaja{
@@ -99,26 +99,42 @@
                             }
 
                         ?>
-			
+<script>
+    function validandoSuscription1(){
+      // VALIDAR EMAIL
+      var emailTEST = document.querySelector("#emailSucription").value;
+      
+      if(emailTEST !== ""){
+        //   var expresion = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+          var expresion = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+          if(!expresion.test(emailTEST)){
+            swal("Ingresa una email valido!", "No se permiten caracteres especiales!");
+              return false; 
+          }
+      }else{
+        swal("Tienes que ingresar un email!", "La caja esta vacia!");
+          return false;
+      }
+  
+    }
+</script>	
+  		
 
-            <form method="POST"  onsubmit="validandoSuscription();" action="vistas/modulos/principal.suscription.php">
+            <form method="POST"  onsubmit="return validandoSuscription1();" action="vistas/modulos/principal.suscription.php" id="formSuscripcion">
 				<div class="input-group">
-                    <input type="text" name="suscriEmail" id="email" class="form-control" size="50" placeholder="Deja tu email y te enviaremos novedades." required>
+                    <input type="email" name="suscriEmail" id="emailSucription" class="form-control" size="50" placeholder="Deja tu email y te enviaremos novedades." required>
                     <div class="input-group-btn">
                         <input type="submit" value="Suscribirse" class="btn btn-danger"/>
                     </div>
 				</div>
             </form>
 
-            <?php /* require_once "vistas/modulos/principal.suscription.php"; */ 
-                // include "vistas/modulos/principal.suscription.php";
-            ?> 
 				
 		</div>
 
 	</div>
 
-	<!-- Container (About Section) -->
+	<!-- Container About Section -->
 	<div id="about" class="container">
 		<div class="row">
                     <div class="col-sm-8">
@@ -338,7 +354,8 @@
                     <p><span class="glyphicon glyphicon-envelope"></span> ventas@comercialmonely.com</p>
                 </div>
                 <div class="col-sm-7 slideanim">
-                    <form action="index.php" method="POST" action="vistas/modulos/contacto.principal.phpaa">
+                    <!-- Fata validar con js las cajas de texto y revisar por que no registra -->
+                    <form action="index.php" method="POST" action="vistas/modulos/principal.suscription.php">
                         <div class="row">
                             <div class="col-sm-6 form-group">
                                 <input class="form-control" id="name" name="name" placeholder="Nombre" type="text" required>
@@ -347,12 +364,13 @@
                                 <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
                             </div>
                         </div>
-                        <textarea class="form-control" id="comments" name="comments" placeholder="Comentario" rows="5"></textarea><br>
+                        <textarea class="form-control" id="comments" name="comments" placeholder="Comentario" rows="5" required></textarea><br>
                         <div class="row">
                             <div class="col-sm-12 form-group">
                                 <button class="btn btn-default pull-right" type="submit">Enviar</button>
                             </div>
                         </div>
+
                     </form>
                 </div>
 			</div>
@@ -371,8 +389,7 @@
 		<p>Derechos reservados por Jasson Polo  <a href="https://www.w3schools.com" title="Visit w3schools">www.myproduccion.com</a></p>
 	</footer>
 
-
-	
+    
 </body>
 </html>
 
