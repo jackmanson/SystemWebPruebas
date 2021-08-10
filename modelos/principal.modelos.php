@@ -38,17 +38,19 @@ class ModeloPrincipal{
             $conect = null;
         } 
 
-    }    // Insertar datos PDO Principal Portal CONTACTAR --> 
+    }   
+    
+    // Insertar datos PDO Principal Portal CONTACTAR --> 
     static public function PrincipalPortalContactar($n,$e,$c){
  
         $name = $n;
         $email = $e;
-        $comments = $cs;
+        $comments = $c;
 
         try{
             $conect = Conexion::conectarPortal();
             $conect->exec("SET CHARACTER SET utf8");
-            $sql = "INSERT INTO contacto (id_contacto,nombre,email,comentario,fecha_registro) VALUES (null,:miName,:miMail,:miComments,null)"; 
+            $sql = "INSERT INTO contacto (id_contacto,nombre,email,comentarios,fecha_registro) VALUES (null,:miName,:miMail,:miComments,null)"; 
             $resultado = $conect->prepare($sql);
             $resultado->execute(array(":miName"=>$name,":miMail"=>$email,":miComments"=>$comments));
             

@@ -263,19 +263,19 @@
             </div>
             <br>
 
-            <h2>Nuestros clientes comentan.</h2>
-            <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
+            <!-- <h2>Nuestros clientes comentan.</h2>
+            <div id="myCarousel" class="carousel slide text-center" data-ride="carousel"> -->
                 <!-- Indicators -->
-                <ol class="carousel-indicators">
+                <!-- <ol class="carousel-indicators">
                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                 <li data-target="#myCarousel" data-slide-to="1"></li>
                 <li data-target="#myCarousel" data-slide-to="2"></li>
-                </ol>
+                </ol> -->
 
                 <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox">
+                <!-- <div class="carousel-inner" role="listbox">
                     <div class="item active">
-                            <h4>"This company is the best. I am so happy with the result!"<br><span>Michael Roe, Vice President, Comment Box</span></h4>
+                            <h4>"The Brands Company"<br><span>Michael Roe, Vice President, Comment Box</span></h4>
                     </div>
                     <div class="item">
                             <h4>"One word... WOW!!"<br><span>John Doe, Salesman, Rep Inc</span></h4>
@@ -283,10 +283,10 @@
                     <div class="item">
                             <h4>"Could I... BE any more happy with this company?"<br><span>Chandler Bing, Actor, FriendsAlot</span></h4>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Left and right controls -->
-                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <!-- <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
                     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                 </a>
@@ -294,7 +294,7 @@
                     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
-            </div>
+            </div> -->
 	</div>
 
 	<!-- Container (Pricing Section) -->
@@ -353,18 +353,65 @@
                     <p><span class="glyphicon glyphicon-phone"></span> +51 947 274 472</p>
                     <p><span class="glyphicon glyphicon-envelope"></span> ventas@comercialmonely.com</p>
                 </div>
+
                 <div class="col-sm-7 slideanim">
-                    <!-- Fata validar con js las cajas de texto y revisar por que no registra -->
-                    <form action="index.php" method="POST" action="vistas/modulos/principal.suscription.php">
+                <script>
+                    function validandoFormContacto(){
+                        // VALIDAR NOMBRE
+                        var nombreContacto = document.querySelector("#namePrincipalContacto").value;
+                        if(nombreContacto !== ""){
+                            var expresion = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$/;
+                            if(!expresion.test(nombreContacto)){
+                                swal("Ingresa un nombre valido!", "No se permiten caracteres especiales!");
+                                return false; 
+                            }
+                        }else{
+                            swal("Tiene ingresar su nombre!", "La caja nombre esta vacia!");
+                            return false;
+                        }
+
+                        // VALIDAR EMAIL
+                        var emailTEST = document.querySelector("#emailPrincipalContacto").value;
+                        
+                        if(emailTEST !== ""){
+                            var expresion = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+                            if(!expresion.test(emailTEST)){
+                                swal("Ingresa un email valido!", "No se permiten caracteres especiales!");
+                                return false; 
+                            }
+                        }else{
+                            swal("Tiene ingresar un email!", "La caja del email esta vacia!");
+                            return false;
+                        }
+                        
+                        // VALIDAR COMENTARIOS 
+                        var comentariosContacto = document.querySelector("#commentsPrincipalContacto").value;
+                        alert(comentariosContacto);
+                        if(comentariosContacto !== ""){
+                            // TODO: Corregir las expresiones regulares del campo de comentarios, no  acepta puntos ni comas.
+                            var expresion = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$/;
+                            if(!expresion.test(comentariosContacto)){
+                                swal("Ingresa un comentario valido!", "No se permiten caracteres especiales!");
+                                return false; 
+                            }
+                        }else{
+                            swal("Tiene ingresar su comentario!", "La caja nombre esta vacia!");
+                            return false;
+                        }
+                
+                    }
+                </script>	
+
+                    <form method="POST" action="vistas/modulos/contacto.principal.php" onsubmit="return validandoFormContacto();" id="formPrincipalContacto">
                         <div class="row">
                             <div class="col-sm-6 form-group">
-                                <input class="form-control" id="name" name="name" placeholder="Nombre" type="text" required>
+                                <input class="form-control" id="namePrincipalContacto" name="name" placeholder="Nombre" type="text" required>
                             </div>
                             <div class="col-sm-6 form-group">
-                                <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                                <input class="form-control" id="emailPrincipalContacto" name="email" placeholder="Email" type="email" required>
                             </div>
                         </div>
-                        <textarea class="form-control" id="comments" name="comments" placeholder="Comentario" rows="5" required></textarea><br>
+                        <textarea class="form-control" id="commentsPrincipalContacto" name="comments" placeholder="Comentario" type="text" rows="5" required></textarea><br>
                         <div class="row">
                             <div class="col-sm-12 form-group">
                                 <button class="btn btn-default pull-right" type="submit">Enviar</button>

@@ -1,10 +1,10 @@
 // VALIDANDO LOGIN 
 
-function validandoLogin(){
+function loginvalidandoLogin(){
     
     // validando email
     var email = $(".miEmail").val();
-    
+    alert(email);
     if(email != ""){
         var expresion = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ]*$/;
         
@@ -21,3 +21,4 @@ function validandoLogin(){
     return true;
 }
 
+console.log('Hola a todos');

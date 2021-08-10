@@ -10,5 +10,13 @@ class ControladorHead{
 
     }
 
+
+    // IMPORTA EL HEAD PARA LOGIN
+    public function headLogin(){
+
+        include "vistas/modulos/head.login.php";
+
+    }
+
     
 }
