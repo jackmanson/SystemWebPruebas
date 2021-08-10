@@ -3,22 +3,20 @@
 function loginvalidandoLogin(){
     
     // validando email
-    var email = $(".miEmail").val();
+    var email = $("#email").val();
     alert(email);
     if(email != ""){
         var expresion = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ]*$/;
         
         if(!expresion.test(email)){
-            $(".miEmail").parent().before('<div class="alert alert-warming"><strong>ATENCIÓN:</strong>No se permiten números ni caracteres especiales.</div>');
+            swall("Ingresar contraseña correcta","La contraseña solo puede tener mayúsculas, minúsculas y números.");
+            Return false;
         }
         
     }else{
-        $(".miEmail").parent().before('<div class="alert alert-warming"><strong>ATENCIÓN:</strong>Este campo es obligatorio</div>');
+        swall ("Ingresar su email","La caja no puede estar vacía.");
+        return false;
     }
-    
-
-    
-    return true;
 }
 
-console.log('Hola a todos');
+
