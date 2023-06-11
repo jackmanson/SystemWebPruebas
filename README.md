@@ -1,7 +1,5 @@
 _Desarrollo de Aplicación Web para proceso de producción_
-# IMPLEMENTACIÓN DE SISTEMA INFORMÁTICO PARA PRODUCCIÓN TEXTIL EN LA EMPRESA “COMERCIAL MONELY E.I.R.L.” LIMA - PERU
-## Tesis para optar el título profesional de Ingeniero Sistemas Computacionales
-#### UNIVERSIDAD PRIVADA DEL NORTE
+# IMPLEMENTACIÓN DE SISTEMA INFORMÁTICO PARA PRODUCCIÓN TEXTIL
 
 ##### Desarrollo del Sistema: Versión v1.0.0
 ##### Planificación: 15/06/2020
